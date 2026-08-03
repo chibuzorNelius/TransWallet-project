@@ -1,0 +1,13 @@
+/*
+Project: Trans Wallet Project
+File Purpose: Profile and settings styling
+Author Placeholder: Profile Developer
+Created Date Placeholder: 2026-08-03
+Last Updated Placeholder: 2026-08-03
+Description: Starter styles for the profile experience.
+*/
+
+.profile-section {
+  display: grid;
+  gap: var(--space-2);
+}

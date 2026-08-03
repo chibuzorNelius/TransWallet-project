@@ -1,0 +1,41 @@
+/*
+Project: Trans Wallet Project
+File Purpose: Design tokens and shared variables
+Author Placeholder: Team Frontend
+Created Date Placeholder: 2026-08-03
+Last Updated Placeholder: 2026-08-03
+Description: Centralized visual system for the entire application.
+*/
+
+:root {
+  --color-primary: #2563EB;
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-danger: #EF4444;
+  --color-background: #F8FAFC;
+  --color-surface: #FFFFFF;
+  --color-text-primary: #111827;
+  --color-text-secondary: #6B7280;
+  --color-border: #E5E7EB;
+  --font-family-base: 'Inter', Arial, sans-serif;
+  --radius-sm: 10px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 48px;
+  --space-6: 64px;
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+  --shadow-md: 0 10px 30px rgba(15, 23, 42, 0.08);
+  --transition-fast: 180ms ease-in-out;
+  --transition-medium: 280ms ease-in-out;
+  --container-width-sm: 100%;
+  --container-width-md: 720px;
+  --container-width-lg: 1120px;
+  --z-dropdown: 1000;
+  --z-sticky: 1100;
+  --z-modal: 1200;
+}

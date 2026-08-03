@@ -1,0 +1,37 @@
+/*
+Project: Trans Wallet Project
+File Purpose: Responsive layout adjustments
+Author Placeholder: Team Frontend
+Created Date Placeholder: 2026-08-03
+Last Updated Placeholder: 2026-08-03
+Description: Mobile-first responsive guidance and breakpoints.
+*/
+
+/* Mobile First */
+body {
+  padding: var(--space-2);
+}
+
+@media (min-width: 768px) {
+  body {
+    padding: var(--space-3);
+  }
+
+  .two-column {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: var(--space-3);
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    padding: var(--space-4);
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    width: min(var(--container-width-lg), 1320px);
+  }
+}

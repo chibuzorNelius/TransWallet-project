@@ -1,0 +1,29 @@
+/*
+Project: Trans Wallet Project
+File Purpose: Dashboard-specific styling
+Author Placeholder: Dashboard Developer
+Created Date Placeholder: 2026-08-03
+Last Updated Placeholder: 2026-08-03
+Description: Starter page styles for the dashboard experience.
+*/
+
+/* ===== MODULE OWNER =====
+This file is intended for:
+Dashboard Developer
+Responsibilities:
+Build wallet summary
+Recent transactions
+Quick actions
+Maintain responsive layout
+================================ */
+
+.dashboard-grid {
+  display: grid;
+  gap: var(--space-3);
+}
+
+@media (min-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 1.2fr 0.8fr;
+  }
+}

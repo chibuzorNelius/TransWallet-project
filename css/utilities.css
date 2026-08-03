@@ -1,0 +1,26 @@
+/*
+Project: Trans Wallet Project
+File Purpose: Shared utility helpers
+Author Placeholder: Team Frontend
+Created Date Placeholder: 2026-08-03
+Last Updated Placeholder: 2026-08-03
+Description: Utility classes for layout spacing and common patterns.
+*/
+
+.container {
+  width: min(var(--container-width-lg), calc(100% - 2rem));
+  margin: 0 auto;
+}
+
+.u-mt-1 { margin-top: var(--space-1); }
+.u-mt-2 { margin-top: var(--space-2); }
+.u-mt-3 { margin-top: var(--space-3); }
+.u-mb-1 { margin-bottom: var(--space-1); }
+.u-mb-2 { margin-bottom: var(--space-2); }
+.u-mb-3 { margin-bottom: var(--space-3); }
+
+.text-center { text-align: center; }
+.text-muted { color: var(--color-text-secondary); }
+
+.flex { display: flex; }
+.grid { display: grid; }

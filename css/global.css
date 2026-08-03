@@ -1,0 +1,41 @@
+/*
+Project: Trans Wallet Project
+File Purpose: Global site shell styles
+Author Placeholder: Team Frontend
+Created Date Placeholder: 2026-08-03
+Last Updated Placeholder: 2026-08-03
+Description: Shared application layout and section styling.
+*/
+
+@import url('./variables.css');
+@import url('./reset.css');
+@import url('./typography.css');
+@import url('./utilities.css');
+@import url('./components.css');
+@import url('./responsive.css');
+
+body {
+  background: var(--color-background);
+}
+
+main {
+  padding: var(--space-3) 0;
+}
+
+.page-header {
+  margin-bottom: var(--space-3);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-2) 0;
+}
+
+.hero {
+  background: linear-gradient(135deg, var(--color-primary), #3b82f6);
+  color: var(--color-surface);
+  border-radius: var(--radius-xl);
+  padding: var(--space-4);
+}

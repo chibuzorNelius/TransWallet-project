@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Send Money | Trans Wallet</title>
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/pages/send-money.css" />
+    <script defer src="../js/transfer.js"></script>
+  </head>
+  <body>
+    <main class="container">
+      <section class="card">
+        <h1>Send money</h1>
+        <p>TODO: Create the transfer form and simulated transaction confirmation.</p>
+        <form class="transfer-form u-mt-3">
+          <div class="form-group">
+            <label for="recipient">Recipient</label>
+            <input id="recipient" name="recipient" type="text" placeholder="Name or email" />
+          </div>
+          <div class="form-group">
+            <label for="amount">Amount</label>
+            <input id="amount" name="amount" type="number" placeholder="0.00" />
+          </div>
+          <button class="btn btn-primary" type="submit">Send</button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

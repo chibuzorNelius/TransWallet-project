@@ -1,0 +1,28 @@
+/*
+Project: Trans Wallet Project
+File Purpose: Typography rules and heading defaults
+Author Placeholder: Team Frontend
+Created Date Placeholder: 2026-08-03
+Last Updated Placeholder: 2026-08-03
+Description: Defines consistent text styling for the product experience.
+*/
+
+body {
+  font-family: var(--font-family-base);
+  color: var(--color-text-primary);
+  background-color: var(--color-background);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 var(--space-2);
+  line-height: 1.2;
+}
+
+p {
+  margin: 0 0 var(--space-2);
+  color: var(--color-text-secondary);
+}
+
+small {
+  color: var(--color-text-secondary);
+}

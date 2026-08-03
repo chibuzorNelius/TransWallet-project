@@ -1,0 +1,13 @@
+/*
+Project: Trans Wallet Project
+File Purpose: Wallet-specific styling
+Author Placeholder: Wallet Developer
+Created Date Placeholder: 2026-08-03
+Last Updated Placeholder: 2026-08-03
+Description: Starter page styles for wallet-related views.
+*/
+
+.wallet-summary {
+  display: grid;
+  gap: var(--space-2);
+}
