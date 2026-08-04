@@ -11,3 +11,7 @@ Description: Starter styles for the transfer experience.
   display: grid;
   gap: var(--space-2);
 }
+body{
+  /* background-color: var(--color-primary); */
+  color: var();
+}

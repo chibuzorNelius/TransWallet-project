@@ -8,11 +8,11 @@ Description: Shared application layout and section styling.
 */
 
 @import url('./variables.css');
-@import url('./reset.css');
-@import url('./typography.css');
-@import url('./utilities.css');
-@import url('./components.css');
-@import url('./responsive.css');
+@import url(/css/pages/send-money.css);
+@import url(/css/pages/wallet.css);
+@import url(/css/pages/profile.css);
+@import url(/css/pages/exchange.css);
+@import url(/css/pages/dashboard.css);
 
 body {
   background: var(--color-background);
