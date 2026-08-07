@@ -21,11 +21,7 @@ Maintain responsive layout
   display: grid;
   /* gap: var(--space-3); */
 }
-body{
-  background-color: var(--color-primary);
-  color: var(--background-color);
-  /* color: var(--); */
-}
+
 
 @media (min-width: 1024px) {
   .dashboard-grid {

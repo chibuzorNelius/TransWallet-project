@@ -1,41 +1,493 @@
 /*
 Project: Trans Wallet Project
-File Purpose: Global site shell styles
+File Purpose: Global site shell styles & layout foundation
 Author Placeholder: Team Frontend
 Created Date Placeholder: 2026-08-03
-Last Updated Placeholder: 2026-08-03
-Description: Shared application layout and section styling.
+Last Updated Placeholder: 2026-08-07
+Description: Shared application layout, responsive navigation shell, and core style variables.
 */
 
+/* ========================================================
+   GLOBAL DEVELOPER & AI GUIDANCE COMMENTS
+   ========================================================
+   GLOBAL STYLING NOTICE:
+   The application background, base typography and global colours are already 
+   handled by this global stylesheet. Do not redefine the page background or 
+   body margins in page-specific styles unless there is a specific requirement.
+
+   SHARED NAVIGATION:
+   Navigation has already been integrated through the shared component system 
+   across the required viewports (Desktop Sidebar & Mobile Bottom Nav & Closable Drawer). 
+   Do not recreate or duplicate the navigation in individual pages.
+
+   COMPONENT OWNERSHIP:
+   Changes to shared navigation affect multiple pages. Do not modify shared 
+   navigation styling or structure while working on an individual feature 
+   without first communicating with the project lead.
+
+   AI DEVELOPMENT NOTICE:
+   If you use an AI coding assistant, explicitly tell it that this is a 
+   collaborative multi-developer project and identify the specific file/module 
+   you are working on. Instruct it NOT to rewrite, restructure, or modify 
+   unrelated files. Keep changes localized.
+   ======================================================== */
+
+/* Imports - Adjusted to relative paths for file:// protocol support */
 @import url('./variables.css');
-@import url(/css/pages/send-money.css);
-@import url(/css/pages/wallet.css);
-@import url(/css/pages/profile.css);
-@import url(/css/pages/exchange.css);
-@import url(/css/pages/dashboard.css);
+@import url('./pages/dashboard.css');
+@import url('./pages/send-money.css');
+@import url('./pages/receive-money.css');
+@import url('./pages/exchange-rate.css');
+@import url('./pages/transations.css');
+@import url('./pages/cypto-request.css');
+@import url('./pages/cards.css');
+@import url('./pages/help.css');
+@import url('./pages/login.css');
+@import url('./pages/register.css');
+
+/* Global Reset & Base Typography */
+* {
+  box-sizing: border-box;
+}
 
 body {
   background: var(--color-background);
+  color: var(--color-text-primary);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }
 
-main {
-  padding: var(--space-3) 0;
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-text-primary);
+  margin-top: 0;
 }
 
-.page-header {
-  margin-bottom: var(--space-3);
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
-.navbar {
+a:hover {
+  color: #60a5fa;
+}
+
+/* Custom Scrollbar for Sleek Dark Look */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-secondary);
+}
+
+/* Base Form Styling Utilities */
+.form-group {
+  margin-bottom: var(--space-2);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+}
+
+.btn-primary:hover {
+  background-color: #2563EB;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+}
+
+.btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: var(--color-text-secondary);
+}
+
+/* Cards Layout */
+/* .card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+} */
+
+/* ========================================================
+   SHARED BRAND LOGO STYLING
+   ======================================================== */
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo-img {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.logo-text {
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: -0.025em;
+  display: flex;
+  align-items: center;
+}
+
+.logo-text-primary {
+  color: var(--color-primary);
+}
+
+.logo-text-secondary {
+  color: #FFFFFF;
+}
+
+/* ========================================================
+   SHARED LAYOUT SHELL (LOGGED IN EXPERIENCE)
+   ======================================================== */
+
+body.app-logged-in {
+  display: flex;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* Permanent Sidebar Navigation (Desktop View) */
+.app-sidebar {
+  width: 260px;
+  min-width: 260px;
+  background-color: var(--color-surface);
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  padding: var(--space-3);
+  box-sizing: border-box;
+  z-index: 100;
+}
+
+.sidebar-logo-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--space-2) 0;
+  margin-bottom: var(--space-4);
 }
 
-.hero {
-  background: linear-gradient(135deg, var(--color-primary), #3b82f6);
-  color: var(--color-surface);
-  border-radius: var(--radius-xl);
+.sidebar-close-btn {
+  display: none; /* Hidden on desktop */
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex-grow: 1;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.nav-item svg {
+  color: var(--color-text-secondary);
+  transition: color 0.2s ease-in-out;
+  flex-shrink: 0;
+}
+
+.nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.04);
+  color: var(--color-text-primary);
+}
+
+.nav-item:hover svg {
+  color: var(--color-text-primary);
+}
+
+.nav-item.active {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+}
+
+.nav-item.active svg {
+  color: #FFFFFF;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-2);
+}
+
+.logout-link {
+  color: var(--color-danger);
+}
+
+.logout-link svg {
+  color: var(--color-danger);
+}
+
+.logout-link:hover {
+  background-color: rgba(248, 113, 113, 0.1);
+  color: var(--color-danger);
+}
+
+/* Dynamic Mobile/Tablet Top Header (Hidden on Desktop) */
+.app-mobile-header {
+  display: none;
+}
+
+/* Mobile Bottom Navigation (Tablet/Mobile Viewports) */
+.app-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background-color: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  justify-content: space-around;
+  align-items: center;
+  z-index: 1000;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.bottom-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  flex: 1;
+  height: 100%;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-size: 0.7rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.bottom-nav-item svg {
+  color: var(--color-text-secondary);
+  transition: transform 0.2s ease, color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.bottom-nav-item:hover svg {
+  transform: translateY(-2px);
+}
+
+.bottom-nav-item.active {
+  color: var(--color-primary);
+}
+
+.bottom-nav-item.active svg {
+  color: var(--color-primary);
+}
+
+/* Backdrop Overlay for responsive Drawer */
+.app-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 1050; /* Above bottom-nav (1000) and headers (900) but below sidebar drawer (1100) */
+}
+
+/* Content Container Spacing */
+main.container {
+  flex-grow: 1;
   padding: var(--space-4);
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Utilities */
+.u-mt-1 { margin-top: var(--space-1); }
+.u-mt-2 { margin-top: var(--space-2); }
+.u-mt-3 { margin-top: var(--space-3); }
+.u-mt-4 { margin-top: var(--space-4); }
+
+/* ========================================================
+   RESPONSIVE DESIGN BREAKPOINTS (< 1024px is Mobile/Tablet)
+   ======================================================== */
+
+@media (max-width: 1023px) {
+  body.app-logged-in {
+    flex-direction: column;
+  }
+
+  /* Transform Sidebar into an Off-screen Drawer Overlay */
+  .app-sidebar {
+    position: fixed;
+    top: 0;
+    left: -280px; /* Start hidden offscreen */
+    width: 280px;
+    height: 100vh;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.4);
+    z-index: 1100; /* Highest layer to overlay everything */
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .sidebar-close-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    border: none;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background-color 0.2s, color 0.2s;
+  }
+
+  .sidebar-close-btn:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--color-text-primary);
+  }
+
+  /* Show top header bar on mobile/tablet */
+  .app-mobile-header {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 var(--space-3);
+    z-index: 900; /* Stays below backdrop & drawer */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  .mobile-menu-trigger {
+    background: none;
+    border: none;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+  }
+
+  .mobile-menu-trigger:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  /* Show Bottom Nav Bar */
+  .app-bottom-nav {
+    display: flex;
+  }
+
+  /* Active states when drawer is opened via trigger */
+  body.drawer-open {
+    overflow: hidden;
+  }
+  
+  body.drawer-open .app-sidebar {
+    left: 0; /* Slide in */
+  }
+
+  body.drawer-open .app-backdrop {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Grid spacing adjust: main content stays between top header and bottom nav */
+  main.container {
+    padding: calc(60px + var(--space-3)) var(--space-2) calc(64px + var(--space-3)) var(--space-2);
+    width: 100%;
+  }
 }
