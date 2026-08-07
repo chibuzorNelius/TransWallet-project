@@ -106,3 +106,20 @@ This project is licensed under the MIT License.
 ## Credits
 
 Built as a starter frontend fintech simulation for product and engineering teams.
+
+## AI Coding Safety & Collaboration Guidelines
+
+To maintain a stable development baseline and support collaborative multi-developer contributions, all developers and their AI coding assistants must strictly adhere to the following rules:
+
+### 🚫 Prohibited AI Actions
+- **DO NOT rewrite or restructure the visual design variables** in `css/variables.css` without approval from the project lead.
+- **DO NOT create, delete, rename, or reorganize project files or folders**. Keep the project structure exactly as defined.
+- **DO NOT duplicate the navigation sidebar or bottom menu markup** in individual pages. The navigation shell is handled centrally and dynamically by `js/app.js`.
+- **DO NOT introduce frontend frameworks** (React, Vue, TailwindCSS, etc.), backend servers, databases, or third-party API dependencies. The project must remain a static HTML/CSS/Vanilla JS experience.
+- **DO NOT modify another developer's page or CSS files** unless explicitly requested.
+
+### ✅ Expected AI Behavior
+- **Isolation**: Make the smallest necessary code changes, strictly scoped inside your assigned page/module (e.g. `pages/send-money.html`, `js/transfer.js`, etc.).
+- **Comments**: Keep global layout headers, styles, and script entry points intact. Add informative developer comments to prevent accidental regressions.
+- **Viewport Verification**: Test layout changes on mobile, tablet, and desktop viewports to ensure the shared layout transitions correctly and has no horizontal scrolling.
+

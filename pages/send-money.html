@@ -4,12 +4,41 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Send Money | Trans Wallet</title>
+    <!--
+    ========================================================
+    DEVELOPER & AI CODING SAFETY GUIDELINES
+    ========================================================
+    SHARED NAVIGATION:
+    Navigation has already been integrated through the shared component system 
+    across the required viewports. Do NOT recreate or duplicate navigation here.
+    Focus work entirely on the main page content inside <main class="container">.
+
+    GLOBAL STYLING NOTICE:
+    The application background, base typography and global colours are already 
+    handled by the global stylesheet. Do NOT redefine body background styles here.
+
+    AI DEVELOPMENT NOTICE:
+    If you use an AI coding assistant, explicitly tell it that this is a 
+    collaborative multi-developer project and identify the specific file/module 
+    you are working on. Instruct it NOT to rewrite, restructure, or modify 
+    unrelated files.
+
+    PAGE OWNERSHIP:
+    This page is assigned to a specific developer. Keep feature-specific HTML, 
+    CSS and JavaScript isolated to this page/module unless a shared component 
+    is genuinely required.
+
+    RESPONSIVE DESIGN:
+    This page must be tested on mobile, tablet and desktop before completion.
+    ========================================================
+    -->
+    <link rel="stylesheet" href="../css/variables.css">
     <link rel="stylesheet" href="../css/global.css" />
-    <link rel="stylesheet" href="/css/variables.css">
     <link rel="stylesheet" href="../css/pages/send-money.css" />
+    <script defer src="../js/app.js"></script>
     <script defer src="../js/transfer.js"></script>
   </head>
-  <body>
+  <body class="app-logged-in">
     <main class="container">
       <section class="card">
         <h1>Send money</h1>

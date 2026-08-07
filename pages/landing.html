@@ -5,10 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Trans Wallet Project landing experience" />
     <title>Trans Wallet | Fintech Starter</title>
+    <!--
+    ========================================================
+    DEVELOPER & AI CODING SAFETY GUIDELINES
+    ========================================================
+    AUTH LAYOUT:
+    This is an onboarding/authentication view. Shared navigation sidebars and 
+    mobile bottom bars are automatically excluded from this view via the 'app-auth' 
+    body class. Do NOT add layout navigation here.
+
+    AI DEVELOPMENT NOTICE:
+    Do NOT rewrite, restructure, or modify unrelated files or change the visual 
+    variables in variables.css. All development must respect local page isolation.
+    ========================================================
+    -->
+    <link rel="stylesheet" href="../css/variables.css">
     <link rel="stylesheet" href="../css/global.css" />
     <script defer src="../js/app.js"></script>
   </head>
-  <body>
+  <body class="app-auth">
     <header class="container navbar">
       <a href="landing.html"><strong>Trans Wallet</strong></a> 
       <nav>
