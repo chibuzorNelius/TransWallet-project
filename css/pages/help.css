@@ -1,0 +1,180 @@
+
+
+   .help-center {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+
+
+.help-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.help-header h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.help-header p {
+    font-size: 18px;
+    opacity: 0.8;
+    margin-bottom: 25px;
+}
+
+
+.help-search {
+    display: flex;
+    max-width: 650px;
+    margin: 0 auto;
+    gap: 10px;
+}
+
+.help-search input {
+    flex: 1;
+    padding: 14px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.06);
+    color: white;
+    font-size: 15px;
+    outline: none;
+}
+
+.help-search input:focus {
+    border-color: #19aef3;
+}
+
+.help-search input::placeholder {
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.help-search button {
+    padding: 14px 22px;
+    border: none;
+    border-radius: 10px;
+    background: #19aef3;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.help-search button:hover {
+    opacity: 0.85;
+}
+
+
+
+.faq-section {
+    margin-bottom: 40px;
+}
+
+.faq-section h2,
+.support-section h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+
+
+.faq-item {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.faq-question {
+    width: 100%;
+    padding: 18px 20px;
+    border: none;
+    background: transparent;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.faq-question:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.faq-question span {
+    font-size: 24px;
+    color: #19aef3;
+}
+
+
+
+.faq-answer {
+    display: none;
+    padding: 0 20px 18px;
+}
+
+.faq-answer p {
+    margin: 0;
+    line-height: 1.6;
+    opacity: 0.8;
+}
+
+
+
+.support-section {
+    text-align: center;
+    padding: 30px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.support-section p {
+    opacity: 0.8;
+    margin-bottom: 20px;
+}
+
+.support-btn {
+    padding: 13px 25px;
+    border: none;
+    border-radius: 10px;
+    background: #19aef3;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.support-btn:hover {
+    opacity: 0.85;
+}
+
+
+
+@media (max-width: 600px) {
+
+    .help-header h1 {
+        font-size: 28px;
+    }
+
+    .help-search {
+        flex-direction: column;
+    }
+
+    .help-search button {
+        width: 100%;
+    }
+
+    .faq-question {
+        font-size: 14px;
+    }
+
+    .support-section {
+        padding: 20px;
+    }
+}
