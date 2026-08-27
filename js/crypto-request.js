@@ -91,7 +91,8 @@ const cryptoAssets = {
     networkFeeLabel: 'Network Fee',
     coingeckoSlug: 'solana',
     priceChange: 1.05,
-    priceDirection: 'negative'
+    priceDirection: 'negative',
+    icon: 'Solana_logo.png'
   },
   bnb: {
     id: 'bnb',
@@ -129,7 +130,7 @@ const cryptoAssets = {
     coingeckoSlug: 'the-open-network',
     priceChange: 1.28,
     priceDirection: 'positive',
-    icon: 'bnb-bnb-logo.png'
+    icon: 'gram ton.png'
   },
   usdc: {
     id: 'usdc',
@@ -148,7 +149,7 @@ const cryptoAssets = {
     coingeckoSlug: 'usd-coin',
     priceChange: 0.0,
     priceDirection: 'neutral',
-    icon: 'bnb-bnb-logo.png'
+    icon: 'usdc.png'
   },
   core: {
     id: 'core',
@@ -167,7 +168,7 @@ const cryptoAssets = {
     coingeckoSlug: 'core',
     priceChange: 1.22,
     priceDirection: 'negative',
-    icon: 'bnb-bnb-logo.png'
+    icon: 'core-dao-core-logo.png'
   },
   sui: {
     id: 'sui',
@@ -185,7 +186,8 @@ const cryptoAssets = {
     networkFeeLabel: 'Network Fee',
     coingeckoSlug: 'sui',
     priceChange: 0.77,
-    priceDirection: 'negative'
+    priceDirection: 'negative',
+    icon: 'Sui_logo.png'
   },
   base: {
     id: 'base',
@@ -203,7 +205,8 @@ const cryptoAssets = {
     networkFeeLabel: 'Network Fee',
     coingeckoSlug: 'base',
     priceChange: 1.07,
-    priceDirection: 'positive'
+    priceDirection: 'positive',
+    icon: 'base logo.png'
   },
   ltc: {
     id: 'ltc',
@@ -222,7 +225,7 @@ const cryptoAssets = {
     coingeckoSlug: 'litecoin',
     priceChange: 0.19,
     priceDirection: 'negative',
-    icon: null
+    icon: 'Litecoin_Logo.jpg'
   }
 };
 
