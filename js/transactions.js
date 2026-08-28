@@ -18,7 +18,9 @@ Description: Starter structure for transaction list rendering.
 
 function readTransactions() {
   try {
-    return JSON.parse(localStorage.getItem('transwallet_transactions') || sessionStorage.getItem('transwallet_transactions') || '[]');
+    const user = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
+    const transactions = JSON.parse(localStorage.getItem('transwallet_transactions') || '[]');
+    return user ? transactions.filter((transaction) => transaction.userId === user.id) : [];
   } catch (error) {
     return [];
   }
