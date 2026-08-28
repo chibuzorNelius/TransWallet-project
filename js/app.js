@@ -266,6 +266,13 @@ function injectNavigation() {
 
 function initApp() {
   console.info('Trans Wallet app initialized');
+  if (document.body.classList.contains('app-logged-in')) {
+    const session = localStorage.getItem('transwallet_user_session');
+    if (!session) {
+      window.location.replace('login.html');
+      return;
+    }
+  }
   // Inject the shared visual layouts
   injectNavigation();
 }

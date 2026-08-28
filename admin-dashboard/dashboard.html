@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Admin Dashboard | Trans Wallet</title>
+		<link rel="stylesheet" href="../css/variables.css" />
+		<link rel="stylesheet" href="dashboard.css" />
+		<script defer src="admin-auth.js"></script>
+		<script defer src="dachboard.js"></script>
+	</head>
+	<body data-admin-page="dashboard">
+		<div class="admin-shell">
+			<aside class="admin-sidebar" id="adminSidebar">
+				<div class="admin-brand"><a href="../pages/landing.html"> <img class="brand-mark" src="../images/transwallet-logo-removebg-preview.png" alt=""> </a><span><strong>Trans</strong>Wallet</span></div>
+				<nav class="admin-nav" aria-label="Admin navigation">
+					<a class="active" href="#overview">Dashboard</a>
+					<a href="#users">Users</a>
+					<a href="#transactions">Transactions</a>
+					<a href="#crypto-requests">Crypto Requests <span class="nav-count" id="navPendingCount">0</span></a>
+						<a href="#revenue">Revenue</a>
+					<a href="#activity">Activity</a>
+					<a href="#settings">Settings</a>
+				</nav>
+				<button class="admin-logout" id="adminLogout" type="button">Log out</button>
+			</aside>
+
+			<div class="admin-main">
+				<header class="admin-header">
+					<button class="menu-button" id="adminMenuButton" type="button" aria-label="Open admin menu">☰</button>
+					<div>
+						<p class="admin-kicker">Operations / Overview</p>
+						<h1 id="adminWelcome">Welcome back, Admin</h1>
+					</div>
+					<div class="admin-profile"><span class="notification-dot" aria-label="Notifications available">3</span><span class="profile-avatar" id="adminAvatar">AO</span><span><strong id="adminProfileName">Admin Officer</strong><small>Operations</small></span></div>
+				</header>
+
+				<main class="admin-content" id="overview">
+					<div class="section-heading"><div><p class="admin-kicker">Today at a glance</p><h2>Overview</h2></div><span class="live-indicator">● Live data</span></div>
+					<section class="metric-grid" aria-label="Dashboard metrics">
+						<article class="metric-card"><span>Total users</span><strong id="totalUsers">0</strong><small>Registered accounts</small></article>
+						<article class="metric-card"><span>Total transactions</span><strong id="totalTransactions">0</strong><small>All recorded activity</small></article>
+						<article class="metric-card metric-accent"><span>Pending requests</span><strong id="pendingRequests">0</strong><small>Need review</small></article>
+						<article class="metric-card"><span>Completed transactions</span><strong id="completedTransactions">0</strong><small>Successfully processed</small></article>
+							<article class="metric-card metric-wide"><span>Total transaction volume</span><strong id="transactionVolume">NGN 0</strong><small>Fiat value processed</small></article>
+							<article class="metric-card metric-revenue"><span>Total revenue</span><strong id="totalRevenue">NGN 0</strong><small>Completed crypto service fees</small></article>
+					</section>
+
+					<section class="admin-panel" id="crypto-requests">
+						<div class="section-heading"><div><p class="admin-kicker">Primary queue</p><h2>Crypto requests</h2></div><select id="statusFilter" aria-label="Filter requests by status"><option value="all">All requests</option><option value="pending">Pending</option><option value="completed">Completed</option><option value="rejected">Rejected</option></select></div>
+						<div class="request-table-wrap"><table class="request-table"><thead><tr><th>Request ID</th><th>User</th><th>Asset</th><th>Amount</th><th>Wallet address</th><th>To pay</th><th>Date</th><th>Status</th><th></th></tr></thead><tbody id="requestTableBody"></tbody></table></div>
+						<div class="request-cards" id="requestCards"></div>
+						<p class="empty-state hidden" id="emptyRequests">No crypto requests match this filter.</p>
+					</section>
+
+						<div class="admin-columns">
+							<section class="admin-panel" id="transactions"><div class="section-heading"><div><p class="admin-kicker">Fiat ledger</p><h2>Transaction history</h2></div><div class="admin-controls"><input class="admin-filter" id="transactionSearch" type="search" placeholder="Search transactions" aria-label="Search transactions" /><select id="transactionStatus" aria-label="Filter transactions by status"><option value="all">All statuses</option><option value="completed">Completed</option><option value="pending">Pending</option><option value="rejected">Rejected</option></select></div></div><div id="recentTransactions" class="activity-feed"></div><p class="empty-state hidden" id="emptyTransactions">No transactions yet.</p></section>
+						<section class="admin-panel" id="activity"><div class="section-heading"><div><p class="admin-kicker">Audit trail</p><h2>Recent activity</h2></div></div><div id="adminActivity" class="activity-feed"></div></section>
+					</div>
+						<section class="admin-panel" id="users"><div class="section-heading"><div><p class="admin-kicker">Customer accounts</p><h2>Users</h2></div><div class="admin-controls"><input class="admin-filter" id="userSearch" type="search" placeholder="Search users" aria-label="Search users" /><select id="userStatus" aria-label="Filter users by status"><option value="all">All statuses</option><option value="active">Active</option><option value="inactive">Inactive</option></select></div></div><div class="user-table-wrap"><table class="request-table"><thead><tr><th>User</th><th>Email</th><th>Status</th><th>Balance</th><th>Joined</th><th>Transactions</th></tr></thead><tbody id="userTableBody"></tbody></table></div><div class="request-cards" id="userCards"></div><p class="empty-state hidden" id="emptyUsers">No users yet.</p></section>
+						<section class="admin-panel" id="revenue"><div class="section-heading"><div><p class="admin-kicker">Service fees</p><h2>Revenue history</h2></div></div><div id="revenueFeed" class="activity-feed"></div></section>
+						<section class="admin-panel" id="settings"><div class="section-heading"><div><p class="admin-kicker">Workspace controls</p><h2>Settings</h2></div></div><div class="settings-list"><div><strong>Admin workspace</strong><span>Trans Wallet Operations</span></div><div><strong>Data mode</strong><span>Frontend demonstration</span></div><div><strong>Settlement destination</strong><span>External customer wallet</span></div></div></section>
+				</main>
+			</div>
+		</div>
+
+		<div class="admin-backdrop hidden" id="adminBackdrop"></div>
+		<dialog class="request-dialog" id="requestDialog"><form method="dialog" class="dialog-close-form"><button class="dialog-close" id="dialogClose" type="submit" aria-label="Close request details">×</button></form><div id="requestDetails"></div></dialog>
+		<div class="admin-toast" id="adminToast" role="status"></div>
+	</body>
+</html>
