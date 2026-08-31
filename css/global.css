@@ -297,16 +297,16 @@ body.app-logged-in {
 }
 
 .logout-link {
-  color: var(--color-danger);
+  color: #F87171 !important;
 }
 
 .logout-link svg {
-  color: var(--color-danger);
+  color: #F87171 !important;
 }
 
 .logout-link:hover {
   background-color: rgba(248, 113, 113, 0.1);
-  color: var(--color-danger);
+  color: #F87171 !important;
 }
 
 /* Dynamic Mobile/Tablet Top Header (Hidden on Desktop) */

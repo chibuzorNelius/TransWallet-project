@@ -81,9 +81,9 @@ function injectNavigation() {
         <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
         <span>Send Money</span>
       </a>
-      <a href="receive-money.html" class="nav-item" id="nav-receive">
+      <a href="pay-bills.html" class="nav-item" id="nav-pay">
         <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M12 2v9m-4-4l4 4 4-4"></path></svg>
-        <span>Receive Money</span>
+        <span>Pay Bills</span>
       </a>
       <a href="exchange-rate.html" class="nav-item" id="nav-exchange">
         <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="16 3 21 8 16 13"></polyline><line x1="21" y1="8" x2="9" y2="8"></line><polyline points="8 21 3 16 8 11"></polyline><line x1="3" y1="16" x2="15" y2="16"></line></svg>
@@ -159,7 +159,7 @@ function injectNavigation() {
     const desktopIdMap = {
       'dashboard.html': 'nav-dashboard',
       'send-money.html': 'nav-send',
-      'receive-money.html': 'nav-receive',
+      'pay-bills.html': 'nav-pay',
       'exchange-rate.html': 'nav-exchange',
       'transactions.html': 'nav-transactions',
       'crypto-request.html': 'nav-crypto',
