@@ -94,6 +94,83 @@ function initRegister() {
   });
 }
 
-function initAuth() { if (!requireUser()) return; initLogin(); initRegister(); if (document.body.classList.contains('app-logged-in')) renderUserDashboard(getCurrentUser()); }
+function initAuth() { 
+  if (!requireUser()) return; 
+  initLogin(); 
+  initRegister(); 
+  if (document.body.classList.contains('app-logged-in')) {
+    renderUserDashboard(getCurrentUser());
+    setupNotificationPanel();
+    setupBalanceToggle();
+  }
+}
+
+function setupNotificationPanel() {
+  const notifBell = document.querySelector('.notif');
+  const notifPanel = document.getElementById('notifPanel');
+  const notifClose = document.getElementById('notifClose');
+  
+  if (!notifBell || !notifPanel) return;
+  
+  // Toggle panel on bell click
+  notifBell.addEventListener('click', (e) => {
+    e.stopPropagation();
+    notifPanel.classList.toggle('visible');
+  });
+  
+  // Close button
+  if (notifClose) {
+    notifClose.addEventListener('click', (e) => {
+      e.stopPropagation();
+      notifPanel.classList.remove('visible');
+    });
+  }
+  
+  // Close panel when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!notifBell.contains(e.target) && !notifPanel.contains(e.target)) {
+      notifPanel.classList.remove('visible');
+    }
+  });
+  
+  // Close panel when pressing Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && notifPanel.classList.contains('visible')) {
+      notifPanel.classList.remove('visible');
+    }
+  });
+}
+
+function setupBalanceToggle() {
+  const eyeToggle = document.getElementById('eyeToggle');
+  const balanceAmount = document.getElementById('balanceAmount');
+  const balanceUsd = document.getElementById('balanceUsd');
+  
+  if (!eyeToggle || !balanceAmount) return;
+  
+  let isBalanceVisible = true;
+  const originalBalance = balanceAmount.textContent;
+  const originalUsd = balanceUsd?.textContent || '';
+  
+  eyeToggle.addEventListener('click', () => {
+    isBalanceVisible = !isBalanceVisible;
+    
+    if (isBalanceVisible) {
+      // Show balance
+      balanceAmount.textContent = originalBalance;
+      if (balanceUsd) balanceUsd.textContent = originalUsd;
+      eyeToggle.classList.remove('fa-eye-slash');
+      eyeToggle.classList.add('fa-eye');
+    } else {
+      // Hide balance with asterisks
+      const maskedBalance = '******* ****';
+      balanceAmount.textContent = maskedBalance;
+      if (balanceUsd) balanceUsd.textContent = '≈ *** USD';
+      eyeToggle.classList.remove('fa-eye');
+      eyeToggle.classList.add('fa-eye-slash');
+    }
+  });
+}
+
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initAuth);
 else initAuth();
