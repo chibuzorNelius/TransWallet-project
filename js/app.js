@@ -158,6 +158,7 @@ function injectNavigation() {
   function setActive() {
     const desktopIdMap = {
       'dashboard.html': 'nav-dashboard',
+      'withdraw.html': 'nav-dashboard',
       'send-money.html': 'nav-send',
       'receive-money.html': 'nav-receive',
       'exchange-rate.html': 'nav-exchange',
@@ -169,6 +170,7 @@ function injectNavigation() {
 
     const mobileIdMap = {
       'dashboard.html': 'm-nav-dashboard',
+      'withdraw.html': 'm-nav-dashboard',
       'cards.html': 'm-nav-cards',
       'crypto-request.html': 'm-nav-crypto',
       'exchange-rate.html': 'm-nav-exchange',

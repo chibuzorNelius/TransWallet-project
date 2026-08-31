@@ -376,6 +376,10 @@ body {
 .btn-add:hover { opacity: 0.85; }
 
 .btn-withdraw {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   background: rgba(255,255,255,0.1);
   color: #fff;
   border: 1px solid rgba(255,255,255,0.2);
@@ -385,9 +389,10 @@ body {
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s;
+  text-decoration: none;
 }
 
-.btn-withdraw:hover { background: rgba(255,255,255,0.2); }
+.btn-withdraw:hover { background: rgba(255,255,255,0.2); color: #fff; }
 
 /* wallet visual */
 .balance-right { position: relative; width: 160px; height: 140px; flex-shrink: 0; }

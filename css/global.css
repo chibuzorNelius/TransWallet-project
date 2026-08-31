@@ -44,6 +44,7 @@ Description: Shared application layout, responsive navigation shell, and core st
 @import url('./pages/help.css');
 @import url('./pages/login.css');
 @import url('./pages/register.css');
+@import url('./pages/withdraw.css');
 
 /* Global Reset & Base Typography */
 * {
