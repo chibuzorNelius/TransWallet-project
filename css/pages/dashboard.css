@@ -113,7 +113,7 @@ body {
   color: var(--text);
 }
 
-.logo-text span { color: var(--accent); }
+/* Logo text colors are defined in global.css */
 
 .nav { display: flex; flex-direction: column; gap: 2px; flex: 1; }
 
@@ -229,7 +229,7 @@ body {
   z-index: 10;
 }
 
-.greeting h1 { font-size: 20px; font-weight: 700; }
+.greeting h1 { font-size: 18px; font-weight: 700; }
 .greeting p  { font-size: 13px; color: var(--muted); margin-top: 2px; }
 
 .topbar-right {
@@ -265,6 +265,125 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* ── NOTIFICATION PANEL ── */
+.notif {
+  position: relative;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.notif-panel {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 12px;
+  width: 320px;
+  max-height: 400px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.3);
+  display: none;
+  flex-direction: column;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.notif-panel.visible {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.notif-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.notif-header h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.notif-close {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.notif-close:hover {
+  color: var(--text);
+}
+
+.notif-content {
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.notif-item {
+  display: flex;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(35, 46, 69, 0.5);
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.notif-item:hover {
+  background: var(--surface);
+}
+
+.notif-item:last-child {
+  border-bottom: none;
+}
+
+.notif-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.notif-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.notif-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+
+.notif-msg {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.4;
 }
 
 .profile {
@@ -326,7 +445,7 @@ body {
 .eye { cursor: pointer; }
 
 .balance-amount {
-  font-size: 36px;
+  font-size: 32px;
   font-weight: 800;
   color: #fff;
   letter-spacing: -1px;
@@ -707,6 +826,30 @@ body {
   font-size: 48px;
   color: rgba(255,255,255,0.2);
 }
+
+/* The shared app shell owns navigation; keep dashboard content inside it. */
+body.app-logged-in { display: flex; min-height: 100vh; overflow-x: hidden; }
+body.app-logged-in .main { margin-left: 0; width: auto; min-width: 0; }
+body.app-logged-in .content { width: 100%; max-width: 1500px; margin: 0 auto; }
+body.app-logged-in .left-col, body.app-logged-in .right-col { min-width: 0; }
+@media (max-width: 1100px) {
+  body.app-logged-in .content { flex-direction: column; }
+  body.app-logged-in .right-col { width: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 700px) {
+  body.app-logged-in .topbar { padding: 16px; align-items: flex-start; }
+  body.app-logged-in .topbar-right .flag, body.app-logged-in .topbar-right > .notif { display: none; }
+  body.app-logged-in .profile span, body.app-logged-in .profile .fa-chevron-down { display: none; }
+  body.app-logged-in .content { padding: 16px 16px 84px; }
+  body.app-logged-in .balance-card { padding: 20px; min-height: 0; }
+  body.app-logged-in .balance-right { display: none; }
+  body.app-logged-in .balance-amount { font-size: clamp(1.8rem, 8vw, 2.25rem); }
+  body.app-logged-in .two-col, body.app-logged-in .right-col { grid-template-columns: 1fr; }
+  body.app-logged-in .security-banner { align-items: flex-start; flex-wrap: wrap; }
+  body.app-logged-in .security-text { min-width: 0; }
+}
+.dashboard-empty { color: var(--muted); text-align: center; padding: 1rem 0; }
+.success-mark { width: 4rem; height: 4rem; display: grid; place-items: center; margin: 0 auto 1.5rem; border-radius: 50%; color: #fff; background: var(--color-success); font-size: 2rem; font-weight: 800; }
 
 .refer-gift i { font-size: 48px; }
 
