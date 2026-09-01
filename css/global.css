@@ -44,6 +44,7 @@ Description: Shared application layout, responsive navigation shell, and core st
 @import url('./pages/help.css');
 @import url('./pages/login.css');
 @import url('./pages/register.css');
+@import url('./pages/withdraw.css');
 
 /* Global Reset & Base Typography */
 * {
@@ -297,16 +298,16 @@ body.app-logged-in {
 }
 
 .logout-link {
-  color: var(--color-danger);
+  color: #F87171 !important;
 }
 
 .logout-link svg {
-  color: var(--color-danger);
+  color: #F87171 !important;
 }
 
 .logout-link:hover {
   background-color: rgba(248, 113, 113, 0.1);
-  color: var(--color-danger);
+  color: #F87171 !important;
 }
 
 /* Dynamic Mobile/Tablet Top Header (Hidden on Desktop) */

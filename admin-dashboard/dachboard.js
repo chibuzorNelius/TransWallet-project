@@ -2,6 +2,7 @@ const REQUESTS_KEY = 'transwallet_crypto_requests';
 const USERS_KEY = 'transwallet_users';
 const TRANSACTIONS_KEY = 'transwallet_transactions';
 const NOTIFICATIONS_KEY = 'transwallet_notifications';
+const SUPPORT_MESSAGES_KEY = 'transwallet_support_messages';
 const ACTIVITY_KEY = 'transwallet_admin_activity';
 
 function readState(key) {
@@ -155,7 +156,93 @@ function processRequest(requestId, nextStatus) {
 	renderAll();
 }
 
-function renderAll() { renderAdminIdentity(); renderOverview(); renderRequests(); renderFeeds(); renderTransactions(); renderUsers(); }
+function renderSupportRequests() {
+	const supportRequests = readState(SUPPORT_MESSAGES_KEY);
+	const unreadCount = supportRequests.filter((request) => request.status !== 'read').length;
+	const badge = document.querySelector('.notification-dot');
+	if (badge) {
+		badge.textContent = String(unreadCount);
+		badge.style.opacity = unreadCount > 0 ? '1' : '0.8';
+		badge.setAttribute('aria-label', unreadCount > 0 ? `${unreadCount} unread notifications` : 'No unread notifications');
+	}
+	return supportRequests;
+}
+
+function markSupportRequestRead(requestId) {
+	const supportRequests = readState(SUPPORT_MESSAGES_KEY);
+	const request = supportRequests.find((entry) => entry.id === requestId);
+	if (!request) return;
+	request.status = 'read';
+	writeState(SUPPORT_MESSAGES_KEY, supportRequests);
+
+	const notifications = readState(NOTIFICATIONS_KEY);
+	const relatedNotifications = notifications.filter((entry) => entry.type === 'support' && entry.userId === request.userId && entry.message.includes(request.userName));
+	relatedNotifications.forEach((notification) => {
+		notification.read = true;
+	});
+	writeState(NOTIFICATIONS_KEY, notifications);
+	renderSupportRequests();
+}
+
+function openSupportRequestsDialog() {
+	const supportRequests = readState(SUPPORT_MESSAGES_KEY);
+	const dialog = document.getElementById('requestDialog');
+	const details = document.getElementById('requestDetails');
+	if (!dialog || !details) return;
+
+	const latestRequests = supportRequests.length ? supportRequests : [];
+	if (!latestRequests.length) {
+		showToast('No support requests yet.', 'info');
+		return;
+	}
+
+	details.innerHTML = `
+		<p class="admin-kicker">Support requests</p>
+		<h2>Customer messages</h2>
+		<div class="support-request-list">
+			${latestRequests.map((request) => `
+				<div class="support-request-item">
+					<div class="support-request-head">
+						<strong>${request.userName}</strong>
+						<span class="status ${request.status === 'read' ? 'status-completed' : 'status-pending'}">${request.status === 'read' ? 'Read' : 'Unread'}</span>
+					</div>
+					<p><strong>Category:</strong> ${request.category || 'General Support'}</p>
+					<p><strong>Submitted:</strong> ${new Date(request.createdAt).toLocaleString()}</p>
+					<p><strong>Email:</strong> ${request.email || 'Not provided'}</p>
+					<button class="table-action" data-support-request-id="${request.id}" type="button">View message</button>
+				</div>
+			`).join('')}
+		</div>
+	`;
+	dialog.dataset.supportRequestId = latestRequests[0]?.id || '';
+	dialog.showModal();
+}
+
+function openSupportRequestDetails(requestId) {
+	const request = readState(SUPPORT_MESSAGES_KEY).find((entry) => entry.id === requestId);
+	if (!request) return;
+	markSupportRequestRead(requestId);
+	const dialog = document.getElementById('requestDialog');
+	const details = document.getElementById('requestDetails');
+	if (!dialog || !details) return;
+	const statusClass = request.status === 'read' ? 'status-completed' : 'status-pending';
+	details.innerHTML = `
+		<p class="admin-kicker">Support Request</p>
+		<h2>Customer message</h2>
+		<div class="detail-list">
+			<div><span>From</span><strong>${request.userName || 'Unknown user'}</strong></div>
+			<div><span>Email</span><strong>${request.email || 'Not provided'}</strong></div>
+			<div><span>Category</span><strong>${request.category || 'General Support'}</strong></div>
+			<div><span>Submitted</span><strong>${new Date(request.createdAt).toLocaleString()}</strong></div>
+			<div><span>Status</span><strong><span class="status ${statusClass}">${request.status === 'read' ? 'Read' : 'Unread'}</span></strong></div>
+			<div class="detail-wallet"><span>Message</span><strong>${(request.message || '').replace(/\n/g, '<br>')}</strong></div>
+		</div>
+	`;
+	dialog.dataset.supportRequestId = requestId;
+	dialog.showModal();
+}
+
+function renderAll() { renderAdminIdentity(); renderOverview(); renderRequests(); renderFeeds(); renderTransactions(); renderUsers(); renderSupportRequests(); }
 
 document.addEventListener('DOMContentLoaded', () => {
 	if (!guardAdminDashboard()) return;
@@ -170,6 +257,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		if (reviewButton) openRequest(reviewButton.dataset.requestId);
 		if (event.target.closest('[data-approve]')) processRequest(document.getElementById('requestDialog').dataset.requestId, 'completed');
 		if (event.target.closest('[data-reject]')) processRequest(document.getElementById('requestDialog').dataset.requestId, 'rejected');
+		const supportViewButton = event.target.closest('[data-support-request-id]');
+		if (supportViewButton) {
+			openSupportRequestDetails(supportViewButton.dataset.supportRequestId);
+		}
+		if (event.target.closest('.admin-notification') || event.target.closest('.notification-dot')) {
+			openSupportRequestsDialog();
+		}
 		const copyButton = event.target.closest('.copy-address');
 		if (copyButton) navigator.clipboard?.writeText(copyButton.dataset.address).then(() => showToast('Wallet address copied.', 'success'));
 	});

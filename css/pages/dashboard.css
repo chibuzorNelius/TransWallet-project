@@ -113,7 +113,7 @@ body {
   color: var(--text);
 }
 
-.logo-text span { color: var(--accent); }
+/* Logo text colors are defined in global.css */
 
 .nav { display: flex; flex-direction: column; gap: 2px; flex: 1; }
 
@@ -229,7 +229,7 @@ body {
   z-index: 10;
 }
 
-.greeting h1 { font-size: 20px; font-weight: 700; }
+.greeting h1 { font-size: 18px; font-weight: 700; }
 .greeting p  { font-size: 13px; color: var(--muted); margin-top: 2px; }
 
 .topbar-right {
@@ -265,6 +265,125 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* ── NOTIFICATION PANEL ── */
+.notif {
+  position: relative;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.notif-panel {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 12px;
+  width: 320px;
+  max-height: 400px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.3);
+  display: none;
+  flex-direction: column;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.notif-panel.visible {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.notif-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.notif-header h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.notif-close {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.notif-close:hover {
+  color: var(--text);
+}
+
+.notif-content {
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.notif-item {
+  display: flex;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(35, 46, 69, 0.5);
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.notif-item:hover {
+  background: var(--surface);
+}
+
+.notif-item:last-child {
+  border-bottom: none;
+}
+
+.notif-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.notif-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.notif-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+
+.notif-msg {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.4;
 }
 
 .profile {
@@ -326,7 +445,7 @@ body {
 .eye { cursor: pointer; }
 
 .balance-amount {
-  font-size: 36px;
+  font-size: 32px;
   font-weight: 800;
   color: #fff;
   letter-spacing: -1px;
@@ -376,6 +495,10 @@ body {
 .btn-add:hover { opacity: 0.85; }
 
 .btn-withdraw {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   background: rgba(255,255,255,0.1);
   color: #fff;
   border: 1px solid rgba(255,255,255,0.2);
@@ -385,9 +508,10 @@ body {
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s;
+  text-decoration: none;
 }
 
-.btn-withdraw:hover { background: rgba(255,255,255,0.2); }
+.btn-withdraw:hover { background: rgba(255,255,255,0.2); color: #fff; }
 
 /* wallet visual */
 .balance-right { position: relative; width: 160px; height: 140px; flex-shrink: 0; }

@@ -1,0 +1,224 @@
+/* Page-specific styling for the withdraw flow */
+
+body.app-logged-in {
+  background: #061321;
+}
+
+.withdraw-page-shell {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 0;
+}
+
+.withdraw-page {
+  width: min(100%, 980px);
+  padding-top: 1.2rem;
+}
+
+.withdraw-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.withdraw-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: #f8fafc;
+  font-size: clamp(1.4rem, 2vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
+.withdraw-back-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  color: #dbeafe;
+  font-size: 1.1rem;
+}
+
+.withdraw-inner {
+  width: min(100%, 680px);
+  margin: 2rem auto 0;
+  display: grid;
+  gap: 1.2rem;
+}
+
+.withdraw-panel,
+.requirements-panel,
+.info-banner {
+  background: rgba(17, 30, 49, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  border-radius: 18px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+}
+
+.withdraw-panel {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 2rem 1.5rem 1.5rem;
+  background: rgba(13, 24, 39, 0.86);
+  min-height: 180px;
+}
+
+.panel-badge {
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  background: rgba(250, 204, 21, 0.18);
+  color: #facc15;
+  border: 1px solid rgba(250, 204, 21, 0.38);
+  font-size: 1.7rem;
+  margin-bottom: 1.1rem;
+}
+
+.withdraw-panel h2 {
+  margin: 0;
+  font-size: clamp(1.9rem, 3vw, 2.7rem);
+  line-height: 1.2;
+  letter-spacing: -0.06em;
+  color: #f8fafc;
+}
+
+.withdraw-panel p {
+  margin: 0.9rem 0 0;
+  max-width: 540px;
+  font-size: 1.05rem;
+  color: #aab6c9;
+  line-height: 1.6;
+}
+
+.requirements-panel {
+  padding: 1.5rem 1.4rem 1.2rem;
+}
+
+.requirements-panel h3 {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.requirements-panel ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.requirements-panel li {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: #edf2ff;
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.requirements-panel li i {
+  color: #22c55e;
+  font-size: 0.9rem;
+}
+
+.verify-button {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  border: none;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #3ba0ff 0%, #2b7ef5 100%);
+  color: #fff;
+  font-weight: 800;
+  font-size: clamp(1.15rem, 2vw, 1.8rem);
+  padding: 1.3rem 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 10px 22px rgba(43, 126, 245, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.verify-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 24px rgba(43, 126, 245, 0.45);
+}
+
+.info-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1rem 1.1rem;
+  color: #dce7f7;
+}
+
+.info-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  color: #bfdcff;
+  font-size: 0.85rem;
+}
+
+.info-banner p {
+  margin: 0;
+  line-height: 1.6;
+  color: #d9e4f8;
+}
+
+.approval-note {
+  margin-top: 0.6rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.98rem;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.approval-note.visible {
+  color: #f8fafc;
+}
+
+@media (max-width: 768px) {
+  .withdraw-page {
+    width: min(100%, 720px);
+    padding-top: 1rem;
+  }
+
+  .withdraw-inner {
+    width: min(100%, 100%);
+    margin-top: 1.4rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .withdraw-panel {
+    padding: 1.5rem 1rem 1.2rem;
+  }
+
+  .requirements-panel {
+    padding: 1.1rem 1rem;
+  }
+
+  .requirements-panel li {
+    font-size: 1rem;
+  }
+
+  .verify-button {
+    padding: 1rem 1.1rem;
+  }
+}
