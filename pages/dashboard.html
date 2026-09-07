@@ -38,6 +38,7 @@
     <link rel="stylesheet" href="../css/variables.css">
     <link rel="stylesheet" href="../css/global.css" />
     <link rel="stylesheet" href="../css/pages/dashboard.css" />
+    <script defer src="../js/country-flags.js"></script>
     <script defer src="../js/auth.js"></script>
     <script defer src="../js/exchange-rates-data.js"></script>
     <script defer src="../js/dashboard-exchange-rates.js"></script>
@@ -54,8 +55,8 @@
         <p>Here's what's happening with your wallet today.</p>
       </div>
       <div class="topbar-right">
-        <div class="flag">
-          <i class="fa-solid fa-flag"></i> NG 
+        <div class="flag" aria-label="Current region: Nigeria">
+          <img class="country-flag-image" src="../images/nigeriaFlag.png" alt="Nigeria flag" /> Nigeria
         </div>
         <div class="notif">
           <i class="fa-solid fa-bell"></i>
@@ -143,7 +144,7 @@
               </div>
               <div class="coin coin-btc"><i class="fa-brands fa-bitcoin"></i></div>
               <div class="coin coin-eth"><i class="fa-brands fa-ethereum"></i></div>
-              <div class="coin coin-usd"><i class="fa-solid fa-dollar-sign"></i></div>
+              <div class="coin coin-usd"><img src="../images/usaFlag.png" alt="United States flag" /></div>
             </div>
           </div>
         </div>
@@ -255,7 +256,7 @@
             </div>
             <div class="wallet-list">
               <div class="wallet-item">
-                <div class="wallet-flag-icon ngn"><i class="fa-solid fa-naira-sign"></i></div>
+                <div class="wallet-flag-icon ngn"><img src="../images/nigeriaFlag.png" alt="Nigeria flag" /></div>
                 <div class="wallet-info">
                   <div class="wallet-name">NGN Wallet</div>
                   <div class="wallet-sub">Nigerian Naira</div>
@@ -263,7 +264,7 @@
                 <div class="wallet-bal">₦950,000.00</div>
               </div>
               <div class="wallet-item">
-                <div class="wallet-flag-icon usd"><i class="fa-solid fa-dollar-sign"></i></div>
+                <div class="wallet-flag-icon usd"><img src="../images/usaFlag.png" alt="United States flag" /></div>
                 <div class="wallet-info">
                   <div class="wallet-name">USD Wallet</div>
                   <div class="wallet-sub">US Dollar</div>
@@ -271,7 +272,7 @@
                 <div class="wallet-bal">$0.00</div>
               </div>
               <div class="wallet-item">
-                <div class="wallet-flag-icon eur"><i class="fa-solid fa-euro-sign"></i></div>
+                <div class="wallet-flag-icon eur"><img src="../images/EURFLAG.png" alt="European Union flag" /></div>
                 <div class="wallet-info">
                   <div class="wallet-name">EUR Wallet</div>
                   <div class="wallet-sub">Euro</div>
@@ -279,7 +280,7 @@
                 <div class="wallet-bal">€0.00</div>
               </div>
               <div class="wallet-item">
-                <div class="wallet-flag-icon gbp"><i class="fa-solid fa-sterling-sign"></i></div>
+                <div class="wallet-flag-icon gbp"><img src="../images/britishflag.png" alt="United Kingdom flag" /></div>
                 <div class="wallet-info">
                   <div class="wallet-name">GBP Wallet</div>
                   <div class="wallet-sub">British Pound</div>
@@ -321,7 +322,7 @@
           </div>
           <div class="rate-list">
             <div class="rate-item">
-              <div class="wallet-flag-icon usd"><i class="fa-solid fa-dollar-sign"></i></div>
+              <div class="wallet-flag-icon usd"><img src="../images/usaFlag.png" alt="United States flag" /></div>
               <div class="rate-info">
                 <div class="rate-name">USD</div>
                 <div class="rate-sub">United States Dollar</div>
@@ -334,7 +335,7 @@
               </div>
             </div>
             <div class="rate-item">
-              <div class="wallet-flag-icon gbp"><i class="fa-solid fa-sterling-sign"></i></div>
+              <div class="wallet-flag-icon gbp"><img src="../images/britishflag.png" alt="United Kingdom flag" /></div>
               <div class="rate-info">
                 <div class="rate-name">GBP</div>
                 <div class="rate-sub">British Pound</div>
@@ -347,7 +348,7 @@
               </div>
             </div>
             <div class="rate-item">
-              <div class="wallet-flag-icon eur"><i class="fa-solid fa-euro-sign"></i></div>
+              <div class="wallet-flag-icon eur"><img src="../images/EURFLAG.png" alt="European Union flag" /></div>
               <div class="rate-info">
                 <div class="rate-name">EUR</div>
                 <div class="rate-sub">Euro</div>
@@ -360,7 +361,7 @@
               </div>
             </div>
             <div class="rate-item">
-              <div class="wallet-flag-icon cad"><i class="fa-solid fa-c"></i></div>
+              <div class="wallet-flag-icon cad"><img src="../images/canadaflag.png" alt="Canada flag" /></div>
               <div class="rate-info">
                 <div class="rate-name">CAD</div>
                 <div class="rate-sub">Canadian Dollar</div>
@@ -379,7 +380,7 @@
         <div class="section-card refer-earn">
           <div class="section-title">Refer & Earn</div>
           <div class="refer-earn-sub">Invite friends and earn up to</div>
-          <div class="refer-earn-amount">₦10,000</div>
+          <div class="refer-earn-amount">₦100,000</div>
           <a href="#" class="refer-earn-link">Learn More <i class="fa-solid fa-arrow-right"></i></a>
           <div class="refer-gift">
             <i class="fa-solid fa-gift"></i>

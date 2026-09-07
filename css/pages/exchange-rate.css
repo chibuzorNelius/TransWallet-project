@@ -14,7 +14,7 @@ Description: Starter page styles for the exchange experience.
 
 /* Exchange page only: the shared shell and page background remain in global.css. */
 .exchange-page {
-  max-width: 1280px !important;
+  max-width: 1280px;
 }
 
 .exchange-page h1,
@@ -37,7 +37,7 @@ Description: Starter page styles for the exchange experience.
   font-size: 11px;
   font-weight: 800;
   letter-spacing: .12em;
-  margin-bottom: 8px !important;
+  margin-bottom: 8px;
 }
 
 .exchange-hero h1 {
@@ -170,13 +170,27 @@ Description: Starter page styles for the exchange experience.
 .currency-flag,
 .pair-mark,
 .card-flag {
-  font-family: "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
-  font-variant-emoji: emoji;
+  align-items: center;
+  display: inline-flex;
 }
 
 .currency-flag {
-  font-size: 22px;
+  height: 28px;
   margin-right: 9px;
+  width: 38px;
+}
+
+.currency-flag img,
+.pair-mark img,
+.card-flag img {
+  display: block;
+  height: 22px;
+  object-fit: cover;
+  width: 32px;
+}
+
+.currency-flag img {
+  border-radius: 4px;
 }
 
 .currency-control select {
@@ -620,8 +634,8 @@ Description: Starter page styles for the exchange experience.
 
 @media (max-width: 560px) {
   .exchange-page {
-    padding-left: 14px !important;
-    padding-right: 14px !important;
+    padding-left: 14px;
+    padding-right: 14px;
   }
 
   .exchange-hero h1 {
@@ -703,9 +717,9 @@ Description: Starter page styles for the exchange experience.
   *,
   *::before,
   *::after {
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
-    transition-duration: .01ms !important;
+    animation-duration: .01ms;
+    animation-iteration-count: 1;
+    scroll-behavior: auto ;
+    transition-duration: .01ms ;
   }
 }

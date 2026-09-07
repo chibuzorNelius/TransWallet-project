@@ -4,14 +4,14 @@
  */
 (function exposeExchangeRates(global) {
   const currencies = {
-    USD: { code: 'USD', name: 'US Dollar', symbol: '$', flag: '\ud83c\uddfa\ud83c\uddf8', baseRate: 1 },
-    NGN: { code: 'NGN', name: 'Nigerian Naira', symbol: '\u20a6', flag: '\ud83c\uddf3\ud83c\uddec', baseRate: 1600 },
-    EUR: { code: 'EUR', name: 'Euro', symbol: '\u20ac', flag: '\ud83c\uddea\ud83c\uddfa', baseRate: 0.92 },
-    GBP: { code: 'GBP', name: 'British Pound', symbol: '\u00a3', flag: '\ud83c\uddec\ud83c\udde7', baseRate: 0.78 },
-    CAD: { code: 'CAD', name: 'Canadian Dollar', symbol: 'C$', flag: '\ud83c\udde8\ud83c\udde6', baseRate: 1.36 },
-    AUD: { code: 'AUD', name: 'Australian Dollar', symbol: 'A$', flag: '\ud83c\udde6\ud83c\uddfa', baseRate: 1.52 },
-    JPY: { code: 'JPY', name: 'Japanese Yen', symbol: '\u00a5', flag: '\ud83c\uddef\ud83c\uddf5', baseRate: 154 },
-    CHF: { code: 'CHF', name: 'Swiss Franc', symbol: 'CHF', flag: '\ud83c\udde8\ud83c\udded', baseRate: 0.89 }
+    USD: { code: 'USD', name: 'US Dollar', symbol: '$', flag: '../images/usaFlag.png', baseRate: 1 },
+    NGN: { code: 'NGN', name: 'Nigerian Naira', symbol: '\u20a6', flag: '../images/nigeriaFlag.png', baseRate: 1600 },
+    EUR: { code: 'EUR', name: 'Euro', symbol: '\u20ac', flag: '../images/EURFLAG.png', baseRate: 0.92 },
+    GBP: { code: 'GBP', name: 'British Pound', symbol: '\u00a3', flag: '../images/britishflag.png', baseRate: 0.78 },
+    CAD: { code: 'CAD', name: 'Canadian Dollar', symbol: 'C$', flag: '../images/canadaflag.png', baseRate: 1.36 },
+    AUD: { code: 'AUD', name: 'Australian Dollar', symbol: 'A$', flag: '', baseRate: 1.52 },
+    JPY: { code: 'JPY', name: 'Japanese Yen', symbol: '\u00a5', flag: '../images/JapanFlag.png', baseRate: 154 },
+    CHF: { code: 'CHF', name: 'Swiss Franc', symbol: 'CHF', flag: '', baseRate: 0.89 }
   };
 
   const movements = {

@@ -20,6 +20,7 @@
     -->
     <link rel="stylesheet" href="../css/variables.css">
     <link rel="stylesheet" href="../css/global.css" />
+    <script defer src="../js/country-flags.js"></script>
     <script defer src="../js/auth.js"></script>
     <script defer src="../js/app.js"></script>
   </head>
@@ -29,7 +30,7 @@
         <div class="auth-brand">Trans<span>Wallet</span></div>
         <p class="auth-eyebrow">Start your wallet journey</p>
         <h1>Create your account</h1>
-        <p class="auth-copy">Open a personal wallet and receive a ₦10,000 welcome bonus.</p>
+        <p class="auth-copy">Open a personal wallet and receive a ₦100,000 welcome bonus.</p>
         <div id="authAlert" class="auth-alert" role="alert"></div>
         <form id="registerForm" class="auth-form register-form">
           <div class="form-group">
@@ -44,16 +45,18 @@
           <div class="form-group"><label for="phone">Phone number</label><input id="phone" name="phone" type="tel" required placeholder="08012345678" /></div>
           <div class="form-group">
             <label for="region">Region</label>
-            <select id="region" name="region" required>
-              <option value="NG">🇳🇬 Nigeria</option>
-              <option value="GH">🇬🇭 Ghana</option>
-              <option value="KE">🇰🇪 Kenya</option>
-              <option value="ZA">🇿🇦 South Africa</option>
-              <option value="ET">🇪🇹 Ethiopia</option>
-              <option value="UG">🇺🇬 Uganda</option>
-              <option value="TZ">🇹🇿 Tanzania</option>
-              <option value="RW">🇷🇼 Rwanda</option>
-            </select>
+            <div class="region-control">
+              <img id="region-flag" class="region-flag" src="../images/nigeriaFlag.png" alt="Nigeria flag" />
+              <select id="region" name="region" required>
+                <option value="NG">Nigeria</option>
+                <option value="US">United States</option>
+                <option value="GB">United Kingdom</option>
+                <option value="CA">Canada</option>
+                <option value="EU">European Union</option>
+                <option value="CN">China</option>
+                <option value="JP">Japan</option>
+              </select>
+            </div>
           </div>
           <div class="form-group">
             <label for="registerPassword">Password</label>
