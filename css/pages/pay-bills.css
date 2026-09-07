@@ -1,0 +1,110 @@
+.bill-payments {
+    margin-top: 30px;
+}
+
+.bill-payments h2 {
+    font-size: 14px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.service-card {
+    position: relative;
+    min-height: 150px;
+    padding: 28px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-2px);
+}
+
+.service-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 22px;
+    flex-shrink: 0;
+}
+
+.service-info {
+    flex: 1;
+}
+
+.service-info h3 {
+    margin: 0 0 8px;
+    font-size: 18px;
+}
+
+.service-info p {
+    margin: 0;
+    font-size: 13px;
+    opacity: 0.7;
+}
+
+.service-arrow {
+    font-size: 30px;
+    opacity: 0.6;
+}
+
+/* Icons */
+
+.airtime-icon {
+    background: rgba(255, 100, 50, 0.15);
+}
+
+.data-icon {
+    background: rgba(0, 150, 255, 0.15);
+}
+
+.electricity-icon {
+    background: rgba(255, 180, 0, 0.15);
+}
+
+.cable-icon {
+    background: rgba(150, 100, 255, 0.15);
+}
+
+.exam-icon {
+    background: rgba(0, 200, 100, 0.15);
+}
+
+
+/* Exam Pin takes the full width */
+
+.services-grid .service-card:last-child {
+    grid-column: 1 / -1;
+}
+
+
+/* Mobile */
+
+@media (max-width: 700px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .services-grid .service-card:last-child {
+        grid-column: auto;
+    }
+}
