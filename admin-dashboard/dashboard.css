@@ -115,6 +115,60 @@ select {
 	cursor: pointer;
 }
 
+.logout-dialog {
+	background: var(--color-surface);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-lg);
+	color: var(--color-text-primary);
+	max-width: min(420px, calc(100vw - 32px));
+	padding: 0;
+	width: 100%;
+}
+
+.logout-dialog::backdrop {
+	background: rgba(2, 6, 23, .72);
+}
+
+.logout-dialog-content {
+	padding: 24px;
+}
+
+.logout-dialog h2 {
+	font-size: 1.15rem;
+	margin: 0;
+}
+
+.logout-dialog p {
+	color: var(--color-text-secondary);
+	font-size: .9rem;
+	margin: 10px 0 22px;
+}
+
+.logout-dialog-actions {
+	display: flex;
+	gap: 10px;
+	justify-content: flex-end;
+}
+
+.logout-dialog-actions button {
+	border: 0;
+	border-radius: var(--radius-md);
+	cursor: pointer;
+	font: inherit;
+	font-weight: 700;
+	padding: 10px 16px;
+}
+
+.logout-cancel {
+	background: rgba(148, 163, 184, .14);
+	color: var(--color-text-primary);
+}
+
+.logout-confirm {
+	background: var(--color-danger);
+	color: #fff;
+}
+
 .admin-main {
 	min-width: 0;
 	flex: 1;

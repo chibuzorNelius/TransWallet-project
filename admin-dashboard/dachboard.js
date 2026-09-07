@@ -277,5 +277,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	});
 	document.getElementById('adminMenuButton').addEventListener('click', () => { document.getElementById('adminSidebar').classList.add('open'); document.getElementById('adminBackdrop').classList.remove('hidden'); });
 	document.getElementById('adminBackdrop').addEventListener('click', () => { document.getElementById('adminSidebar').classList.remove('open'); document.getElementById('adminBackdrop').classList.add('hidden'); });
-	document.getElementById('adminLogout').addEventListener('click', () => { clearAdminSession(); goToAdminLogin(); });
+	const adminLogoutDialog = document.getElementById('adminLogoutDialog');
+	document.getElementById('adminLogout').addEventListener('click', () => adminLogoutDialog.showModal());
+	adminLogoutDialog.addEventListener('close', () => {
+		if (adminLogoutDialog.returnValue === 'confirm') {
+			clearAdminSession();
+			goToAdminLogin();
+		}
+	});
 });

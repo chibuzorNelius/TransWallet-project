@@ -151,6 +151,21 @@ function injectNavigation() {
   document.body.appendChild(bottomNav);
   document.body.appendChild(backdrop);
 
+  const logoutDialog = document.createElement('dialog');
+  logoutDialog.className = 'logout-dialog';
+  logoutDialog.setAttribute('aria-labelledby', 'logout-dialog-title');
+  logoutDialog.innerHTML = `
+    <form method="dialog" class="logout-dialog-content">
+      <h2 id="logout-dialog-title">Are you sure you want to log out?</h2>
+      <p>Your current session will be closed on this device.</p>
+      <div class="logout-dialog-actions">
+        <button class="logout-cancel" value="cancel" type="submit">Cancel</button>
+        <button class="logout-confirm" id="confirm-user-logout" value="confirm" type="submit">Log out</button>
+      </div>
+    </form>
+  `;
+  document.body.appendChild(logoutDialog);
+
   // Setup active states based on current filename
   const path = window.location.pathname;
   const page = path.split('/').pop().toLowerCase() || 'dashboard.html';
@@ -256,13 +271,16 @@ function injectNavigation() {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       closeDrawer();
-      // Clear session simulation details
-      localStorage.removeItem('user_session');
-      localStorage.removeItem('current_user');
-      console.info('Simulated logout: Session cleared.');
-      // Redirect back to Landing Experience
-      window.location.href = 'landing.html';
+      logoutDialog.showModal();
     });
+  });
+
+  logoutDialog.addEventListener('close', () => {
+    if (logoutDialog.returnValue !== 'confirm') return;
+    localStorage.removeItem('user_session');
+    localStorage.removeItem('current_user');
+    console.info('Simulated logout: Session cleared.');
+    window.location.href = 'landing.html';
   });
 }
 

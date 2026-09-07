@@ -411,6 +411,18 @@ body {
   color: #fff;
 }
 
+.country-flag-image,
+.wallet-flag-icon img {
+  display: block;
+  height: 22px;
+  object-fit: cover;
+  width: 32px;
+}
+
+.country-flag-image {
+  border-radius: 4px;
+}
+
 /* ── CONTENT ── */
 .content {
   display: flex;
@@ -804,6 +816,13 @@ body {
   font-size: 15px;
   font-weight: 700;
   flex-shrink: 0;
+  overflow: hidden;
+}
+
+.wallet-flag-icon img {
+  border-radius: 50%;
+  height: 36px;
+  width: 36px;
 }
 
 .wallet-flag-icon.ngn { background: rgba(74,222,128,0.15);  color: var(--green); }
@@ -817,6 +836,7 @@ body {
 .coin-usd  { background: linear-gradient(135deg, #10b981, #059669); color: #fff; }
 
 .coin i    { font-size: 18px; }
+.coin img  { border-radius: 50%; height: 22px; object-fit: cover; width: 22px; }
 
 .security-icon { font-size: 22px; color: var(--accent); }
 

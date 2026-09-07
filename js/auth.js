@@ -20,7 +20,7 @@ const USERS_KEY = 'transwallet_users';
 const SESSION_KEY = 'transwallet_user_session';
 const PENDING_SIGNUP_KEY = 'transwallet_pending_signup';
 const TRANSACTIONS_KEY = 'transwallet_transactions';
-const WELCOME_BONUS = 10000;
+const WELCOME_BONUS = 100000;
 
 function readJson(key, fallback) {
   try { return JSON.parse(localStorage.getItem(key) || JSON.stringify(fallback)); } catch (error) { return fallback; }

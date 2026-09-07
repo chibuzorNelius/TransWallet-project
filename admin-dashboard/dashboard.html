@@ -72,6 +72,16 @@
 		</div>
 
 		<div class="admin-backdrop hidden" id="adminBackdrop"></div>
+		<dialog class="logout-dialog" id="adminLogoutDialog" aria-labelledby="admin-logout-title">
+			<form method="dialog" class="logout-dialog-content">
+				<h2 id="admin-logout-title">Are you sure you want to log out?</h2>
+				<p>Your admin session will be closed on this device.</p>
+				<div class="logout-dialog-actions">
+					<button class="logout-cancel" value="cancel" type="submit">Cancel</button>
+					<button class="logout-confirm" value="confirm" type="submit">Log out</button>
+				</div>
+			</form>
+		</dialog>
 		<dialog class="request-dialog" id="requestDialog"><form method="dialog" class="dialog-close-form"><button class="dialog-close" id="dialogClose" type="submit" aria-label="Close request details">×</button></form><div id="requestDetails"></div></dialog>
 		<div class="admin-toast" id="adminToast" role="status"></div>
 	</body>
