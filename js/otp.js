@@ -19,7 +19,7 @@ Description: Provides a starter structure for the OTP confirmation flow.
 const PENDING_SIGNUP_KEY = 'transwallet_pending_signup';
 const USERS_KEY = 'transwallet_users';
 const TRANSACTIONS_KEY = 'transwallet_transactions';
-const WELCOME_BONUS = 10000;
+const WELCOME_BONUS = 100000;
 
 function otpJson(key, fallback) { try { return JSON.parse(localStorage.getItem(key) || JSON.stringify(fallback)); } catch (error) { return fallback; } }
 function otpSave(key, value) { localStorage.setItem(key, JSON.stringify(value)); }
