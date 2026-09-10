@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verify account | Trans Wallet</title>
+    <link rel="icon" type="image/png" href="../images/transwallet-logo-removebg-preview.png" />
+    <link rel="stylesheet" href="../css/variables.css" />
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/pages/login.css" />
+    <script defer src="../js/otp.js"></script>
+  </head>
+  <body class="app-auth">
+    <main class="container auth-page">
+      <section class="auth-card otp-card">
+        <div class="auth-brand">Trans<span>Wallet</span></div>
+        <p class="auth-eyebrow">Account verification</p>
+        <h1>Verify your account</h1>
+        <p class="auth-copy">Enter the four-digit code sent to your registered contact.</p>
+        <div id="otpAlert" class="auth-alert" role="alert"></div>
+        <form id="otpForm" class="otp-form">
+          <div class="otp-inputs" aria-label="Verification code">
+            <input class="otp-input" inputmode="numeric" maxlength="1" aria-label="Digit 1" required />
+            <input class="otp-input" inputmode="numeric" maxlength="1" aria-label="Digit 2" required />
+            <input class="otp-input" inputmode="numeric" maxlength="1" aria-label="Digit 3" required />
+            <input class="otp-input" inputmode="numeric" maxlength="1" aria-label="Digit 4" required />
+          </div>
+          <button class="btn btn-primary auth-submit" type="submit">Verify account</button>
+        </form>
+        <p class="otp-resend">Didn't receive a code? <button id="resendOtp" type="button" disabled>Resend in <span id="otpTimer">30</span>s</button></p>
+      </section>
+    </main>
+  </body>
+</html>

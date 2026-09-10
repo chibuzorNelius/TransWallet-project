@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Crypto | Trans Wallet</title>
+    <link rel="icon" type="image/png" href="../images/transwallet-logo-removebg-preview.png" />
     <!--
     ========================================================
     DEVELOPER & AI CODING SAFETY GUIDELINES
@@ -40,10 +41,131 @@
   </head>
   <body class="app-logged-in">
     <main class="container">
-      <section class="card">
-        <h1>Crypto purchase requests</h1>
-        <p>TODO: Build request form and review actions for simulated crypto orders.</p>
+      <section class="crypto-list-page" id="cryptoListPage">
+        <div class="crypto-list-header">
+          <div>
+            <a class="crypto-request-back" href="dashboard.html">
+              <span class="crypto-request-back-icon">←</span>
+              <span>Dashboard</span>
+            </a>
+            <h1>All Coins</h1>
+            <p class="subtitle">Browse available crypto assets and click any coin to request funds.</p>
+          </div>
+        </div>
+
+        <div class="crypto-list-card">
+          <div class="crypto-list-grid" id="cryptoListGrid"></div>
+        </div>
       </section>
+
+      <div id="cryptoDetailView" class="hidden">
+        <section class="crypto-request-header">
+          <a class="crypto-request-back" href="crypto-request.html">
+            <span class="crypto-request-back-icon">←</span>
+            <span>All Coins</span>
+          </a>
+          <div class="crypto-request-heading">
+            <div>
+              <p class="eyebrow">Send crypto</p>
+              <h1 id="cryptoTitle">USDT</h1>
+              <p class="subtitle" id="cryptoSubtitle">Request the stablecoin securely through the selected network.</p>
+            </div>
+            <div class="crypto-token-badge" id="cryptoBadge">
+              <span class="token-avatar" id="cryptoAvatar"></span>
+              <div>
+                <p id="cryptoSymbol">USDT</p>
+                <span id="cryptoNetwork">BEP20</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="crypto-request-panel">
+          <div class="crypto-panel-card">
+            <div class="crypto-panel-top">
+              <div class="crypto-price-block">
+                <span class="label" id="priceLabel">USDT PRICE</span>
+                <strong id="priceValue">$1.000</strong>
+                <span class="subtext" id="fiatValue">₦1,415.95</span>
+              </div>
+              <button class="btn btn-secondary crypto-market-btn" id="marketRatesBtn" type="button">Market Rates</button>
+            </div>
+
+            <div class="crypto-network-card">
+              <div class="network-info">
+                <span class="network-avatar" id="networkAvatar">B</span>
+                <div>
+                  <strong id="networkName">BEP20</strong>
+                  <span id="networkFee">Network Fee: 0.15 USDT</span>
+                </div>
+              </div>
+              <button class="network-action" id="networkChangeBtn" type="button">Change</button>
+            </div>
+
+            <div class="network-picker hidden" id="networkPicker"></div>
+
+            <form class="crypto-request-form" id="cryptoRequestForm">
+              <div class="form-alert" id="formAlert" aria-live="polite"></div>
+
+              <div class="form-group">
+                <label for="walletAddress">External Wallet Address</label>
+                <span class="field-note">Enter the external wallet where your purchased crypto will be sent after approval.</span>
+                <div class="input-group">
+                  <input id="walletAddress" name="walletAddress" type="text" placeholder="Enter external wallet address" autocomplete="off" />
+                  <button type="button" class="btn btn-secondary btn-sm" id="pasteBtn">Paste</button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="requestAmount">Amount</label>
+                <div class="input-group input-group-amount">
+                  <button type="button" class="asset-select" id="assetSelect">USDT</button>
+                  <input id="requestAmount" name="requestAmount" type="number" placeholder="0.00" min="0" step="0.01" />
+                  <button type="button" class="btn btn-secondary btn-sm" id="maxBtn">MAX</button>
+                </div>
+                <div class="asset-picker hidden" id="assetPicker"></div>
+                <span class="field-note" id="fieldNote">Min 2 USDT</span>
+              </div>
+
+              <div class="crypto-form-footer">
+                <span class="balance-note" id="balanceNote">Fiat balance: <strong>••••</strong></span>
+                <button class="btn btn-primary btn-full" type="submit">Review Request →</button>
+              </div>
+            </form>
+
+            <section class="crypto-review hidden" id="cryptoReview" aria-live="polite">
+              <div class="review-heading">
+                <div>
+                  <p class="eyebrow">Review request</p>
+                  <h2>Confirm your crypto purchase</h2>
+                </div>
+                <span class="review-status">PENDING AFTER SUBMIT</span>
+              </div>
+              <div class="review-grid">
+                <div><span>Crypto</span><strong id="reviewAsset">USDT</strong></div>
+                <div><span>Amount</span><strong id="reviewAmount">0 USDT</strong></div>
+                <div><span>Rate</span><strong id="reviewRate">NGN 0 / USDT</strong></div>
+                <div><span>Crypto value</span><strong id="reviewBaseAmount">NGN 0</strong></div>
+                <div><span>Service fee</span><strong id="reviewServiceFee">NGN 0</strong></div>
+                <div><span>Destination wallet</span><strong id="reviewWallet">-</strong></div>
+                <div><span>Total to pay</span><strong id="reviewTotal">NGN 0</strong></div>
+              </div>
+              <p class="review-note">Your Trans Wallet fiat balance will only be charged after an admin approves this request. Crypto will be sent to your external wallet.</p>
+              <div class="review-actions">
+                <button class="btn btn-secondary" id="editRequestBtn" type="button">Edit Request</button>
+                <button class="btn btn-primary" id="confirmRequestBtn" type="button">Submit Request</button>
+              </div>
+            </section>
+          </div>
+
+          <div class="crypto-activity-card" id="cryptoActivityCard">
+            <div class="activity-empty" id="cryptoActivityEmpty">
+              <span class="activity-icon">⟳</span>
+              <p>No transaction records</p>
+            </div>
+          </div>
+        </section>
+      </div>
     </main>
   </body>
 </html>

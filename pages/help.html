@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Help | Trans Wallet</title>
+    <link rel="icon" type="image/png" href="../images/transwallet-logo-removebg-preview.png" />
     <!--
     ========================================================
     DEVELOPER & AI CODING SAFETY GUIDELINES
@@ -32,17 +33,139 @@
     This page must be tested on mobile, tablet and desktop before completion.
     ========================================================
     -->
-    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/variables.css"/>
     <link rel="stylesheet" href="../css/global.css" />
     <link rel="stylesheet" href="../css/pages/help.css" />
-    <script defer src="../js/app.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/help.js"></script>
   </head>
+  
   <body class="app-logged-in">
-    <main class="container">
-      <section class="card">
-        <h1>Help center</h1>
-        <p>TODO: Add FAQ, support channels, and troubleshooting guidance.</p>
-      </section>
-    </main>
+    <section class="card help-center">
+
+      <div class="help-header">
+          <h1>Help Center</h1>
+          <p>How can we help you?</p>
+  
+          <div class="help-search">
+              <input 
+                  type="text" 
+                  id="helpSearch" 
+                  placeholder="Search for a question..."
+              >
+              <button id="searchBtn">Search</button>
+          </div>
+      </div>
+  
+      <div class="faq-section">
+          <h2>Frequently Asked Questions</h2>
+  
+          <div class="faq-item">
+              <button class="faq-question" type="button" aria-expanded="false">
+                  How do I send money?
+                  <span>+</span>
+              </button>
+  
+              <div class="faq-answer">
+                  <p>
+                      Go to the Send Money section, enter the recipient's
+                      details and amount, then confirm the transaction.
+                  </p>
+              </div>
+          </div>
+  
+          <div class="faq-item">
+              <button class="faq-question" type="button" aria-expanded="false">
+                  How do I receive money?
+                  <span>+</span>
+              </button>
+  
+              <div class="faq-answer">
+                  <p>
+                      Go to the Receive Money section to view the information
+                      needed to receive funds.
+                  </p>
+              </div>
+          </div>
+  
+          <div class="faq-item">
+              <button class="faq-question" type="button" aria-expanded="false">
+                  How can I check my transactions?
+                  <span>+</span>
+              </button>
+  
+              <div class="faq-answer">
+                  <p>
+                      Open the Transactions page from the navigation menu
+                      to view your transaction history.
+                  </p>
+              </div>
+          </div>
+  
+          <div class="faq-item">
+              <button class="faq-question" type="button" aria-expanded="false">
+                  What should I do if my transaction fails?
+                  <span>+</span>
+              </button>
+  
+              <div class="faq-answer">
+                  <p>
+                      Check that your account details and balance are correct.
+                      If the problem continues, contact support.
+                  </p>
+              </div>
+          </div>
+
+          <div class="faq-item">
+              <button class="faq-question" type="button" aria-expanded="false">
+                  What should I do if I have a problem with my crypto request?
+                  <span>+</span>
+              </button>
+
+              <div class="faq-answer">
+                  <p>
+                      If your crypto request is delayed or not showing correctly,
+                      contact our support team through the message form below and
+                      include the issue details. We’ll review your request promptly.
+                  </p>
+              </div>
+          </div>
+      </div>
+  
+      <div class="support-section">
+          <h2>Contact Support</h2>
+          <p>Tell us what is going on and our team will review it.</p>
+
+          <form id="supportForm" class="support-form" novalidate>
+              <label class="support-field" for="supportCategory">
+                  <span>Issue category</span>
+                  <select id="supportCategory" name="category">
+                      <option value="General Support">General Support</option>
+                      <option value="Crypto Issue">Crypto Issue</option>
+                  </select>
+              </label>
+
+              <label class="support-field" for="supportMessage">
+                  <span>Message</span>
+                  <textarea
+                      id="supportMessage"
+                      name="message"
+                      rows="6"
+                      placeholder="Describe your issue or complaint..."
+                  ></textarea>
+              </label>
+
+              <button class="support-btn" type="submit">Send Message</button>
+          </form>
+      </div>
+
+      <div id="helpToast" class="help-toast" role="status" aria-live="polite"></div>
+  
+  </section>
+      
+        
+      
+    
   </body>
+  
 </html>

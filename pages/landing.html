@@ -1,43 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Trans Wallet Project landing experience" />
+    <title>Trans Wallet | Fintech Starter</title>
+    <!--
+    ========================================================
+    DEVELOPER & AI CODING SAFETY GUIDELINES
+    ========================================================
+    AUTH LAYOUT:
+    This is an onboarding/authentication view. Shared navigation sidebars and 
+    mobile bottom bars are automatically excluded from this view via the 'app-auth' 
+    body class. Do NOT add layout navigation here.
 
-    <title>Trans Wallet — Money Without Borders</title>
-
-    <meta
-        name="description"
-        content="Trans Wallet makes international transfers, multi-currency payments and crypto deposits simple."
-    >
-
-    <link rel="stylesheet" href="/TransWallet-project/css/pages/landing.css">
-</head>
-
-<body>
-
-    <!-- Top navigation -->
-    <header class="header">
-        <div class="container navbar">
-
-            <a href="#" class="logo">
-                <span class="logo-icon">↗</span>
-                <span>Trans Wallet</span>
-            </a>
-
-            <nav class="nav-links">
-                <a href="#features">Features</a>
-                <a href="#transfers">Transfers</a>
-                <a href="#crypto">Crypto</a>
-                <a href="#offers">Offers</a>
-            </nav>
-
-            <div class="nav-actions">
-                <a href="#" class="login-link">Log in</a>
-                <a href="#" class="nav-button">Open Account</a>
-            </div>
-
-        </div>
+    AI DEVELOPMENT NOTICE:
+    Do NOT rewrite, restructure, or modify unrelated files or change the visual 
+    variables in variables.css. All development must respect local page isolation.
+    ========================================================
+    -->
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/global.css" />
+    <script defer src="../js/app.js"></script>
+  </head>
+  <body class="app-auth">
+    <header class="container navbar">
+      <a href="landing.html"><strong>Trans Wallet</strong></a> 
+      <nav>
+        <a href="login.html" class="btn btn-secondary">Login</a>
+        <a href="register.html" class="btn btn-primary">Get Started</a>
+      </nav>
     </header>
 
 

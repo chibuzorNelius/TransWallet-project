@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Exchange | Trans Wallet</title>
+    <title>Exchange Rates | Trans Wallet</title>
+    <link rel="icon" type="image/png" href="../images/transwallet-logo-removebg-preview.png" />
     <!--
     ========================================================
     DEVELOPER & AI CODING SAFETY GUIDELINES
@@ -35,15 +36,58 @@
     <link rel="stylesheet" href="../css/variables.css">
     <link rel="stylesheet" href="../css/global.css" />
     <link rel="stylesheet" href="../css/pages/exchange-rate.css" />
+    <script defer src="../js/exchange-rates-data.js"></script>
     <script defer src="../js/app.js"></script>
     <script defer src="../js/exchange-rate.js"></script>
   </head>
   <body class="app-logged-in">
-    <main class="container">
-      <section class="card exchange-card">
-        <h1>Exchange currency</h1>
-        <p>TODO: Build the exchange form and simulated conversion summary.</p>
+    <main class="container exchange-page">
+      <section class="exchange-hero">
+        <div>
+          <p class="eyebrow">TRANS WALLET / MARKET DESK</p>
+          <h1>Global exchange rates</h1>
+          <p class="hero-copy">Know the value of your money before it crosses borders.</p>
+        </div>
+        <div class="market-status"><span class="status-dot"></span><span>Demo market active</span><small id="last-updated">Updated just now</small></div>
       </section>
+
+      <section class="exchange-grid" aria-label="Exchange rate workspace">
+        <article class="converter-panel">
+          <div class="panel-heading"><div><p class="eyebrow">CONVERTER</p><h2>Move money with clarity</h2></div><span class="panel-index">01</span></div>
+          <p class="panel-intro">Indicative rates for planning your next international transfer.</p>
+          <div class="converter-fields">
+            <div class="currency-field">
+              <label for="from-currency">You send</label>
+              <div class="currency-control"><span class="currency-flag" id="from-flag"></span><select id="from-currency" aria-label="Currency you send"></select><span class="select-chevron">⌄</span></div>
+              <div class="amount-input"><span id="from-symbol">$</span><input id="amount" type="number" min="0" step="0.01" value="1" inputmode="decimal" aria-label="Amount to convert"></div>
+            </div>
+            <button type="button" class="swap-button" id="swap-currencies" aria-label="Swap currencies" title="Swap currencies"><span>↕</span></button>
+            <div class="currency-field currency-result-field">
+              <label for="to-currency">You receive</label>
+              <div class="currency-control"><span class="currency-flag" id="to-flag"></span><select id="to-currency" aria-label="Currency you receive"></select><span class="select-chevron">⌄</span></div>
+              <div class="result-output"><span id="to-symbol">₦</span><output id="converted-amount" for="amount from-currency to-currency">1,600.00</output></div>
+            </div>
+          </div>
+          <div class="rate-note"><span class="rate-note-icon">↗</span><span id="rate-summary">1 USD = 1,600.00 NGN</span><span class="rate-lock">Fixed demo rate</span></div>
+          <a class="primary-action" href="send-money.html">Start a global transfer <span>→</span></a>
+        </article>
+
+        <aside class="market-panel">
+          <div class="panel-heading"><div><p class="eyebrow">MARKET PULSE</p><h2>Today at a glance</h2></div><span class="live-chip"><span class="status-dot"></span>ACTIVE</span></div>
+          <div class="market-list" id="market-list"></div>
+          <div class="market-footnote">Movements are simulated for this demo experience.</div>
+        </aside>
+      </section>
+
+      <section class="insight-grid">
+        <article class="trend-panel">
+          <div class="section-heading"><div><p class="eyebrow">MARKET ACTIVITY</p><h2>USD / NGN <span>24H trend</span></h2></div><div class="trend-value"><strong>₦1,600.00</strong><span class="positive">↑ 0.45%</span></div></div>
+          <div class="chart-wrap" aria-label="Illustrative USD to NGN 24 hour trend chart" role="img"><svg viewBox="0 0 760 220" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="area-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3B82F6" stop-opacity=".28"/><stop offset="1" stop-color="#3B82F6" stop-opacity="0"/></linearGradient></defs><path class="chart-grid" d="M0 42H760M0 102H760M0 162H760"/><path class="chart-area" d="M0 170 C50 158 64 170 108 143 S180 147 218 124 S274 137 318 104 S370 119 411 98 S467 119 508 74 S562 99 600 67 S667 78 710 42 S738 47 760 26 V220 H0Z"/><path class="chart-line" d="M0 170 C50 158 64 170 108 143 S180 147 218 124 S274 137 318 104 S370 119 411 98 S467 119 508 74 S562 99 600 67 S667 78 710 42 S738 47 760 26"/></svg><div class="chart-labels"><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>Now</span></div></div>
+        </article>
+        <article class="info-panel"><p class="eyebrow">RATE DESK</p><h2>A calmer way to move globally.</h2><p>Compare major currencies in one place, then take the next step when the number feels right.</p><div class="info-stats"><div><strong>8</strong><span>supported currencies</span></div><div><strong>24h</strong><span>market movement</span></div></div></article>
+      </section>
+
+      <section class="popular-section"><div class="section-heading"><div><p class="eyebrow">POPULAR CURRENCIES</p><h2>Keep an eye on the majors</h2></div><span class="section-caption">Select a pair to load it in the converter</span></div><div class="currency-cards" id="currency-cards"></div></section>
     </main>
   </body>
 </html>

@@ -4,45 +4,307 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cards | Trans Wallet</title>
-    <!--
-    ========================================================
-    DEVELOPER & AI CODING SAFETY GUIDELINES
-    ========================================================
-    SHARED NAVIGATION:
-    Navigation has already been integrated through the shared component system 
-    across the required viewports. Do NOT recreate or duplicate navigation here.
-    Focus work entirely on the main page content inside <main class="container">.
-
-    GLOBAL STYLING NOTICE:
-    The application background, base typography and global colours are already 
-    handled by the global stylesheet. Do NOT redefine body background styles here.
-
-    AI DEVELOPMENT NOTICE:
-    If you use an AI coding assistant, explicitly tell it that this is a 
-    collaborative multi-developer project and identify the specific file/module 
-    you are working on. Instruct it NOT to rewrite, restructure, or modify 
-    unrelated files.
-
-    PAGE OWNERSHIP:
-    This page is assigned to a specific developer. Keep feature-specific HTML, 
-    CSS and JavaScript isolated to this page/module unless a shared component 
-    is genuinely required.
-
-    RESPONSIVE DESIGN:
-    This page must be tested on mobile, tablet and desktop before completion.
-    ========================================================
-    -->
-    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="../css/variables.css" />
     <link rel="stylesheet" href="../css/global.css" />
     <link rel="stylesheet" href="../css/pages/cards.css" />
+    <script defer src="../js/auth.js"></script>
     <script defer src="../js/app.js"></script>
   </head>
   <body class="app-logged-in">
-    <main class="container">
-      <section class="card">
-        <h1>Cards</h1>
-        <p>TODO: Display physical and virtual debit cards, toggle status, and set transaction limits.</p>
+    <main class="container cards-page">
+      <section class="cards-shell">
+        <div class="cards-hero">
+          <div class="hero-copy">
+            <span class="eyebrow">Premium digital banking</span>
+            <h1>Your Virtual Cards</h1>
+            <p>Create, manage and spend with secure digital cards designed for modern everyday life.</p>
+          </div>
+          <div class="hero-badge" aria-label="Card status">
+            <span class="status-dot"></span>
+            Active
+          </div>
+        </div>
+
+        <div class="cards-toggle" role="tablist" aria-label="Available card categories">
+          <button class="card-tab is-active" type="button" role="tab" aria-selected="true" data-tab="virtual">
+            Virtual Card
+          </button>
+          <button class="card-tab is-disabled" type="button" role="tab" aria-selected="false" data-tab="physical" disabled aria-disabled="true">
+            Physical Card
+            <span class="coming-soon-pill">Coming soon</span>
+          </button>
+        </div>
+
+        <div class="tab-panel is-active" id="tab-virtual" role="tabpanel" aria-label="Virtual card panel">
+          <div class="card-showcase">
+            <article class="bank-card ngn-card" aria-label="Naira virtual card">
+              <div class="card-glow"></div>
+              <div class="card-topline">
+                <div>
+                  <span class="card-tag">TransWallet</span>
+                  <span class="card-subtag">Virtual Card</span>
+                </div>
+                <span class="card-currency">NGN</span>
+              </div>
+              <div class="chip-row">
+                <div class="chip"></div>
+                <div class="contactless">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+              </div>
+              <div class="card-number-row">5246 3109 1117 2042</div>
+              <div class="card-meta-row">
+                <div>
+                  <span class="meta-label">Cardholder</span>
+                  <strong data-user-name>HappaTech</strong>
+                </div>
+                <div>
+                  <span class="meta-label">Expires</span>
+                  <strong>09/31</strong>
+                </div>
+              </div>
+            </article>
+
+            <article class="bank-card usd-card" aria-label="Dollar virtual card">
+              <div class="card-glow"></div>
+              <div class="card-topline">
+                <div>
+                  <span class="card-tag">TransWallet</span>
+                  <span class="card-subtag">Virtual Card</span>
+                </div>
+                <span class="card-currency">USD</span>
+              </div>
+              <div class="chip-row">
+                <div class="chip"></div>
+                <div class="contactless">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+              </div>
+              <div class="card-number-row">4100 1121 8834 9014</div>
+              <div class="card-meta-row">
+                <div>
+                  <span class="meta-label">Cardholder</span>
+                  <strong data-user-name>HappaTech</strong>
+                </div>
+                <div>
+                  <span class="meta-label">Expires</span>
+                  <strong>12/30</strong>
+                </div>
+              </div>
+            </article>
+
+            <article class="bank-card eur-card" aria-label="Euro virtual card">
+              <div class="card-glow"></div>
+              <div class="card-topline">
+                <div>
+                  <span class="card-tag">TransWallet</span>
+                  <span class="card-subtag">Virtual Card</span>
+                </div>
+                <span class="card-currency">EUR</span>
+              </div>
+              <div class="chip-row">
+                <div class="chip"></div>
+                <div class="contactless">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+              </div>
+              <div class="card-number-row">3770 8621 9540 2442</div>
+              <div class="card-meta-row">
+                <div>
+                  <span class="meta-label">Cardholder</span>
+                  <strong data-user-name>HappaTech</strong>
+                </div>
+                <div>
+                  <span class="meta-label">Expires</span>
+                  <strong>03/29</strong>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="cards-layout">
+            <div class="management-card">
+              <div class="section-heading">
+                <h2>Card controls</h2>
+              </div>
+              <div class="control-list">
+                <button type="button" class="control-button active">
+                  <span class="control-icon"><i class="fa-solid fa-lock-open"></i></span>
+                  Unfreeze Card
+                </button>
+                <button type="button" class="control-button">
+                  <span class="control-icon"><i class="fa-solid fa-shield-halved"></i></span>
+                  Change PIN
+                </button>
+                <button type="button" class="control-button">
+                  <span class="control-icon"><i class="fa-solid fa-wallet"></i></span>
+                  Spending limit
+                </button>
+                <button type="button" class="control-button toggle-surface">
+                  <span class="control-icon"><i class="fa-solid fa-wifi"></i></span>
+                  Online payments
+                </button>
+              </div>
+            </div>
+
+            <div class="management-card summary-card">
+              <div class="section-heading">
+                <h2>Card overview</h2>
+              </div>
+              <div class="summary-row">
+                <span>Card status</span>
+                <strong class="success-text">● Active</strong>
+              </div>
+              <div class="summary-row">
+                <span>Monthly spend</span>
+                <strong>₦124,800</strong>
+              </div>
+              <div class="summary-row">
+                <span>Available balance</span>
+                <strong>₦562,000</strong>
+              </div>
+              <div class="summary-row">
+                <span>Priority</span>
+                <strong>Global</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="tab-physical" role="tabpanel" aria-label="Physical card panel">
+          <div class="coming-soon-panel">
+            <div class="coming-soon-icon"><i class="fa-solid fa-sparkles"></i></div>
+            <h2>Physical Card</h2>
+            <p>Physical cards are on the way. This option is currently unavailable while we prepare the next release.</p>
+            <span class="coming-soon-tag">Coming soon</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="features-grid">
+        <article class="feature-card">
+          <div class="feature-icon blue"><i class="fa-solid fa-shield-heart"></i></div>
+          <h3>Secure &amp; Private</h3>
+          <p>Protect your details with device-level security and real-time monitoring.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon cyan"><i class="fa-solid fa-bolt"></i></div>
+          <h3>Instant Access</h3>
+          <p>Your virtual card is ready instantly with no shipping or waiting time.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon purple"><i class="fa-solid fa-globe"></i></div>
+          <h3>Global Payments</h3>
+          <p>Use supported cards for digital and cross-border purchases with confidence.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon gold"><i class="fa-solid fa-sliders"></i></div>
+          <h3>Full Control</h3>
+          <p>Adjust limits, freeze activity and manage your spend from one place.</p>
+        </article>
+      </section>
+
+      <section class="bottom-grid">
+        <div class="activity-panel">
+          <div class="section-heading">
+            <h2>Recent Card Activity</h2>
+            <a href="#">View all</a>
+          </div>
+          <ul class="activity-list">
+            <li>
+              <div class="activity-copy">
+                <strong>Netflix subscription</strong>
+                <span>Online payment</span>
+              </div>
+              <div class="activity-meta">
+                <strong class="amount negative">- $14.99</strong>
+                <span>Today</span>
+              </div>
+            </li>
+            <li>
+              <div class="activity-copy">
+                <strong>Amazon marketplace</strong>
+                <span>Purchase</span>
+              </div>
+              <div class="activity-meta">
+                <strong class="amount negative">- ₦48,200</strong>
+                <span>Yesterday</span>
+              </div>
+            </li>
+            <li>
+              <div class="activity-copy">
+                <strong>PayPal top-up</strong>
+                <span>Wallet funding</span>
+              </div>
+              <div class="activity-meta">
+                <strong class="amount positive">+ €120.00</strong>
+                <span>2 days ago</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="security-panel">
+          <div class="section-heading">
+            <h2>Your security comes first</h2>
+          </div>
+          <p>Your card details and transactions are protected with multiple layers of security, instant alerts and controlled spending preferences.</p>
+          <ul class="security-points">
+            <li><i class="fa-solid fa-circle-check"></i> 3D Secure verification</li>
+            <li><i class="fa-solid fa-circle-check"></i> Real-time instant alerts</li>
+            <li><i class="fa-solid fa-circle-check"></i> Card freeze and limits</li>
+          </ul>
+        </div>
       </section>
     </main>
+
+    <script>
+      function populateCardUserNames() {
+        const currentUser = JSON.parse(localStorage.getItem('current_user') || 'null');
+        const displayName = currentUser?.fullName || currentUser?.name || currentUser?.username || 'HappaTech';
+        document.querySelectorAll('[data-user-name]').forEach((node) => {
+          node.textContent = displayName;
+        });
+      }
+
+      function bindTabs() {
+        const tabs = document.querySelectorAll('.card-tab');
+        const panels = document.querySelectorAll('.tab-panel');
+
+        tabs.forEach((tab) => {
+          tab.addEventListener('click', () => {
+            if (tab.disabled || tab.classList.contains('is-disabled')) {
+              return;
+            }
+
+            tabs.forEach((button) => {
+              const isSelected = button === tab;
+              button.classList.toggle('is-active', isSelected);
+              button.setAttribute('aria-selected', String(isSelected));
+            });
+
+            panels.forEach((panel) => {
+              panel.classList.toggle('is-active', panel.id === `tab-${tab.dataset.tab}`);
+            });
+          });
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        populateCardUserNames();
+        bindTabs();
+      });
+    </script>
   </body>
 </html>
+

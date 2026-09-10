@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard | Trans Wallet</title>
+    <link rel="icon" type="image/png" href="../images/transwallet-logo-removebg-preview.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
     <!--
     ========================================================
     DEVELOPER & AI CODING SAFETY GUIDELINES
@@ -35,25 +39,358 @@
     <link rel="stylesheet" href="../css/variables.css">
     <link rel="stylesheet" href="../css/global.css" />
     <link rel="stylesheet" href="../css/pages/dashboard.css" />
+    <script defer src="../js/country-flags.js"></script>
+    <script defer src="../js/auth.js"></script>
+    <script defer src="../js/exchange-rates-data.js"></script>
+    <script defer src="../js/dashboard-exchange-rates.js"></script>
     <script defer src="../js/app.js"></script>
   </head>
   <body class="app-logged-in">
-    <main class="container">
-      <header class="page-header">
-        <h1>Good morning, Alex</h1>
-        <p>TODO: Build wallet summary, quick actions, and recent activity widgets.</p>
-      </header>
+     <!-- MAIN CONTENT -->
+  <main class="main">
 
-      <section class="dashboard-grid">
-        <article class="card">
-          <h2>Wallet overview</h2>
-          <p>TODO: Show total balance and account insights.</p>
-        </article>
-        <article class="card">
-          <h2>Quick actions</h2>
-          <p>TODO: Add send, request, exchange, and crypto buttons.</p>
-        </article>
-      </section>
-    </main>
-  </body>
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <div class="greeting">
+        <h1>Welcome back, HappaTech <i class=\"fa-solid fa-hand-wave\"></i></h1>
+        <p>Here's what's happening with your wallet today.</p>
+      </div>
+      <div class="topbar-right">
+        <div class="flag" aria-label="Current region: Nigeria">
+          <img class="country-flag-image" src="../images/nigeriaFlag.png" alt="Nigeria flag" /> Nigeria
+        </div>
+        <div class="notif">
+          <i class="fa-solid fa-bell"></i>
+          <span class="notif-badge">3</span>
+          <div class="notif-panel" id="notifPanel">
+            <div class="notif-header">
+              <h3>Notifications</h3>
+              <button class="notif-close" id="notifClose">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+            <div class="notif-content">
+              <div class="notif-item">
+                <div class="notif-icon">
+                  <i class="fa-solid fa-check-circle"></i>
+                </div>
+                <div class="notif-text">
+                  <div class="notif-title">Welcome to TransWallet</div>
+                  <div class="notif-msg">Your account is ready to use.</div>
+                </div>
+              </div>
+              <div class="notif-item">
+                <div class="notif-icon">
+                  <i class="fa-solid fa-gift"></i>
+                </div>
+                <div class="notif-text">
+                  <div class="notif-title">Welcome bonus credited</div>
+                  <div class="notif-msg">Your account has been credited.</div>
+                </div>
+              </div>
+              <div class="notif-item">
+                <div class="notif-icon">
+                  <i class="fa-solid fa-info-circle"></i>
+                </div>
+                <div class="notif-text">
+                  <div class="notif-title">Account verification complete</div>
+                  <div class="notif-msg">Your account has been verified.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="profile">
+          <div class="avatar">HT</div>
+          <span>HappaTech</span>
+          <!-- <i class="fa-solid fa-chevron-down"></i> -->
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTENT GRID -->
+    <div class="content">
+
+      <!-- LEFT COLUMN -->
+      <div class="left-col">
+
+        <!-- BALANCE CARD -->
+        <div class="balance-card">
+          <div class="balance-left">
+            <div class="balance-label">
+              Total Balance
+              <i class="fa-regular fa-eye eye" id="eyeToggle"></i>
+            </div>
+            <div class="balance-amount" id="balanceAmount">₦1,250,000<span>.00</span></div>
+            <div class="balance-usd" id="balanceUsd">≈ $781.25 USD</div>
+            <div class="balance-growth">
+              <span class="growth-up">
+                <i class="fa-solid fa-arrow-trend-up"></i> 12.5%
+              </span> from last month
+            </div>
+            <div class="balance-actions">
+              <button class="btn-add">
+                <i class="fa-solid fa-paper-plane"></i>Send Money
+              </button>
+              <a href="withdraw.html" class="btn-withdraw">
+                <i class="fa-solid fa-arrow-up-from-bracket"></i> Withdraw
+              </a>
+            </div>
+          </div>
+          <div class="balance-right">
+            <div class="wallet-visual">
+              <div class="wallet-card">
+                <div class="wallet-chip"></div>
+                <div class="wallet-num">**** **** 4728</div>
+              </div>
+              <div class="coin coin-btc"><i class="fa-brands fa-bitcoin"></i></div>
+              <div class="coin coin-eth"><i class="fa-brands fa-ethereum"></i></div>
+              <div class="coin coin-usd"><img src="../images/usaFlag.png" alt="United States flag" /></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- QUICK ACTIONS -->
+        <div class="section-card">
+          <div class="section-title">Quick Actions</div>
+          <div class="quick-actions">
+            <div class="action-item">
+              <div class="action-icon blue">
+               <a href="../pages/send-money.html"> <i class="fa-solid fa-paper-plane"></i></a>
+              </div>
+              <span>Send Money</span>
+            </div>
+            <div class="action-item">
+              <div class="action-icon purple">
+               <a href="../pages/exchange-rate.html"> <i class="fa-solid fa-arrow-right-arrow-left"></i></a>
+              </div>
+              <span>Exchange</span>
+            </div>
+            <div class="action-item">
+              <div class="action-icon orange">
+                <a href="../pages/crypto-request.html"><i class="fa-brands fa-bitcoin" style="color: yellow;"></i></a>
+              </div>
+              <span>Crypto Request</span>
+            </div>
+            <div class="action-item">
+              <div class="action-icon teal">
+                <a href="../pages/pay-bills.html"><i class="fa-solid fa-file-invoice" style="color: yellow;"></i></a>
+              </div>
+              <span>Pay Bills</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- TRANSACTIONS + WALLETS ROW -->
+        <div class="two-col">
+
+          <!-- RECENT TRANSACTIONS -->
+          <div class="section-card">
+            <div class="section-header">
+              <div class="section-title">Recent Transactions</div>
+              <a href="#" class="view-all">View all</a>
+            </div>
+            <div class="tx-list">
+              <div class="tx-item">
+                <div class="tx-icon blue"><i class="fa-solid fa-paper-plane"></i></div>
+                <div class="tx-info">
+                  <div class="tx-name">Sent to John Doe</div>
+                  <div class="tx-date">Today, 9:35 AM</div>
+                </div>
+                <div class="tx-right">
+                  <div class="tx-amount negative">- ₦50,000.00</div>
+                  <div class="tx-status sent">Sent</div>
+                </div>
+              </div>
+              <div class="tx-item">
+                <div class="tx-icon purple"><i class="fa-solid fa-arrow-right-arrow-left"></i></div>
+                <div class="tx-info">
+                  <div class="tx-name">Currency Exchange</div>
+                  <div class="tx-date">Today, 8:20 AM</div>
+                </div>
+                <div class="tx-right">
+                  <div class="tx-amount positive">+ $120.00</div>
+                  <div class="tx-status completed">Completed</div>
+                </div>
+              </div>
+              <div class="tx-item">
+                <div class="tx-icon green"><i class="fa-solid fa-download"></i></div>
+                <div class="tx-info">
+                  <div class="tx-name">Received from Mary</div>
+                  <div class="tx-date">Yesterday, 6:15 PM</div>
+                </div>
+                <div class="tx-right">
+                  <div class="tx-amount positive">+ ₦25,000.00</div>
+                  <div class="tx-status received">Received</div>
+                </div>
+              </div>
+              <div class="tx-item">
+                <div class="tx-icon orange"><i class="fa-brands fa-bitcoin"></i></div>
+                <div class="tx-info">
+                  <div class="tx-name">Crypto Request (BTC)</div>
+                  <div class="tx-date">Yesterday, 4:40 PM</div>
+                </div>
+                <div class="tx-right">
+                  <div class="tx-amount">0.0025 BTC</div>
+                  <div class="tx-status pending">Pending</div>
+                </div>
+              </div>
+              <div class="tx-item">
+                <div class="tx-icon teal"><i class="fa-solid fa-file-invoice"></i></div>
+                <div class="tx-info">
+                  <div class="tx-name">Paid Electricity Bill</div>
+                  <div class="tx-date">May 20, 2024</div>
+                </div>
+                <div class="tx-right">
+                  <div class="tx-amount negative">- ₦12,500.00</div>
+                  <div class="tx-status paid">Paid</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- MY WALLETS -->
+          <div class="section-card">
+            <div class="section-header">
+              <div class="section-title">My Wallets</div>
+              <a href="#" class="view-all">Manage</a>
+            </div>
+            <div class="wallet-list">
+              <div class="wallet-item">
+                <div class="wallet-flag-icon ngn"><img src="../images/nigeriaFlag.png" alt="Nigeria flag" /></div>
+                <div class="wallet-info">
+                  <div class="wallet-name">NGN Wallet</div>
+                  <div class="wallet-sub">Nigerian Naira</div>
+                </div>
+                <div class="wallet-bal">₦950,000.00</div>
+              </div>
+              <div class="wallet-item">
+                <div class="wallet-flag-icon usd"><img src="../images/usaFlag.png" alt="United States flag" /></div>
+                <div class="wallet-info">
+                  <div class="wallet-name">USD Wallet</div>
+                  <div class="wallet-sub">US Dollar</div>
+                </div>
+                <div class="wallet-bal">$0.00</div>
+              </div>
+              <div class="wallet-item">
+                <div class="wallet-flag-icon eur"><img src="../images/EURFLAG.png" alt="European Union flag" /></div>
+                <div class="wallet-info">
+                  <div class="wallet-name">EUR Wallet</div>
+                  <div class="wallet-sub">Euro</div>
+                </div>
+                <div class="wallet-bal">€0.00</div>
+              </div>
+              <div class="wallet-item">
+                <div class="wallet-flag-icon gbp"><img src="../images/britishflag.png" alt="United Kingdom flag" /></div>
+                <div class="wallet-info">
+                  <div class="wallet-name">GBP Wallet</div>
+                  <div class="wallet-sub">British Pound</div>
+                </div>
+                <div class="wallet-bal">£0.00</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- SECURITY BANNER
+        <div class="security-banner" id="securityBanner">
+          <i class="fa-solid fa-shield-halved security-icon"></i>
+          <div class="security-text">
+            <strong>Secure Your Account</strong>
+            <span>Enable 2FA to keep your account safe and secure.</span>
+          </div>
+          <button class="btn-2fa">Enable 2FA</button>
+          <button class="security-close" id="securityClose">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div> -->
+
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="right-col">
+
+        <!-- EXCHANGE RATES -->
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-title">Exchange Rates</div>
+
+            <a href="exchange-rate.html" class="view-all">View all</a>
+
+            <!-- <a href="../pages/exchange-rate.html" class="view-all">View all</a> -->
+
+          </div>
+          <div class="rate-list">
+            <div class="rate-item">
+              <div class="wallet-flag-icon usd"><img src="../images/usaFlag.png" alt="United States flag" /></div>
+              <div class="rate-info">
+                <div class="rate-name">USD</div>
+                <div class="rate-sub">United States Dollar</div>
+              </div>
+              <div class="rate-right">
+                <div class="rate-val">₦1,600.00</div>
+                <div class="rate-change up">
+                  <i class="fa-solid fa-arrow-trend-up"></i> 0.45%
+                </div>
+              </div>
+            </div>
+            <div class="rate-item">
+              <div class="wallet-flag-icon gbp"><img src="../images/britishflag.png" alt="United Kingdom flag" /></div>
+              <div class="rate-info">
+                <div class="rate-name">GBP</div>
+                <div class="rate-sub">British Pound</div>
+              </div>
+              <div class="rate-right">
+                <div class="rate-val">₦2,050.00</div>
+                <div class="rate-change up">
+                  <i class="fa-solid fa-arrow-trend-up"></i> 0.32%
+                </div>
+              </div>
+            </div>
+            <div class="rate-item">
+              <div class="wallet-flag-icon eur"><img src="../images/EURFLAG.png" alt="European Union flag" /></div>
+              <div class="rate-info">
+                <div class="rate-name">EUR</div>
+                <div class="rate-sub">Euro</div>
+              </div>
+              <div class="rate-right">
+                <div class="rate-val">₦1,750.00</div>
+                <div class="rate-change up">
+                  <i class="fa-solid fa-arrow-trend-up"></i> 0.28%
+                </div>
+              </div>
+            </div>
+            <div class="rate-item">
+              <div class="wallet-flag-icon cad"><img src="../images/canadaflag.png" alt="Canada flag" /></div>
+              <div class="rate-info">
+                <div class="rate-name">CAD</div>
+                <div class="rate-sub">Canadian Dollar</div>
+              </div>
+              <div class="rate-right">
+                <div class="rate-val">₦1,180.00</div>
+                <div class="rate-change down">
+                  <i class="fa-solid fa-arrow-trend-down"></i> 0.15%
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- REFER AND EARN -->
+        <div class="section-card refer-earn">
+          <div class="section-title">Refer & Earn</div>
+          <div class="refer-earn-sub">Invite friends and earn up to</div>
+          <div class="refer-earn-amount">₦100,000</div>
+          <a href="#" class="refer-earn-link">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+          <div class="refer-gift">
+            <i class="fa-solid fa-gift"></i>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>  
+</body>
 </html>

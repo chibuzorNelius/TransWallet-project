@@ -81,9 +81,9 @@ function injectNavigation() {
         <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
         <span>Send Money</span>
       </a>
-      <a href="receive-money.html" class="nav-item" id="nav-receive">
+      <a href="pay-bills.html" class="nav-item" id="nav-pay">
         <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M12 2v9m-4-4l4 4 4-4"></path></svg>
-        <span>Receive Money</span>
+        <span>Pay Bills</span>
       </a>
       <a href="exchange-rate.html" class="nav-item" id="nav-exchange">
         <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="16 3 21 8 16 13"></polyline><line x1="21" y1="8" x2="9" y2="8"></line><polyline points="8 21 3 16 8 11"></polyline><line x1="3" y1="16" x2="15" y2="16"></line></svg>
@@ -151,6 +151,21 @@ function injectNavigation() {
   document.body.appendChild(bottomNav);
   document.body.appendChild(backdrop);
 
+  const logoutDialog = document.createElement('dialog');
+  logoutDialog.className = 'logout-dialog';
+  logoutDialog.setAttribute('aria-labelledby', 'logout-dialog-title');
+  logoutDialog.innerHTML = `
+    <form method="dialog" class="logout-dialog-content">
+      <h2 id="logout-dialog-title">Are you sure you want to log out?</h2>
+      <p>Your current session will be closed on this device.</p>
+      <div class="logout-dialog-actions">
+        <button class="logout-cancel" value="cancel" type="submit">Cancel</button>
+        <button class="logout-confirm" id="confirm-user-logout" value="confirm" type="submit">Log out</button>
+      </div>
+    </form>
+  `;
+  document.body.appendChild(logoutDialog);
+
   // Setup active states based on current filename
   const path = window.location.pathname;
   const page = path.split('/').pop().toLowerCase() || 'dashboard.html';
@@ -158,8 +173,9 @@ function injectNavigation() {
   function setActive() {
     const desktopIdMap = {
       'dashboard.html': 'nav-dashboard',
+      'withdraw.html': 'nav-dashboard',
       'send-money.html': 'nav-send',
-      'receive-money.html': 'nav-receive',
+      'pay-bills.html': 'nav-pay',
       'exchange-rate.html': 'nav-exchange',
       'transactions.html': 'nav-transactions',
       'crypto-request.html': 'nav-crypto',
@@ -169,6 +185,7 @@ function injectNavigation() {
 
     const mobileIdMap = {
       'dashboard.html': 'm-nav-dashboard',
+      'withdraw.html': 'm-nav-dashboard',
       'cards.html': 'm-nav-cards',
       'crypto-request.html': 'm-nav-crypto',
       'exchange-rate.html': 'm-nav-exchange',
@@ -254,18 +271,28 @@ function injectNavigation() {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       closeDrawer();
-      // Clear session simulation details
-      localStorage.removeItem('user_session');
-      localStorage.removeItem('current_user');
-      console.info('Simulated logout: Session cleared.');
-      // Redirect back to Landing Experience
-      window.location.href = 'landing.html';
+      logoutDialog.showModal();
     });
+  });
+
+  logoutDialog.addEventListener('close', () => {
+    if (logoutDialog.returnValue !== 'confirm') return;
+    localStorage.removeItem('user_session');
+    localStorage.removeItem('current_user');
+    console.info('Simulated logout: Session cleared.');
+    window.location.href = 'landing.html';
   });
 }
 
 function initApp() {
   console.info('Trans Wallet app initialized');
+  if (document.body.classList.contains('app-logged-in')) {
+    const session = localStorage.getItem('transwallet_user_session');
+    if (!session) {
+      window.location.replace('login.html');
+      return;
+    }
+  }
   // Inject the shared visual layouts
   injectNavigation();
 }

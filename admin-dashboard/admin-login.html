@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Login | Trans Wallet</title>
+    <link rel="icon" type="image/png" href="../images/transwallet-logo-removebg-preview.png" />
+    <link rel="stylesheet" href="../css/variables.css" />
+    <link rel="stylesheet" href="admin-login.css" />
+    <script defer src="admin-auth.js"></script>
+  </head>
+  <body data-admin-page="login">
+    <main class="admin-login-shell">
+      <section class="admin-login-card" aria-labelledby="adminLoginTitle">
+        <div class="admin-login-brand"><span class="brand-mark">T</span><span><strong>Trans</strong>Wallet</span></div>
+        <div class="admin-login-heading"><p class="admin-kicker">Operations portal</p><h1 id="adminLoginTitle">Admin access</h1><p>Sign in to manage Trans Wallet operations.</p></div>
+        <form id="adminLoginForm" class="admin-login-form">
+          <div class="admin-field"><label for="adminName">Admin name</label><input id="adminName" name="adminName" type="text" autocomplete="username" placeholder="Enter your name" /></div>
+          <div class="admin-field"><label for="adminPassword">Password</label><input id="adminPassword" name="adminPassword" type="password" autocomplete="current-password" placeholder="Enter your password" /></div>
+          <p id="adminLoginAlert" class="admin-login-alert" role="alert" aria-live="polite"></p>
+          <button class="admin-login-submit" type="submit">Login to Admin Dashboard</button>
+        </form>
+        <p class="admin-demo-note">Demo administrator portal</p>
+      </section>
+    </main>
+    <section class="admin-loading hidden" id="adminLoading" aria-live="polite"><div class="loading-brand"><span class="brand-mark">T</span><span><strong>Trans</strong>Wallet</span></div><p class="admin-kicker">Operations portal</p><h1 id="adminLoadingName">Welcome back</h1><p>Preparing your workspace...</p><div class="loading-dots" aria-hidden="true"><span></span><span></span><span></span></div></section>
+  </body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Withdraw to Bank | Trans Wallet</title>
+    <link rel="icon" type="image/png" href="../images/transwallet-logo-removebg-preview.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="../css/variables.css" />
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/pages/withdraw.css" />
+    <script defer src="../js/app.js"></script>
+  </head>
+  <body class="app-logged-in">
+    <main class="container withdraw-page-shell">
+      <section class="withdraw-page" aria-labelledby="withdrawTitle">
+        <div class="withdraw-header-row">
+          <a class="withdraw-back" href="dashboard.html" aria-label="Go back to dashboard">
+            <span class="withdraw-back-icon"><i class="fa-solid fa-arrow-left"></i></span>
+            <span id="withdrawTitle">Withdraw to Bank</span>
+          </a>
+        </div>
+
+        <div class="withdraw-inner">
+          <div class="withdraw-panel">
+            <div class="panel-badge" aria-label="Security badge">
+              <i class="fa-solid fa-shield-check"></i>
+            </div>
+            <h2>Verify your identity to withdraw</h2>
+            <p>Verify your identity to withdraw to your bank account. It takes about 2 minutes.</p>
+          </div>
+
+          <div class="requirements-panel">
+            <h3>What you need</h3>
+            <ul>
+              <li><i class="fa-solid fa-check"></i> Have your BVN ready</li>
+              <li><i class="fa-solid fa-check"></i> Your name must match your bank account exactly</li>
+              <li><i class="fa-solid fa-check"></i> Verification is usually instant</li>
+            </ul>
+          </div>
+
+          <button class="verify-button" type="button" id="verifyButton">
+            <span>Verify my identity</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+
+          <div class="info-banner">
+            <span class="info-icon"><i class="fa-solid fa-circle-info"></i></span>
+            <p>Verifying also raises your daily limits and unlocks higher-value transactions across the app.</p>
+          </div>
+
+          <div class="approval-note" id="approvalNote">
+            This feature is currently unavailable while we wait for CBN approval.
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const verifyButton = document.getElementById('verifyButton');
+      const approvalNote = document.getElementById('approvalNote');
+
+      if (verifyButton && approvalNote) {
+        verifyButton.addEventListener('click', () => {
+          approvalNote.textContent = 'This feature is currently unavailable while we wait for CBN approval.';
+          approvalNote.classList.add('visible');
+        });
+      }
+    </script>
+  </body>
+</html>
