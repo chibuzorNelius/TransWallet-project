@@ -50,12 +50,36 @@ function requireUser() { if (document.body.classList.contains('app-logged-in') &
 
 function renderUserDashboard(user) {
   if (!user) return;
+  
+  if (!user.accountNumber) {
+    user.accountNumber = Math.floor(1000000000 + Math.random() * 9000000000).toString();
+    updateUser(user);
+  }
+  
   const name = user.fullName || user.name || user.username;
   document.querySelector('.greeting h1')?.replaceChildren(document.createTextNode(`Welcome back, ${name} `));
   const greeting = document.querySelector('.greeting h1');
   if (greeting) greeting.insertAdjacentHTML('beforeend', '<i class="fa-solid fa-hand-wave"></i>');
+  
+  // Dashboard Header Profile Trigger
   document.querySelector('.profile span')?.replaceChildren(document.createTextNode(name));
   document.querySelector('.avatar')?.replaceChildren(document.createTextNode(initials(name)));
+  
+  // Profile Panel population
+  const panelName = document.getElementById('panelName');
+  const panelEmail = document.getElementById('panelEmail');
+  const panelAvatar = document.getElementById('panelAvatar');
+  const panelAccName = document.getElementById('panelAccName');
+  const panelAccountNumber = document.getElementById('panelAccountNumber');
+  const panelBalance = document.getElementById('panelBalance');
+  
+  if (panelName) panelName.textContent = name;
+  if (panelEmail) panelEmail.textContent = user.email || 'user@example.com';
+  if (panelAvatar) panelAvatar.textContent = initials(name);
+  if (panelAccName) panelAccName.textContent = name;
+  if (panelAccountNumber) panelAccountNumber.textContent = user.accountNumber;
+  if (panelBalance) panelBalance.textContent = formatNaira(user.balance);
+
   const balance = document.getElementById('balanceAmount'); if (balance) balance.textContent = formatNaira(user.balance);
   const usd = document.getElementById('balanceUsd'); if (usd) usd.textContent = `≈ $${(Number(user.balance || 0) / 1600).toFixed(2)} USD`;
   document.querySelector('.wallet-item .wallet-bal')?.replaceChildren(document.createTextNode(formatNaira(user.balance)));
@@ -101,6 +125,7 @@ function initAuth() {
   if (document.body.classList.contains('app-logged-in')) {
     renderUserDashboard(getCurrentUser());
     setupNotificationPanel();
+    setupProfilePanel();
     setupBalanceToggle();
   }
 }
@@ -139,6 +164,108 @@ function setupNotificationPanel() {
       notifPanel.classList.remove('visible');
     }
   });
+}
+
+function setupProfilePanel() {
+  const profileTrigger = document.getElementById('profileTrigger');
+  const profilePanel = document.getElementById('profilePanel');
+  const copyAccNumberBtn = document.getElementById('copyAccNumberBtn');
+  const shareDetailsBtn = document.getElementById('shareDetailsBtn');
+  const copyToast = document.getElementById('copyToast');
+  const toastMsg = document.getElementById('toastMsg');
+  
+  if (!profileTrigger || !profilePanel) return;
+
+  function togglePanel() {
+    const isExpanded = profileTrigger.getAttribute('aria-expanded') === 'true';
+    profileTrigger.setAttribute('aria-expanded', !isExpanded);
+    profilePanel.classList.toggle('visible');
+  }
+
+  function closePanel() {
+    profileTrigger.setAttribute('aria-expanded', 'false');
+    profilePanel.classList.remove('visible');
+  }
+
+  function showToast(message) {
+    if (!copyToast || !toastMsg) return;
+    toastMsg.textContent = message;
+    copyToast.classList.add('show');
+    setTimeout(() => {
+      copyToast.classList.remove('show');
+    }, 2500);
+  }
+
+  // Toggle on click
+  profileTrigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    togglePanel();
+  });
+
+  // Toggle on Enter/Space
+  profileTrigger.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      togglePanel();
+    }
+  });
+
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    if (!profileTrigger.contains(e.target) && !profilePanel.contains(e.target)) {
+      closePanel();
+    }
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && profilePanel.classList.contains('visible')) {
+      closePanel();
+      profileTrigger.focus();
+    }
+  });
+
+  // Copy Account Number
+  if (copyAccNumberBtn) {
+    copyAccNumberBtn.addEventListener('click', () => {
+      const accNumber = document.getElementById('panelAccountNumber')?.textContent || '';
+      navigator.clipboard.writeText(accNumber).then(() => {
+        showToast('Account number copied');
+      }).catch(() => {
+        // Fallback
+        const temp = document.createElement('textarea');
+        temp.value = accNumber;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand('copy');
+        document.body.removeChild(temp);
+        showToast('Account number copied');
+      });
+    });
+  }
+
+  // Copy Account Details
+  if (shareDetailsBtn) {
+    shareDetailsBtn.addEventListener('click', () => {
+      const accName = document.getElementById('panelAccName')?.textContent || '';
+      const accNumber = document.getElementById('panelAccountNumber')?.textContent || '';
+      
+      const shareText = `TransWallet Account Details\n\nAccount Name: ${accName}\nAccount Number: ${accNumber}\nBank: TransWallet\nCurrency: NGN`;
+      
+      navigator.clipboard.writeText(shareText).then(() => {
+        showToast('Account details copied');
+      }).catch(() => {
+        // Fallback
+        const temp = document.createElement('textarea');
+        temp.value = shareText;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand('copy');
+        document.body.removeChild(temp);
+        showToast('Account details copied');
+      });
+    });
+  }
 }
 
 function setupBalanceToggle() {
