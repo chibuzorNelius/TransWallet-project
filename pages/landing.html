@@ -1,178 +1,703 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Trans Wallet Project landing experience" />
+    <title>Trans Wallet | Fintech Starter</title>
+    <!--
+    ========================================================
+    DEVELOPER & AI CODING SAFETY GUIDELINES
+    ========================================================
+    AUTH LAYOUT:
+    This is an onboarding/authentication view. Shared navigation sidebars and 
+    mobile bottom bars are automatically excluded from this view via the 'app-auth' 
+    body class. Do NOT add layout navigation here.
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description"
-    content="TransWallet is a modern digital wallet experience for transfers, currency exchange, cards, bills, and everyday money management." />
-  <meta property="og:title" content="TransWallet | Your money, in motion" />
-  <meta property="og:description"
-    content="Explore a focused digital wallet experience for moving, exchanging, and managing money." />
-  <meta property="og:image" content="../images/transWallet flyer.png" />
-  <meta property="og:type" content="website" />
-  <title>TransWallet | Your money, in motion</title>
-  <link rel="icon" type="image/png" href="../images/transwallet-logo-removebg-preview.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="../css/variables.css" />
-  <link rel="stylesheet" href="../css/global.css" />
-  <link rel="stylesheet" href="../css/pages/landing.css" />
-  <script defer src="../js/app.js"></script>
-  <script defer src="../js/landing.js"></script>
-</head>
+    AI DEVELOPMENT NOTICE:
+    Do NOT rewrite, restructure, or modify unrelated files or change the visual 
+    variables in variables.css. All development must respect local page isolation.
+    ========================================================
+    -->
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/global.css" />
+    <script defer src="../js/app.js"></script>
+  </head>
+  <body class="app-auth">
+    <header class="container navbar">
+      <a href="landing.html"><strong>Trans Wallet</strong></a> 
+      <nav>
+        <a href="login.html" class="btn btn-secondary">Login</a>
+        <a href="register.html" class="btn btn-primary">Get Started</a>
+      </nav>
+    </header>
 
-<body class="landing-page">
-  <header class="landing-nav">
-    <a class="landing-brand" href="landing.html" aria-label="TransWallet home">
-      <img src="../images/transwallet-logo-removebg-preview.png" alt="" />
-      <span><b>Trans</b>Wallet</span>
-    </a>
-    <nav class="landing-links" aria-label="Main navigation">
-      <a href="#story">Our story</a>
-      <a href="#experience">Experience</a>
-      <a href="#origin">Origin</a>
-    </nav>
-    <nav class="landing-actions" aria-label="Account actions">
-      <a href="login.html" class="landing-login">Log in</a>
-      <a href="register.html" class="landing-button landing-button-small">Open a wallet <span
-          aria-hidden="true">↗</span></a>
-    </nav>
-  </header>
 
-  <main>
-    <section class="landing-hero landing-shell" aria-labelledby="hero-title">
-      <div class="hero-copy landing-reveal">
-        <p class="eyebrow"><span></span> A clearer way to move money</p>
-        <h1 id="hero-title">Your money,<br /><em>in motion.</em></h1>
-        <p class="hero-lede">TransWallet brings transfers, exchange, cards, bills, and everyday financial visibility
-          into one focused digital wallet experience.</p>
-        <div class="hero-actions">
-          <a href="register.html" class="landing-button">Get started <span aria-hidden="true">↗</span></a>
-          <a href="#experience" class="text-link">Explore the experience <span aria-hidden="true">↓</span></a>
+    <main>
+
+        <!-- Main hero section -->
+        <section class="hero">
+
+            <div class="container hero-content">
+
+                <div class="hero-text">
+
+                    <div class="eyebrow">
+                        <span class="status-dot"></span>
+                        Banking beyond borders
+                    </div>
+
+                    <h1>
+                        Your money,
+                        <span>without borders.</span>
+                    </h1>
+
+                    <p>
+                        Send, receive and manage money across multiple
+                        currencies with Trans Wallet. Make international
+                        transfers, manage your money and deposit supported
+                        crypto — all from one place.
+                    </p>
+
+                    <div class="hero-buttons">
+                        <a href="#" class="button button-light">
+                            Open your account →
+                        </a>
+
+                        <a href="#features" class="button button-outline">
+                            Explore Trans Wallet
+                        </a>
+                    </div>
+
+                    <p class="hero-note">
+                        ✓ Multi-currency transfers
+                        &nbsp;&nbsp;
+                        ✓ Crypto deposits
+                        &nbsp;&nbsp;
+                        ✓ No crypto trading
+                    </p>
+
+                </div>
+
+
+                <!-- Simple wallet preview -->
+                <div class="wallet-preview">
+
+                    <div class="wallet-card">
+
+                        <div class="wallet-top">
+
+                            <div>
+                                <span class="wallet-label">
+                                    Total balance
+                                </span>
+
+                                <div class="wallet-balance">
+                                    $24,680.42
+                                </div>
+                            </div>
+
+                            <div class="card-chip"></div>
+
+                        </div>
+
+                        <div class="card-number">
+                            •••• &nbsp; •••• &nbsp; 4829
+                        </div>
+
+                        <div class="wallet-bottom">
+                            <span>TRANS WALLET</span>
+                            <span>08/29</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Small trust bar underneath the hero -->
+        <div class="trust-bar">
+
+            <div class="container trust-items">
+
+                <div>
+                    <strong>Global</strong>
+                    transfers
+                </div>
+
+                <div>
+                    <strong>Multi-currency</strong>
+                    wallet
+                </div>
+
+                <div>
+                    <strong>Crypto</strong>
+                    deposits
+                </div>
+
+                <div>
+                    <strong>24/7</strong>
+                    access
+                </div>
+
+            </div>
+
         </div>
-        <div class="hero-note"><span class="note-mark">+</span><span>Built as a frontend fintech simulation for
-            learning, product thinking, and real-world making.</span></div>
-      </div>
 
-      <div class="hero-visual landing-reveal" aria-label="TransWallet product preview">
-        <div class="visual-orbit orbit-one"></div>
-        <div class="visual-orbit orbit-two"></div>
-        <div class="wallet-preview">
-          <div class="preview-topline"><span class="preview-brand"><span class="preview-symbol">↗</span>
-              TransWallet</span><span class="preview-dots">•••</span></div>
-          <div class="preview-balance-label">Available balance</div>
-          <div class="preview-balance">•••••• <span>NGN</span></div>
-          <div class="preview-rule"></div>
-          <div class="preview-actions"><span><i>↗</i> Send</span><span><i>⇄</i> Exchange</span><span><i>▣</i>
-              Cards</span></div>
-          <div class="preview-activity">
-            <div><span class="activity-icon activity-blue">↗</span><span><b>Money transfer</b><small>Ready when you
-                  are</small></span><strong>›</strong></div>
-            <div><span class="activity-icon activity-green">⇄</span><span><b>Exchange rate</b><small>Move across
-                  currencies</small></span><strong>›</strong></div>
-            <div><span class="activity-icon activity-amber">▣</span><span><b>Pay bills</b><small>Keep life
-                  moving</small></span><strong>›</strong></div>
-          </div>
+
+        <!-- Main features -->
+        <section class="features" id="features">
+
+            <div class="container">
+
+                <div class="section-heading center">
+
+                    <span class="section-label">
+                        One wallet. More possibilities.
+                    </span>
+
+                    <h2>
+                        Everything you need to move money globally.
+                    </h2>
+
+                    <p>
+                        Trans Wallet brings international transfers,
+                        currency management and supported crypto deposits
+                        together in one simple experience.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+                        <div class="feature-icon">↗</div>
+
+                        <h3>International transfers</h3>
+
+                        <p>
+                            Send money across countries without making
+                            the process unnecessarily complicated.
+                        </p>
+                    </article>
+
+
+                    <article class="feature-card">
+                        <div class="feature-icon">◎</div>
+
+                        <h3>Multiple currencies</h3>
+
+                        <p>
+                            Keep track of supported currencies from one
+                            wallet instead of managing several accounts.
+                        </p>
+                    </article>
+
+
+                    <article class="feature-card">
+                        <div class="feature-icon">₿</div>
+
+                        <h3>Crypto deposits</h3>
+
+                        <p>
+                            Deposit supported cryptocurrencies into your
+                            wallet. Trans Wallet is not a crypto trading
+                            platform.
+                        </p>
+                    </article>
+
+
+                    <article class="feature-card">
+                        <div class="feature-icon">⌁</div>
+
+                        <h3>Easy payments</h3>
+
+                        <p>
+                            Make everyday money transfers easier whether
+                            you're at home or somewhere around the world.
+                        </p>
+                    </article>
+
+
+                    <article class="feature-card">
+                        <div class="feature-icon">✓</div>
+
+                        <h3>Clear transactions</h3>
+
+                        <p>
+                            Keep incoming and outgoing transactions
+                            organised in one easy-to-understand wallet.
+                        </p>
+                    </article>
+
+
+                    <article class="feature-card">
+                        <div class="feature-icon">◈</div>
+
+                        <h3>Built with security in mind</h3>
+
+                        <p>
+                            Give your customers a modern banking experience
+                            with security and account protection at its core.
+                        </p>
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Currency and international transfer section -->
+        <section class="transfers" id="transfers">
+
+            <div class="container transfer-layout">
+
+                <div class="transfer-copy">
+
+                    <span class="section-label">
+                        Global money movement
+                    </span>
+
+                    <h2>
+                        One wallet for multiple currencies.
+                    </h2>
+
+                    <p>
+                        Receive and transfer supported currencies across
+                        borders without having to manage a separate wallet
+                        for every country.
+                    </p>
+
+                    <a href="#" class="button button-primary">
+                        Start transferring →
+                    </a>
+
+                </div>
+
+
+                <!-- Add or remove currencies here -->
+                <div class="currency-grid">
+
+                    <div class="currency-card">
+                        <span class="currency-flag">🇺🇸</span>
+                        <div>
+                            <strong>US Dollar</strong>
+                            <small>USD</small>
+                        </div>
+                    </div>
+
+                    <div class="currency-card">
+                        <span class="currency-flag">🇪🇺</span>
+                        <div>
+                            <strong>Euro</strong>
+                            <small>EUR</small>
+                        </div>
+                    </div>
+
+                    <div class="currency-card">
+                        <span class="currency-flag">🇬🇧</span>
+                        <div>
+                            <strong>British Pound</strong>
+                            <small>GBP</small>
+                        </div>
+                    </div>
+
+                    <div class="currency-card">
+                        <span class="currency-flag">🇳🇬</span>
+                        <div>
+                            <strong>Nigerian Naira</strong>
+                            <small>NGN</small>
+                        </div>
+                    </div>
+
+                    <div class="currency-card">
+                        <span class="currency-flag">🇨🇦</span>
+                        <div>
+                            <strong>Canadian Dollar</strong>
+                            <small>CAD</small>
+                        </div>
+                    </div>
+
+                    <div class="currency-card">
+                        <span class="currency-flag">🇦🇺</span>
+                        <div>
+                            <strong>Australian Dollar</strong>
+                            <small>AUD</small>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Promotional cards -->
+        <section class="offers" id="offers">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <span class="section-label">
+                        What's happening at Trans Wallet
+                    </span>
+
+                    <h2>
+                        Your space for offers and announcements.
+                    </h2>
+
+                    <p>
+                        Use these cards for promotions, campaigns,
+                        announcements or anything you want your customers
+                        to see.
+                    </p>
+
+                </div>
+
+
+                <div class="promo-grid">
+
+                    <!-- Replace the background image in CSS -->
+                    <article class="promo-card promo-large">
+
+                        <div class="promo-content">
+
+                            <span class="promo-tag">
+                                FEATURED
+                            </span>
+
+                            <h3>
+                                Send money around the world.
+                            </h3>
+
+                            <p>
+                                Your global wallet, wherever you go.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="promo-card promo-one">
+
+                        <div class="promo-content">
+
+                            <span class="promo-tag">
+                                OFFER
+                            </span>
+
+                            <h3>
+                                Transfer smarter.
+                            </h3>
+
+                            <p>
+                                Add your own promotion here.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="promo-card promo-two">
+
+                        <div class="promo-content">
+
+                            <span class="promo-tag">
+                                NEW
+                            </span>
+
+                            <h3>
+                                Crypto deposits.
+                            </h3>
+
+                            <p>
+                                Deposit supported digital assets.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+
+                <!-- Video advert area -->
+                <div class="video-ad">
+
+                    <div class="video-placeholder">
+                        <video src="/TransWallet-project/videos/Make_this_bank_image_fully_res.mp4"></video>
+                        <div class="play-button">▶</div>
+                    </div>
+
+                    <div class="video-copy">
+
+                        <span class="section-label">
+                            Featured video
+                        </span>
+
+                        <h3>
+                            Put your next campaign here.
+                        </h3>
+
+                        <p>
+                            This area can be used for a short promotional
+                            video, product announcement or customer story.
+                        </p>
+
+                        <a href="#" class="button button-light">
+                            Learn more →
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Crypto deposit section -->
+        <section class="crypto" id="crypto">
+
+            <div class="container crypto-layout">
+
+                <div class="crypto-copy">
+
+                    <span class="section-label blue-label">
+                        Digital assets
+                    </span>
+
+                    <h2>
+                        Crypto deposits without the trading platform.
+                    </h2>
+
+                    <p>
+                        Customers can deposit supported cryptocurrencies
+                        into their Trans Wallet account while the platform
+                        stays focused on payments and transfers.
+                    </p>
+
+                    <div class="crypto-note">
+
+                        <strong>Deposit only</strong>
+
+                        <p>
+                            Crypto trading, speculation and exchange
+                            functionality are not part of this service.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="crypto-list">
+
+                    <div class="crypto-item">
+
+                        <div class="crypto-name">
+                            <span class="crypto-symbol bitcoin">₿</span>
+
+                            <div>
+                                <strong>Bitcoin</strong>
+                                <small>BTC</small>
+                            </div>
+                        </div>
+
+                        <span class="deposit-label">
+                            DEPOSIT
+                        </span>
+
+                    </div>
+
+
+                    <div class="crypto-item">
+
+                        <div class="crypto-name">
+                            <span class="crypto-symbol ethereum">Ξ</span>
+
+                            <div>
+                                <strong>Ethereum</strong>
+                                <small>ETH</small>
+                            </div>
+                        </div>
+
+                        <span class="deposit-label">
+                            DEPOSIT
+                        </span>
+
+                    </div>
+
+
+                    <div class="crypto-item">
+
+                        <div class="crypto-name">
+                            <span class="crypto-symbol solana">S</span>
+
+                            <div>
+                                <strong>Solana</strong>
+                                <small>SOL</small>
+                            </div>
+                        </div>
+
+                        <span class="deposit-label">
+                            DEPOSIT
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- A few simple numbers -->
+        <section class="stats">
+
+            <div class="container stats-grid">
+
+                <div class="stat">
+                    <strong>50+</strong>
+                    <span>Supported countries*</span>
+                </div>
+
+                <div class="stat">
+                    <strong>20+</strong>
+                    <span>Supported currencies*</span>
+                </div>
+
+                <div class="stat">
+                    <strong>24/7</strong>
+                    <span>Wallet access</span>
+                </div>
+
+                <div class="stat">
+                    <strong>1</strong>
+                    <span>Global wallet</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Final call to action -->
+        <section class="cta">
+
+            <div class="container">
+
+                <div class="cta-box">
+
+                    <div>
+                        <h2>
+                            Make your money more global.
+                        </h2>
+
+                        <p>
+                            Manage supported currencies, international
+                            transfers and crypto deposits from one modern
+                            wallet.
+                        </p>
+                    </div>
+
+                    <a href="#" class="button button-light">
+                        Open a Trans Wallet account →
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <div class="container footer-grid">
+
+            <div class="footer-brand">
+
+                <a href="#" class="logo">
+                    <span class="logo-icon">↗</span>
+                    <span>Trans Wallet</span>
+                </a>
+
+                <p>
+                    A modern financial platform for global money movement
+                    and supported digital-asset deposits.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>Product</h4>
+
+                <a href="#transfers">Transfers</a>
+                <a href="#transfers">Currencies</a>
+                <a href="#crypto">Crypto Deposits</a>
+                <a href="#">Security</a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>Company</h4>
+
+                <a href="#">About</a>
+                <a href="#">Careers</a>
+                <a href="#">Contact</a>
+                <a href="#">Blog</a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>Legal</h4>
+
+                <a href="#">Terms</a>
+                <a href="#">Privacy</a>
+                <a href="#">Compliance</a>
+                <a href="#">Fees</a>
+
+            </div>
+
         </div>
-        <div class="floating-chip chip-rate"><span>⇄</span><b>Exchange</b><small>Made simple</small></div>
-        <div class="floating-chip chip-secure"><span>✓</span><b>Secure by design</b><small>Your wallet, your
-            view</small></div>
-      </div>
-    </section>
 
-    <section class="story-section landing-shell landing-reveal" id="story" aria-labelledby="story-title">
-      <div class="flyer-frame"><img src="../images/transWallet flyer.png"
-          alt="TransWallet flyer showing the wallet concept, product benefits, and mobile experience" loading="lazy" />
-      </div>
-      <div class="story-copy">
-        <p class="eyebrow"><span></span> The idea behind the wallet</p>
-        <h2 id="story-title">Simple enough for today. <em>Ready for what’s next.</em></h2>
-        <p>TransWallet is designed around a straightforward belief: financial tools should help people act with more
-          clarity, not ask them to work harder to understand their money.</p>
-        <p>Every part of the experience brings the essentials closer together, from sending money and checking activity
-          to exploring exchange and managing everyday payments.</p>
-        <a href="register.html" class="inline-cta">Start with the essentials <span aria-hidden="true">↗</span></a>
-      </div>
-    </section>
 
-    <section class="experience-section" id="experience" aria-labelledby="experience-title">
-      <div class="landing-shell">
-        <div class="seheadingction- landing-reveal">
-          <p class="eyebrow"><span></span> One place to keep moving</p>
-          <h2 id="experience-title">The tools you need,<br /><em>without the noise.</em></h2>
-          <p>Explore the flows that make up the TransWallet experience. Each one is built to feel direct,
-            understandable, and connected.</p>
+        <div class="container footer-bottom">
+
+            <span>
+                © 2026 Trans Wallet. All rights reserved.
+            </span>
+
+            <span>
+                *Availability depends on country and applicable regulations.
+            </span>
+
         </div>
-        <div class="feature-grid">
-          <a class="feature-panel feature-panel-large landing-reveal" href="#"><span
-              class="panel-index">01 / MOVE</span><span class="panel-icon">↗</span>
-            <h3>Send money<br /><em>with intention.</em></h3>
-            <p>A focused path for moving money when it matters.</p><span class="panel-arrow">↗</span>
-          </a>
-          <a class="feature-panel feature-panel-exchange landing-reveal" href=""><span
-              class="panel-index">02 / EXCHANGE</span>
-            <div class="rate-display"><span>NGN</span><b>⇄</b><span>USD</span></div>
-            <h3>See the value<br /><em>as it changes.</em></h3>
-            <p>Make currency exchange easier to understand.</p><span class="panel-arrow">↗</span>
-          </a>
-          <a class="feature-panel feature-panel-cards landing-reveal" href="#"><span class="panel-index">03 /
-              ACCESS</span>
-            <div class="mini-card"><span>TransWallet</span><b>•••• 2048</b><small>VIRTUAL</small></div>
-            <h3>Keep your wallet<br /><em>within reach.</em></h3>
-            <p>Explore the card experience and stay close to your spending.</p><span class="panel-arrow">↗</span>
-          </a>
-          <a class="feature-panel feature-panel-history landing-reveal" href="#"><span
-              class="panel-index">04 / VISIBILITY</span>
-            <div class="history-line"><span></span><span></span><span></span><span></span><span></span></div>
-            <h3>Know where<br /><em>things stand.</em></h3>
-            <p>Follow your activity with a clearer view of your transactions.</p><span class="panel-arrow">↗</span>
-          </a>
-        </div>
-      </div>
-    </section>
 
-    <section class="origin-section landing-shell" id="origin" aria-labelledby="origin-title">
-      <div class="origin-copy landing-reveal">
-        <p class="eyebrow"><span></span> The journey behind TransWallet</p>
-        <h2 id="origin-title">From the classroom<br /><em>to the real world.</em></h2>
-        <p>TransWallet began as an ambitious student-built fintech experience at Aptech Ajah, turning classroom
-          knowledge, teamwork, and technology into something people can interact with.</p>
-        <p>This is learning made visible: a project shaped by curiosity, collaboration, and the desire to build
-          technology that feels useful.</p>
-        <div class="origin-tags"><span>Learning</span><span>Collaboration</span><span>Innovation</span></div>
-      </div>
-      <div class="origin-image landing-reveal"><img src="../images/aptech students.png"
-          alt="Aptech Ajah students collaborating around a fintech project" loading="lazy" />
-        <div class="image-caption"><span>APTECH AJAH</span><b>Where ideas become working experiences.</b></div>
-      </div>
-    </section>
+    </footer>
 
-    <section class="final-cta landing-shell landing-reveal" aria-labelledby="final-title">
-      <div>
-        <p class="eyebrow"><span></span> Your next move</p>
-        <h2 id="final-title">Make money management<br /><em>feel more like momentum.</em></h2>
-      </div><a href="register.html" class="landing-button">Open your wallet <span aria-hidden="true">↗</span></a>
-    </section>
-  </main>
-
-  <footer class="landing-footer landing-shell">
-    <div class="footer-brand"><a class="landing-brand" href="landing.html"><img
-          src="../images/transwallet-logo-removebg-preview.png" alt="" /><span><b>Trans</b>Wallet</span></a>
-      <p>A student-built fintech experience from Aptech Ajah.</p>
-    </div>
-    <div class="footer-links">
-      <div><span>Explore</span><a href="#story">Our story</a><a href="#experience">Experience</a><a
-          href="#origin">Origin</a></div>
-      <div><span>Account</span><a href="login.html">Log in</a><a href="register.html">Register</a><a
-          href="help.html">Help center</a></div>
-    </div>
-    <div class="footer-bottom"><span>© <span id="currentYear">2026</span> TransWallet</span><span>Built for learning.
-        Designed for possibility.</span></div>
-  </footer>
 </body>
-
 </html>
