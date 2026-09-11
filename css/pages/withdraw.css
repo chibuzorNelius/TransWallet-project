@@ -184,7 +184,7 @@ body.app-logged-in {
 .approval-note {
   margin-top: 0.6rem;
   text-align: center;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgb(253, 5, 5);
   font-size: 0.98rem;
   font-weight: 500;
   opacity: 0.9;

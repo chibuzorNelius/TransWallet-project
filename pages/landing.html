@@ -1,50 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   
-    <meta name="description" content="TransWallet — a modern digital wallet designed for seamless money transfers, currency exchange, virtual cards, and smarter financial management." />
-    <title>Trans Wallet | Digital Wallet</title>
-    <link rel="icon" type="image/png" href="../images/transwallet-logo-removebg-preview.png" />
-    <!--
-    ========================================================
-    DEVELOPER & AI CODING SAFETY GUIDELINES
-    ========================================================
-    AUTH LAYOUT:
-    This is an onboarding/authentication view. Shared navigation sidebars and 
-    mobile bottom bars are automatically excluded from this view via the 'app-auth' 
-    body class. Do NOT add layout navigation here.
 
-    AI DEVELOPMENT NOTICE:
-    Do NOT rewrite, restructure, or modify unrelated files or change the visual 
-    variables in variables.css. All development must respect local page isolation.
-    ========================================================
-    -->
-    <link rel="stylesheet" href="../css/variables.css">
-    <link rel="stylesheet" href="../css/global.css" />
-    <script defer src="../js/app.js"></script>
-  </head>
-  <body class="app-auth">
-    <header class="container navbar">
-      <a href="landing.html"><strong>Trans Wallet</strong></a> 
-      <nav>
-        <a href="login.html" class="btn btn-secondary">Login</a>
-        <a href="register.html" class="btn btn-primary">Get Started</a>
-      </nav>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="TransWallet is a modern digital wallet experience for transfers, currency exchange, cards, bills, and everyday money management." />
+  <meta property="og:title" content="TransWallet | Your money, in motion" />
+  <meta property="og:description"
+    content="Explore a focused digital wallet experience for moving, exchanging, and managing money." />
+  <meta property="og:image" content="../images/transWallet flyer.png" />
+  <meta property="og:type" content="website" />
+  <title>TransWallet | Your money, in motion</title>
+  <link rel="icon" type="image/png" href="../images/transwallet-logo-removebg-preview.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/pages/landing.css" />
+  <script defer src="../js/app.js"></script>
+  <script defer src="../js/landing.js"></script>
+</head>
 
-    <main class="container">
-      <section class="hero">
-        <h1>Modern wallet experiences, designed for product teams.</h1>
-        <p>Mobile-first fintech simulation for onboarding, transfers, exchange, and account management.</p>
-        <p class="u-mt-2">TODO: Add hero metrics, feature highlights, and CTA variants.</p>
-      </section>
+<body class="landing-page">
+  <header class="landing-nav">
+    <a class="landing-brand" href="landing.html" aria-label="TransWallet home">
+      <img src="../images/transwallet-logo-removebg-preview.png" alt="" />
+      <span><b>Trans</b>Wallet</span>
+    </a>
+    <nav class="landing-links" aria-label="Main navigation">
+      <a href="#story">Our story</a>
+      <a href="#experience">Experience</a>
+      <a href="#origin">Origin</a>
+    </nav>
+    <nav class="landing-actions" aria-label="Account actions">
+      <a href="login.html" class="landing-login">Log in</a>
+      <a href="register.html" class="landing-button landing-button-small">Open a wallet <span
+          aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
 
-      <section class="card u-mt-3">
-        <h2>Why this project exists</h2>
-        <p>TODO: Present value proposition, use cases, and product story.</p>
-      </section>
-    </main>
-  </body>
+  <main>
+    <section class="landing-hero landing-shell" aria-labelledby="hero-title">
+      <div class="hero-copy landing-reveal">
+        <p class="eyebrow"><span></span> A clearer way to move money</p>
+        <h1 id="hero-title">Your money,<br /><em>in motion.</em></h1>
+        <p class="hero-lede">TransWallet brings transfers, exchange, cards, bills, and everyday financial visibility
+          into one focused digital wallet experience.</p>
+        <div class="hero-actions">
+          <a href="register.html" class="landing-button">Get started <span aria-hidden="true">↗</span></a>
+          <a href="#experience" class="text-link">Explore the experience <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="hero-note"><span class="note-mark">+</span><span>Built as a frontend fintech simulation for
+            learning, product thinking, and real-world making.</span></div>
+      </div>
+
+      <div class="hero-visual landing-reveal" aria-label="TransWallet product preview">
+        <div class="visual-orbit orbit-one"></div>
+        <div class="visual-orbit orbit-two"></div>
+        <div class="wallet-preview">
+          <div class="preview-topline"><span class="preview-brand"><span class="preview-symbol">↗</span>
+              TransWallet</span><span class="preview-dots">•••</span></div>
+          <div class="preview-balance-label">Available balance</div>
+          <div class="preview-balance">•••••• <span>NGN</span></div>
+          <div class="preview-rule"></div>
+          <div class="preview-actions"><span><i>↗</i> Send</span><span><i>⇄</i> Exchange</span><span><i>▣</i>
+              Cards</span></div>
+          <div class="preview-activity">
+            <div><span class="activity-icon activity-blue">↗</span><span><b>Money transfer</b><small>Ready when you
+                  are</small></span><strong>›</strong></div>
+            <div><span class="activity-icon activity-green">⇄</span><span><b>Exchange rate</b><small>Move across
+                  currencies</small></span><strong>›</strong></div>
+            <div><span class="activity-icon activity-amber">▣</span><span><b>Pay bills</b><small>Keep life
+                  moving</small></span><strong>›</strong></div>
+          </div>
+        </div>
+        <div class="floating-chip chip-rate"><span>⇄</span><b>Exchange</b><small>Made simple</small></div>
+        <div class="floating-chip chip-secure"><span>✓</span><b>Secure by design</b><small>Your wallet, your
+            view</small></div>
+      </div>
+    </section>
+
+    <section class="story-section landing-shell landing-reveal" id="story" aria-labelledby="story-title">
+      <div class="flyer-frame"><img src="../images/transWallet flyer.png"
+          alt="TransWallet flyer showing the wallet concept, product benefits, and mobile experience" loading="lazy" />
+      </div>
+      <div class="story-copy">
+        <p class="eyebrow"><span></span> The idea behind the wallet</p>
+        <h2 id="story-title">Simple enough for today. <em>Ready for what’s next.</em></h2>
+        <p>TransWallet is designed around a straightforward belief: financial tools should help people act with more
+          clarity, not ask them to work harder to understand their money.</p>
+        <p>Every part of the experience brings the essentials closer together, from sending money and checking activity
+          to exploring exchange and managing everyday payments.</p>
+        <a href="register.html" class="inline-cta">Start with the essentials <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <section class="experience-section" id="experience" aria-labelledby="experience-title">
+      <div class="landing-shell">
+        <div class="seheadingction- landing-reveal">
+          <p class="eyebrow"><span></span> One place to keep moving</p>
+          <h2 id="experience-title">The tools you need,<br /><em>without the noise.</em></h2>
+          <p>Explore the flows that make up the TransWallet experience. Each one is built to feel direct,
+            understandable, and connected.</p>
+        </div>
+        <div class="feature-grid">
+          <a class="feature-panel feature-panel-large landing-reveal" href="#"><span
+              class="panel-index">01 / MOVE</span><span class="panel-icon">↗</span>
+            <h3>Send money<br /><em>with intention.</em></h3>
+            <p>A focused path for moving money when it matters.</p><span class="panel-arrow">↗</span>
+          </a>
+          <a class="feature-panel feature-panel-exchange landing-reveal" href=""><span
+              class="panel-index">02 / EXCHANGE</span>
+            <div class="rate-display"><span>NGN</span><b>⇄</b><span>USD</span></div>
+            <h3>See the value<br /><em>as it changes.</em></h3>
+            <p>Make currency exchange easier to understand.</p><span class="panel-arrow">↗</span>
+          </a>
+          <a class="feature-panel feature-panel-cards landing-reveal" href="#"><span class="panel-index">03 /
+              ACCESS</span>
+            <div class="mini-card"><span>TransWallet</span><b>•••• 2048</b><small>VIRTUAL</small></div>
+            <h3>Keep your wallet<br /><em>within reach.</em></h3>
+            <p>Explore the card experience and stay close to your spending.</p><span class="panel-arrow">↗</span>
+          </a>
+          <a class="feature-panel feature-panel-history landing-reveal" href="#"><span
+              class="panel-index">04 / VISIBILITY</span>
+            <div class="history-line"><span></span><span></span><span></span><span></span><span></span></div>
+            <h3>Know where<br /><em>things stand.</em></h3>
+            <p>Follow your activity with a clearer view of your transactions.</p><span class="panel-arrow">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="origin-section landing-shell" id="origin" aria-labelledby="origin-title">
+      <div class="origin-copy landing-reveal">
+        <p class="eyebrow"><span></span> The journey behind TransWallet</p>
+        <h2 id="origin-title">From the classroom<br /><em>to the real world.</em></h2>
+        <p>TransWallet began as an ambitious student-built fintech experience at Aptech Ajah, turning classroom
+          knowledge, teamwork, and technology into something people can interact with.</p>
+        <p>This is learning made visible: a project shaped by curiosity, collaboration, and the desire to build
+          technology that feels useful.</p>
+        <div class="origin-tags"><span>Learning</span><span>Collaboration</span><span>Innovation</span></div>
+      </div>
+      <div class="origin-image landing-reveal"><img src="../images/aptech students.png"
+          alt="Aptech Ajah students collaborating around a fintech project" loading="lazy" />
+        <div class="image-caption"><span>APTECH AJAH</span><b>Where ideas become working experiences.</b></div>
+      </div>
+    </section>
+
+    <section class="final-cta landing-shell landing-reveal" aria-labelledby="final-title">
+      <div>
+        <p class="eyebrow"><span></span> Your next move</p>
+        <h2 id="final-title">Make money management<br /><em>feel more like momentum.</em></h2>
+      </div><a href="register.html" class="landing-button">Open your wallet <span aria-hidden="true">↗</span></a>
+    </section>
+  </main>
+
+  <footer class="landing-footer landing-shell">
+    <div class="footer-brand"><a class="landing-brand" href="landing.html"><img
+          src="../images/transwallet-logo-removebg-preview.png" alt="" /><span><b>Trans</b>Wallet</span></a>
+      <p>A student-built fintech experience from Aptech Ajah.</p>
+    </div>
+    <div class="footer-links">
+      <div><span>Explore</span><a href="#story">Our story</a><a href="#experience">Experience</a><a
+          href="#origin">Origin</a></div>
+      <div><span>Account</span><a href="login.html">Log in</a><a href="register.html">Register</a><a
+          href="help.html">Help center</a></div>
+    </div>
+    <div class="footer-bottom"><span>© <span id="currentYear">2026</span> TransWallet</span><span>Built for learning.
+        Designed for possibility.</span></div>
+  </footer>
+</body>
+
 </html>

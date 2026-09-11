@@ -100,10 +100,73 @@
             </div>
           </div>
         </div>
-        <div class="profile">
-          <div class="avatar">HT</div>
-          <span>HappaTech</span>
-          <!-- <i class="fa-solid fa-chevron-down"></i> -->
+        <div class="profile-container">
+          <div class="profile" id="profileTrigger" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false" aria-label="Open profile panel">
+            <div class="avatar">HT</div>
+            <span>HappaTech</span>
+            <!-- <i class="fa-solid fa-chevron-down"></i> -->
+          </div>
+          
+          <div class="profile-panel" id="profilePanel">
+            <div class="profile-header">
+              <div class="profile-header-avatar" id="panelAvatar">HT</div>
+              <div class="profile-header-info">
+                <div class="profile-header-name" id="panelName">HappaTech</div>
+                <div class="profile-header-email" id="panelEmail">user@example.com</div>
+                <div class="profile-status"><span class="status-dot"></span> Active Account</div>
+              </div>
+            </div>
+            
+            <div class="profile-account-card">
+              <div class="card-label">YOUR ACCOUNT DETAILS</div>
+              
+              <div class="account-number-block">
+                <div class="account-number" id="panelAccountNumber">0000000000</div>
+                <button class="copy-btn" id="copyAccNumberBtn" aria-label="Copy Account Number">
+                  <i class="fa-regular fa-copy"></i> Copy
+                </button>
+              </div>
+              
+              <div class="account-details-grid">
+                <div class="detail-item">
+                  <span class="detail-label">Account Name</span>
+                  <span class="detail-value" id="panelAccName">HappaTech</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">Bank</span>
+                  <span class="detail-value">TransWallet</span>
+                </div>
+              </div>
+              
+              <button class="share-details-btn" id="shareDetailsBtn">
+                <i class="fa-solid fa-share-nodes"></i> Share Account Details
+              </button>
+            </div>
+            
+            <div class="profile-summary">
+              <div class="summary-item">
+                <span class="summary-label">Account Type</span>
+                <span class="summary-value">Personal Account</span>
+              </div>
+              <div class="summary-item">
+                <span class="summary-label">Currency</span>
+                <span class="summary-value">NGN</span>
+              </div>
+              <div class="summary-item full-width">
+                <span class="summary-label">Available Balance</span>
+                <span class="summary-value balance" id="panelBalance">₦0.00</span>
+              </div>
+            </div>
+            
+            <div class="profile-actions">
+              <a href="transactions.html" class="panel-action-btn"><i class="fa-solid fa-list-ul"></i> View Transactions</a>
+              <a href="send-money.html" class="panel-action-btn primary"><i class="fa-solid fa-paper-plane"></i> Send Money</a>
+            </div>
+            
+            <div class="copy-toast" id="copyToast">
+              <i class="fa-solid fa-check-circle"></i> <span id="toastMsg">Copied!</span>
+            </div>
+          </div>
         </div>
       </div>
     </header>
@@ -129,9 +192,12 @@
               </span> from last month
             </div>
             <div class="balance-actions">
+              <a href="../pages/send-money.html">
               <button class="btn-add">
+                
                 <i class="fa-solid fa-paper-plane"></i>Send Money
               </button>
+              </a>
               <a href="withdraw.html" class="btn-withdraw">
                 <i class="fa-solid fa-arrow-up-from-bracket"></i> Withdraw
               </a>
@@ -188,7 +254,7 @@
           <div class="section-card">
             <div class="section-header">
               <div class="section-title">Recent Transactions</div>
-              <a href="#" class="view-all">View all</a>
+              <a href="../pages/transactions.html" class="view-all">View all</a>
             </div>
             <div class="tx-list">
               <div class="tx-item">
