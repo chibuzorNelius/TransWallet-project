@@ -1,8 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
   const revealItems = document.querySelectorAll('.landing-reveal');
   const year = document.getElementById('currentYear');
+  const menuToggle = document.querySelector('.menu-toggle');
+  const siteMenu = document.getElementById('site-menu');
 
   if (year) year.textContent = new Date().getFullYear();
+
+  if (menuToggle && siteMenu) {
+    menuToggle.addEventListener('click', () => {
+      const isOpen = siteMenu.classList.toggle('is-open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    siteMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        siteMenu.classList.remove('is-open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
 
   if (!('IntersectionObserver' in window)) {
     revealItems.forEach((item) => item.classList.add('is-visible'));
