@@ -1,34 +1,68 @@
-/*
-Project: Trans Wallet Project
-File Purpose: Send and receive money interactions
-Author Placeholder: Payments Developer
-Created Date Placeholder: 2026-08-03
-Last Updated Placeholder: 2026-08-03
-Description: Premium local and global transfer flows with verification, review, PIN validation, and balance updates.
-*/
+
 
 const BANKS = [
-  { id: 'access', name: 'Access Bank', code: '044', tag: 'A' },
-  { id: 'gtbank', name: 'GTBank', code: '058', tag: 'G' },
-  { id: 'firstbank', name: 'FirstBank', code: '011', tag: 'F' },
-  { id: 'uba', name: 'UBA', code: '033', tag: 'U' },
-  { id: 'zenith', name: 'Zenith Bank', code: '057', tag: 'Z' },
-  { id: 'fidelity', name: 'Fidelity Bank', code: '070', tag: 'Fi' },
-  { id: 'sterling', name: 'Sterling Bank', code: '232', tag: 'S' },
-  { id: 'union', name: 'Union Bank', code: '032', tag: 'U' }
+  { id: 'access', name: 'Access Bank', code: '044', logo: 'accessBankLogo.png' },
+  { id: 'gtbank', name: 'GTBank', code: '058', logo: 'GTA-bankLogo.png' },
+  { id: 'firstbank', name: 'FirstBank', code: '011', logo: 'first-bank logo.png' },
+  { id: 'uba', name: 'UBA', code: '033', logo: 'UBAbankLogo.png' },
+  { id: 'zenith', name: 'Zenith Bank', code: '057', logo: 'zenethBankLogo.png' },
+  { id: 'fidelity', name: 'Fidelity Bank', code: '070', logo: 'fidelityBankLogo.png' },
+  { id: 'sterling', name: 'Sterling Bank', code: '232', logo: 'sterlingBankLogo.png' },
+  { id: 'union', name: 'Union Bank', code: '032', logo: 'unionBankLogo.png' }
 ];
 
+const GLOBAL_BANKS = {
+  US: [
+    { name: 'Bank of America', logo: 'usaFlag.png' },
+    { name: 'Chase', logo: 'usaFlag.png' }
+  ],
+  GB: [
+    { name: 'Barclays', logo: 'britishflag.png' },
+    { name: 'HSBC UK', logo: 'britishflag.png' }
+  ],
+  CA: [
+    { name: 'TD Canada Trust', logo: 'canadaflag.png' },
+    { name: 'Royal Bank of Canada', logo: 'canadaflag.png' }
+  ],
+  GH: [
+    { name: 'GCB Bank', logo: 'GhanaFlag.png' },
+    { name: 'Ecobank Ghana', logo: 'GhanaFlag.png' }
+  ],
+  AE: [
+    { name: 'Emirates NBD', logo: 'AEflag.png' },
+    { name: 'First Abu Dhabi Bank', logo: 'AEflag.png' }
+  ]
+};
+
+const GLOBAL_COUNTRIES = {
+  US: { name: 'United States', flag: 'usaFlag.png' },
+  GB: { name: 'United Kingdom', flag: 'britishflag.png' },
+  CA: { name: 'Canada', flag: 'canadaflag.png' },
+  GH: { name: 'Ghana', flag: 'GMP FLAG.png' },
+  AE: { name: 'United Arab Emirates', flag: 'AEflag.png' }
+};
+
+const COUNTRY_TO_CURRENCY = {
+  US: 'USD',
+  GB: 'GBP',
+  CA: 'CAD',
+  GH: 'GHS',
+  AE: 'AED'
+};
+
+const CURRENCY_TO_COUNTRY = Object.fromEntries(Object.entries(COUNTRY_TO_CURRENCY).map(([country, currency]) => [currency, country]));
+
 const DEMO_RECIPIENTS = [
-  'Aisha Bello',
-  'Chinedu Okafor',
-  'Maya Ibrahim',
-  'James Adebayo',
-  'Grace Eze',
-  'Tobi Adeyemi',
-  'Nneka Umeh',
-  'Daniel Kola',
-  'Amara Nwosu',
-  'Rasheed Yusuf'
+  'Chibuzor Nelius',
+  'Philip Chidera',
+  'mazeed',
+  'Ezekiel Ojo',
+  'Lucy Upiopio',
+  'Comfort Eze',
+  'treasure mary',
+  'Kolawole',
+  'clitton Chibuzor',
+  'Chinaza Joy'
 ];
 
 let currentTransferType = 'local';
@@ -36,6 +70,7 @@ let selectedBank = null;
 let recipientState = null;
 let activeTransferAmount = 0;
 let activeReview = null;
+let activeGlobalReview = null;
 
 function formatNaira(value) {
   return `₦${Number(value || 0).toLocaleString('en-NG', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
@@ -94,8 +129,16 @@ function resetLocalTransferState() {
 }
 
 function updateLandingBalance() {
+  const user = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
   const balance = document.getElementById('landingBalance');
   if (balance) balance.textContent = formatNaira(getCurrentUserBalance());
+  const accountName = document.getElementById('landingAccountName');
+  const accountNumber = document.getElementById('landingAccountNumber');
+  if (accountName) accountName.textContent = user?.fullName || user?.name || user?.username || 'TransWallet account';
+  if (accountNumber) accountNumber.textContent = user?.accountNumber || 'Account number unavailable';
+  const ratePreview = document.getElementById('landingRatePreview');
+  const rate = window.TransWalletExchange?.getExchangeRate?.('USD', 'NGN') || 1600;
+  if (ratePreview) ratePreview.textContent = `1 USD = ${formatNaira(rate)}`;
   const available = document.getElementById('availableBalanceText');
   if (available) available.textContent = formatNaira(getCurrentUserBalance());
 }
@@ -112,8 +155,8 @@ function renderBankOptions(searchTerm = '') {
   const filtered = getBankOptions(searchTerm);
   bankSelector.innerHTML = filtered.map((bank) => `
     <button type="button" class="bank-option ${selectedBank && selectedBank.id === bank.id ? 'selected' : ''}" data-bank-id="${bank.id}">
-      <span class="bank-logo">${bank.tag}</span>
-      <span class="bank-name">${bank.name}</span>
+      <span class="bank-logo"><img src="../images/${bank.logo}" alt="" /></span>
+      <span class="bank-name">${bank.name}<small>Nigeria · ${bank.code}</small></span>
     </button>
   `).join('');
 
@@ -125,6 +168,47 @@ function renderBankOptions(searchTerm = '') {
       updateAsideSummary();
     });
   });
+}
+
+function getCurrencyForCountry(countryCode = 'US') {
+  return COUNTRY_TO_CURRENCY[countryCode] || 'USD';
+}
+
+function getCountryForCurrency(currencyCode = 'USD') {
+  return CURRENCY_TO_COUNTRY[currencyCode] || 'US';
+}
+
+function syncGlobalCurrencyToCountry(countryCode = 'US') {
+  const currencySelect = document.getElementById('globalFromCurrency');
+  if (!currencySelect) return;
+
+  const nextCurrency = getCurrencyForCountry(countryCode || 'US');
+  if (currencySelect.value !== nextCurrency) {
+    currencySelect.value = nextCurrency;
+  }
+}
+
+function syncGlobalCountryToCurrency(currencyCode = 'USD') {
+  const countrySelect = document.getElementById('globalCountry');
+  if (!countrySelect) return;
+
+  const nextCountry = getCountryForCurrency(currencyCode || 'USD');
+  if (countrySelect.value !== nextCountry) {
+    countrySelect.value = nextCountry;
+  }
+}
+
+function renderGlobalBanks() {
+  const country = document.getElementById('globalCountry')?.value || 'US';
+  const bankSelect = document.getElementById('globalBank');
+  if (!bankSelect) return;
+  bankSelect.innerHTML = (GLOBAL_BANKS[country] || []).map((bank) => `<option value="${bank.name}" data-logo="${bank.logo}">${bank.name}</option>`).join('');
+  const selectedBank = GLOBAL_BANKS[country]?.[0];
+  const bankPreview = document.getElementById('globalBankPreview');
+  if (bankPreview && selectedBank) bankPreview.innerHTML = `<img src="../images/${selectedBank.logo}" alt="" /><span><strong>${selectedBank.name}</strong><small>${GLOBAL_COUNTRIES[country].name}</small></span>`;
+  const countryData = GLOBAL_COUNTRIES[country];
+  const flag = document.getElementById('globalReviewFlag');
+  if (flag && countryData) flag.innerHTML = `<img src="../images/${countryData.flag}" alt="${countryData.name} flag" />`;
 }
 
 function simulateRecipientVerification() {
@@ -240,17 +324,33 @@ function validateTransferAmount() {
 }
 
 function renderGlobalFX() {
-  const fromCurrency = document.getElementById('globalFromCurrency')?.value || 'USD';
-  const amount = Number(document.getElementById('globalAmount')?.value || 0);
-  const fxRate = window.TransWalletExchange?.getRateSummary?.(amount, fromCurrency, 'NGN');
+  const currencySelect = document.getElementById('globalFromCurrency');
+  const countrySelect = document.getElementById('globalCountry');
+  const fromCurrency = currencySelect?.value || getCurrencyForCountry(countrySelect?.value || 'US');
+  const safeFromCurrency = fromCurrency || 'USD';
+  const amountInput = document.getElementById('globalAmount');
+  const amount = Number(amountInput?.value || 0);
+  const safeAmount = Number.isFinite(amount) ? Math.max(0, amount) : 0;
+  const fxRate = window.TransWalletExchange?.getRateSummary?.(safeAmount, safeFromCurrency, 'NGN') || { rate: 0, converted: 0 };
 
   const fromAmount = document.getElementById('fxFromAmount');
   const rateLine = document.getElementById('fxRateLine');
   const recipientAmount = document.getElementById('fxRecipientAmount');
 
-  if (fromAmount) fromAmount.textContent = `${fromCurrency} ${Number(amount || 0).toFixed(2)}`;
-  if (rateLine) rateLine.textContent = `1 ${fromCurrency} = ${formatNaira(fxRate?.rate || 1600)}`;
-  if (recipientAmount) recipientAmount.textContent = formatNaira(fxRate?.converted || 0);
+  if (currencySelect && currencySelect.value !== safeFromCurrency) {
+    currencySelect.value = safeFromCurrency;
+  }
+
+  if (countrySelect && countrySelect.value !== getCountryForCurrency(safeFromCurrency)) {
+    countrySelect.value = getCountryForCurrency(safeFromCurrency);
+  }
+
+  if (fromAmount) fromAmount.textContent = `${safeFromCurrency} ${safeAmount.toFixed(2)}`;
+  if (rateLine) rateLine.textContent = `1 ${safeFromCurrency} = ${formatNaira(fxRate.rate || 0)}`;
+  if (recipientAmount) recipientAmount.textContent = formatNaira(fxRate.converted || 0);
+
+  const isValidAmount = safeAmount > 0 && Number.isFinite(fxRate.converted) && fxRate.converted <= getCurrentUserBalance();
+  document.getElementById('globalAmountError')?.classList.toggle('hidden', isValidAmount || !safeAmount);
 }
 
 function openUserPin() {
@@ -265,6 +365,26 @@ function openUserPin() {
   });
   document.getElementById('pinError')?.classList.add('hidden');
   toggleTransferView('pinTransferView');
+}
+
+function buildGlobalReview() {
+  const countryCode = document.getElementById('globalCountry')?.value || 'US';
+  const country = GLOBAL_COUNTRIES[countryCode];
+  const currency = document.getElementById('globalFromCurrency')?.value || 'USD';
+  const amount = Number(document.getElementById('globalAmount')?.value || 0);
+  const fx = window.TransWalletExchange?.getRateSummary?.(amount, currency, 'NGN');
+  const recipient = document.getElementById('globalRecipientName')?.value.trim();
+  const accountNumber = document.getElementById('globalAccountNumber')?.value.trim();
+  const bank = document.getElementById('globalBank')?.value;
+  if (!recipient || !accountNumber || !bank || !amount || !fx || fx.converted > getCurrentUserBalance()) return false;
+  activeGlobalReview = { countryCode, country: country.name, currency, amount, converted: fx.converted, recipient, accountNumber, bank };
+  document.getElementById('globalReviewRecipient').textContent = recipient;
+  document.getElementById('globalReviewDestination').textContent = country.name;
+  document.getElementById('globalReviewBank').textContent = bank;
+  document.getElementById('globalReviewAccount').textContent = maskAccountNumber(accountNumber);
+  document.getElementById('globalReviewAmount').textContent = `${currency} ${amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+  document.getElementById('globalReviewReceive').textContent = formatNaira(fx.converted);
+  return true;
 }
 
 function collectPin() {
@@ -288,8 +408,10 @@ function verifyPin() {
 
 function completeTransfer() {
   const currentUser = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
-  const amount = Number(activeReview?.amount || 0);
-  if (!currentUser || !activeReview || !amount) return;
+  const isGlobal = Boolean(activeGlobalReview);
+  const amount = isGlobal ? Number(activeGlobalReview.converted || 0) : Number(activeReview?.amount || 0);
+  const review = isGlobal ? activeGlobalReview : activeReview;
+  if (!currentUser || !review || !amount) return;
 
   const nextBalance = Number(currentUser.balance || 0) - amount;
   currentUser.balance = Math.max(0, nextBalance);
@@ -301,7 +423,7 @@ function completeTransfer() {
     id: `TX-${Date.now()}`,
     userId: currentUser.id,
     type: 'transfer',
-    description: `Send Money to ${activeReview.recipient}`,
+    description: isGlobal ? `International transfer to ${review.recipient}` : `Send Money to ${review.recipient}`,
     fiatAmount: -amount,
     fiatCurrency: 'NGN',
     status: 'completed',
@@ -316,24 +438,52 @@ function completeTransfer() {
     localStorage.setItem('transwallet_transactions', JSON.stringify([transactionRecord, ...existing]));
   }
 
+  const adminActivity = JSON.parse(localStorage.getItem('transwallet_admin_activity') || '[]');
+  adminActivity.unshift({ id: `ACT-${Date.now()}`, message: `${isGlobal ? 'International' : 'Local'} transfer ${transactionRecord.reference} completed for ${currentUser.fullName || currentUser.name || currentUser.username}.`, createdAt: transactionRecord.createdAt });
+  localStorage.setItem('transwallet_admin_activity', JSON.stringify(adminActivity));
+
   const successAmountLine = document.getElementById('successAmountLine');
   const successRecipient = document.getElementById('successRecipient');
   const successBank = document.getElementById('successBank');
   const successReference = document.getElementById('successReference');
 
-  if (successAmountLine) successAmountLine.textContent = `${formatNaira(amount)} sent successfully`;
-  if (successRecipient) successRecipient.textContent = activeReview.recipient;
-  if (successBank) successBank.textContent = activeReview.bank;
+  if (isGlobal) {
+    document.getElementById('globalSuccessLine').textContent = `${review.currency} ${review.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })} sent successfully`;
+    document.getElementById('globalSuccessRecipient').textContent = review.recipient;
+    document.getElementById('globalSuccessDestination').textContent = review.country;
+    document.getElementById('globalSuccessReference').textContent = transactionRecord.reference;
+  } else {
+    if (successAmountLine) successAmountLine.textContent = `${formatNaira(amount)} sent successfully`;
+    if (successRecipient) successRecipient.textContent = review.recipient;
+    if (successBank) successBank.textContent = review.bank;
+  }
   if (successReference) successReference.textContent = transactionRecord.reference;
 
   updateLandingBalance();
   resetLocalTransferState();
-  toggleTransferView('successView');
+  activeGlobalReview = null;
+  toggleTransferView(isGlobal ? 'globalSuccessView' : 'successView');
 }
 
 function initTransferFlow() {
   updateLandingBalance();
   renderBankOptions();
+
+  const hashMode = window.location.hash.replace('#', '');
+  if (hashMode === 'globalTransfer') {
+    currentTransferType = 'global';
+    const countrySelect = document.getElementById('globalCountry');
+    const currencySelect = document.getElementById('globalFromCurrency');
+    if (countrySelect) {
+      countrySelect.value = 'US';
+    }
+    if (currencySelect) {
+      currencySelect.value = 'USD';
+    }
+    renderGlobalBanks();
+    renderGlobalFX();
+    toggleTransferView('globalTransferView');
+  }
 
   const transferOptions = document.querySelectorAll('.transfer-option');
   transferOptions.forEach((option) => {
@@ -343,6 +493,7 @@ function initTransferFlow() {
         resetLocalTransferState();
         toggleTransferView('localTransferView');
       } else {
+        renderGlobalBanks();
         renderGlobalFX();
         toggleTransferView('globalTransferView');
       }
@@ -361,6 +512,9 @@ function initTransferFlow() {
       }
       if (action === 'back-to-review') {
         toggleTransferView('reviewTransferView');
+      }
+      if (action === 'back-to-global') {
+        toggleTransferView('globalTransferView');
       }
     });
   });
@@ -426,12 +580,44 @@ function initTransferFlow() {
     resetLocalTransferState();
   });
 
+  document.getElementById('globalDoneTransferBtn')?.addEventListener('click', () => {
+    toggleTransferView('transferLanding');
+  });
+
   document.getElementById('globalAmount')?.addEventListener('input', renderGlobalFX);
-  document.getElementById('globalFromCurrency')?.addEventListener('change', renderGlobalFX);
+  document.getElementById('globalFromCurrency')?.addEventListener('change', (event) => {
+    const selectedCurrency = event.target.value || 'USD';
+    syncGlobalCountryToCurrency(selectedCurrency);
+    renderGlobalBanks();
+    renderGlobalFX();
+  });
+  document.getElementById('globalCountry')?.addEventListener('change', (event) => {
+    const selectedCountry = event.target.value || 'US';
+    syncGlobalCurrencyToCountry(selectedCountry);
+    renderGlobalBanks();
+    renderGlobalFX();
+  });
+  document.getElementById('globalBank')?.addEventListener('change', (event) => {
+    const bank = GLOBAL_BANKS[document.getElementById('globalCountry')?.value || 'US']?.find((entry) => entry.name === event.target.value);
+    const preview = document.getElementById('globalBankPreview');
+    if (preview && bank) preview.innerHTML = `<img src="../images/${bank.logo}" alt="" /><span><strong>${bank.name}</strong><small>${GLOBAL_COUNTRIES[document.getElementById('globalCountry')?.value || 'US'].name}</small></span>`;
+  });
 
   document.getElementById('globalTransferContinueBtn')?.addEventListener('click', () => {
     renderGlobalFX();
-    toggleTransferView('transferLanding');
+    if (buildGlobalReview()) toggleTransferView('globalReviewView');
+  });
+
+  document.getElementById('globalConfirmTransferBtn')?.addEventListener('click', () => {
+    if (activeGlobalReview) openUserPin();
+  });
+
+  document.getElementById('copyTransferAccountBtn')?.addEventListener('click', async (event) => {
+    const accountNumber = document.getElementById('landingAccountNumber')?.textContent;
+    if (!accountNumber || accountNumber.includes('unavailable')) return;
+    try { await navigator.clipboard.writeText(accountNumber); } catch (error) { return; }
+    event.currentTarget.textContent = 'Copied';
+    window.setTimeout(() => { event.currentTarget.textContent = 'Copy'; }, 1600);
   });
 
   const pinBoxes = document.querySelectorAll('.pin-box');

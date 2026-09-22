@@ -33,10 +33,15 @@
           <button class="card-tab is-active" type="button" role="tab" aria-selected="true" data-tab="virtual">
             Virtual Card
           </button>
-          <button class="card-tab is-disabled" type="button" role="tab" aria-selected="false" data-tab="physical" disabled aria-disabled="true">
+          <div class="phycard">
+             <span class="coming-soon-pill" >Coming soon</span>
+            <button class="card-tab is-disabled" type="button" role="tab" aria-selected="false" data-tab="physical" disabled aria-disabled="true">
+           
             Physical Card
-            <span class="coming-soon-pill">Coming soon</span>
+            
           </button>
+          </div>
+          
         </div>
 
         <div class="tab-panel is-active" id="tab-virtual" role="tabpanel" aria-label="Virtual card panel">
@@ -181,13 +186,13 @@
           </div>
         </div>
 
-        <div class="tab-panel" id="tab-physical" role="tabpanel" aria-label="Physical card panel">
+        <!-- <div class="tab-panel" id="tab-physical" role="tabpanel" aria-label="Physical card panel">
           <div class="coming-soon-panel">
             <div class="coming-soon-icon"><i class="fa-solid fa-sparkles"></i></div>
             <h2>Physical Card</h2>
             <p>Physical cards are on the way. This option is currently unavailable while we prepare the next release.</p>
             <span class="coming-soon-tag">Coming soon</span>
-          </div>
+          </div> -->
         </div>
       </section>
 

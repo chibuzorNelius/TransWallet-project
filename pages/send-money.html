@@ -1,275 +1,380 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Send Money | Trans Wallet</title>
-    <link rel="stylesheet" href="../css/variables.css" />
-    <link rel="stylesheet" href="../css/global.css" />
-    <link rel="stylesheet" href="../css/pages/send-money.css" />
-    <script defer src="../js/app.js"></script>
-    <script defer src="../js/auth.js"></script>
-    <script defer src="../js/exchange-rate.js"></script>
-    <script defer src="../js/transfer.js"></script>
-  </head>
-  <body class="app-logged-in">
-    <main class="container transfer-page-shell">
-      <section class="transfer-shell">
-        <header class="transfer-header">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Send Money | Trans Wallet</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/pages/send-money.css" />
+  <script defer src="../js/app.js"></script>
+  <script defer src="../js/auth.js"></script>
+  <script defer src="../js/exchange-rate.js"></script>
+  <script defer src="../js/transfer.js"></script>
+</head>
+
+<body class="app-logged-in">
+  <main class="container transfer-page-shell">
+    <section class="transfer-shell">
+      <header class="transfer-header">
+        <div>
+          <p class="eyebrow">Transfers</p>
+          <h1>Send money, anywhere.</h1>
+        </div>
+        <p class="transfer-subtitle">Move money locally or internationally with a clear, secure experience built around
+          you.</p>
+      </header>
+
+      <div id="transferLanding" class="transfer-panel transfer-panel-visible">
+        <div class="account-summary">
+          <div class="account-summary-main">
+            <span class="summary-label">Available balance</span>
+            <strong id="landingBalance">₦0.00</strong>
+            <span class="account-name" id="landingAccountName">TransWallet account</span>
+          </div>
+          <div class="account-summary-meta">
+            <span><small>Account number</small><strong id="landingAccountNumber">—</strong></span>
+            <button type="button" class="copy-account-btn" id="copyTransferAccountBtn"
+              aria-label="Copy account number">Copy</button>
+          </div>
+          <div class="account-summary-status"><span class="status-dot"></span>PIN protected</div>
+        </div>
+
+        <div class="transfer-workspace-heading">
           <div>
-            <p class="eyebrow">Transfers</p>
-            <h1>Send Money</h1>
+            <p class="eyebrow">Choose a route</p>
+            <h2>How would you like to send?</h2>
           </div>
-          <p class="transfer-subtitle">Transfer money locally or internationally with ease.</p>
-        </header>
+          <span class="workspace-note">Transfers are reviewed before they leave your wallet.</span>
+        </div>
 
-        <div id="transferLanding" class="transfer-panel transfer-panel-visible">
-          <div class="transfer-summary-bar">
-            <div class="summary-pill">
-              <span class="summary-label">Available balance</span>
-              <strong id="landingBalance">₦0.00</strong>
-            </div>
-            <div class="summary-pill subtle">
-              <span class="summary-label">Secure transfers</span>
-              <strong>PIN protected</strong>
-            </div>
-          </div>
-
-          <div class="transfer-option-grid">
-            <button class="transfer-option transfer-option-local" type="button" data-transfer-type="local">
-              <span class="option-icon">🇳🇬</span>
-              <span class="option-copy">
-                <strong>Local Transfer</strong>
-                <small>Send to a Nigerian bank account.</small>
-              </span>
-              <span class="option-arrow">→</span>
-            </button>
-
-            <button class="transfer-option transfer-option-global" type="button" data-transfer-type="global">
-              <span class="option-icon">🌍</span>
-              <span class="option-copy">
-                <strong>Foreign / Global Transfer</strong>
-                <small>Send internationally with live FX rates.</small>
-              </span>
-              <span class="option-arrow">→</span>
-            </button>
+        <div class="transfer-summary-bar compact-summary">
+          <div class="summary-pill subtle">
+            <span class="summary-label">Secure transfers</span>
+            <strong>PIN protected</strong>
           </div>
         </div>
 
-        <div id="localTransferView" class="transfer-panel transfer-panel-hidden">
-          <div class="section-heading-row">
-            <div>
-              <p class="eyebrow">Local transfer</p>
-              <h2>Bank transfer</h2>
+        <div class="transfer-option-grid">
+          <button class="transfer-option transfer-option-local" type="button" data-transfer-type="local">
+            <span class="option-icon"><img src="../images/nigeriaFlag.png" alt="Nigeria flag" /></span>
+            <span class="option-copy">
+              <strong>Local Transfer</strong>
+              <small>Send to a Nigerian bank account.</small>
+            </span>
+            <span class="option-arrow">→</span>
+          </button>
+
+          <button class="transfer-option transfer-option-global" type="button" data-transfer-type="global">
+            <span class="option-icon globe-icon" aria-hidden="true">◎</span>
+            <span class="option-copy">
+              <strong>International Transfer</strong>
+              <small>Send across borders with a transparent FX quote.</small>
+            </span>
+            <span class="option-arrow">→</span>
+          </button>
+        </div>
+
+        <div class="landing-lower-grid">
+          <div class="transfer-trust-strip">
+            <span class="trust-icon">✓</span>
+            <div><strong>Built for confidence</strong>
+              <p>Every transfer is protected by your transaction PIN.</p>
             </div>
-            <button type="button" class="ghost-link" data-action="back-to-home">Back</button>
           </div>
+          <div class="rate-preview">
+            <div><span class="summary-label">Today's guide rate</span><strong>USD → NGN</strong></div>
+            <strong id="landingRatePreview">1 USD = ₦1,600</strong>
+          </div>
+        </div>
+      </div>
 
-          <div class="local-transfer-layout">
-            <div class="transfer-form-card">
-              <div class="form-block">
-                <label for="accountNumber">Account number</label>
-                <input id="accountNumber" type="text" inputmode="numeric" maxlength="10" placeholder="Enter 10-digit account number" />
+      <div id="localTransferView" class="transfer-panel transfer-panel-hidden">
+        <div class="section-heading-row">
+          <div>
+            <p class="eyebrow">Local transfer</p>
+            <h2>Bank transfer</h2>
+          </div>
+          <button type="button" class="ghost-link" data-action="back-to-home">Back</button>
+        </div>
+
+        <div class="local-transfer-layout">
+          <div class="transfer-form-card">
+            <div class="form-block">
+              <label for="accountNumber">Account number</label>
+              <input id="accountNumber" type="text" inputmode="numeric" maxlength="10"
+                placeholder="Enter 10-digit account number" />
+            </div>
+
+            <div class="form-block">
+              <label for="bankSearch">Bank</label>
+              <div class="bank-search-wrap">
+                <input id="bankSearch" type="text" placeholder="Search banks" aria-label="Search banks" />
               </div>
+              <div id="bankSelector" class="bank-selector" aria-live="polite"></div>
+            </div>
 
-              <div class="form-block">
-                <label for="bankSearch">Bank</label>
-                <div class="bank-search-wrap">
-                  <input id="bankSearch" type="text" placeholder="Search banks" aria-label="Search banks" />
-                </div>
-                <div id="bankSelector" class="bank-selector" aria-live="polite"></div>
+            <div id="verificationState" class="verification-state hidden" aria-live="polite">
+              <div class="spinner"></div>
+              <div>
+                <strong>Verifying account...</strong>
+                <p>Checking recipient information…</p>
               </div>
+            </div>
 
-              <div id="verificationState" class="verification-state hidden" aria-live="polite">
-                <div class="spinner"></div>
+            <div id="verificationFailure" class="status-panel error hidden" role="alert">
+              <h3>Unable to verify account</h3>
+              <p>Please check the account number and selected bank and try again.</p>
+              <button type="button" class="btn btn-secondary" id="retryVerificationBtn">Try Again</button>
+            </div>
+
+            <div id="recipientVerified" class="recipient-card hidden" aria-live="polite">
+              <div class="recipient-status-row">
+                <span class="success-dot">✓</span>
                 <div>
-                  <strong>Verifying account...</strong>
-                  <p>Checking recipient information…</p>
+                  <span class="recipient-label">Recipient verified</span>
+                  <h3 id="verifiedName">John Doe</h3>
                 </div>
               </div>
-
-              <div id="verificationFailure" class="status-panel error hidden" role="alert">
-                <h3>Unable to verify account</h3>
-                <p>Please check the account number and selected bank and try again.</p>
-                <button type="button" class="btn btn-secondary" id="retryVerificationBtn">Try Again</button>
+              <div class="recipient-meta">
+                <span id="verifiedBank">GTBank</span>
+                <span>Account ending in <strong id="verifiedAccount">1234</strong></span>
               </div>
-
-              <div id="recipientVerified" class="recipient-card hidden" aria-live="polite">
-                <div class="recipient-status-row">
-                  <span class="success-dot">✓</span>
-                  <div>
-                    <span class="recipient-label">Recipient verified</span>
-                    <h3 id="verifiedName">John Doe</h3>
-                  </div>
-                </div>
-                <div class="recipient-meta">
-                  <span id="verifiedBank">GTBank</span>
-                  <span>Account ending in <strong id="verifiedAccount">1234</strong></span>
-                </div>
-                <p>Verified successfully</p>
-              </div>
-
-              <div id="amountSection" class="form-block amount-block hidden">
-                <label for="transferAmount">Amount</label>
-                <div class="amount-field-wrap">
-                  <span class="currency-symbol">₦</span>
-                  <input id="transferAmount" type="number" min="100" step="100" placeholder="0.00" />
-                </div>
-                <div class="amount-meta">
-                  <span>Available balance</span>
-                  <strong id="availableBalanceText">₦0.00</strong>
-                </div>
-                <p id="amountError" class="form-error hidden">Insufficient balance. Please enter an amount within your available balance.</p>
-              </div>
+              <p>Verified successfully</p>
             </div>
 
-            <aside class="transfer-aside-card">
-              <div class="aside-header">
-                <span class="aside-kicker">Transfer summary</span>
+            <div id="amountSection" class="form-block amount-block hidden">
+              <label for="transferAmount">Amount</label>
+              <div class="amount-field-wrap">
+                <span class="currency-symbol">₦</span>
+                <input id="transferAmount" type="number" min="100" step="100" placeholder="0.00" />
               </div>
-              <div class="aside-body">
-                <div class="summary-row">
-                  <span>Recipient</span>
-                  <strong id="asideRecipient">—</strong>
-                </div>
-                <div class="summary-row">
-                  <span>Bank</span>
-                  <strong id="asideBank">—</strong>
-                </div>
-                <div class="summary-row">
-                  <span>Account</span>
-                  <strong id="asideAccount">—</strong>
-                </div>
-                <div class="summary-row">
-                  <span>Transfer amount</span>
-                  <strong id="asideAmount">—</strong>
-                </div>
+              <div class="amount-meta">
+                <span>Available balance</span>
+                <strong id="availableBalanceText">₦0.00</strong>
               </div>
-              <button id="continueToReviewBtn" type="button" class="btn btn-primary" disabled>Review Transfer</button>
-            </aside>
+              <p id="amountError" class="form-error hidden">Insufficient balance. Please enter an amount within your
+                available balance.</p>
+            </div>
           </div>
+
+          <aside class="transfer-aside-card">
+            <div class="aside-header">
+              <span class="aside-kicker">Transfer summary</span>
+            </div>
+            <div class="aside-body">
+              <div class="summary-row">
+                <span>Recipient</span>
+                <strong id="asideRecipient">—</strong>
+              </div>
+              <div class="summary-row">
+                <span>Bank</span>
+                <strong id="asideBank">—</strong>
+              </div>
+              <div class="summary-row">
+                <span>Account</span>
+                <strong id="asideAccount">—</strong>
+              </div>
+              <div class="summary-row">
+                <span>Transfer amount</span>
+                <strong id="asideAmount">—</strong>
+              </div>
+            </div>
+            <button id="continueToReviewBtn" type="button" class="btn btn-primary" disabled>Review Transfer</button>
+          </aside>
+        </div>
+      </div>
+
+      <div id="reviewTransferView" class="transfer-panel transfer-panel-hidden">
+        <div class="section-heading-row">
+          <div>
+            <p class="eyebrow">Review</p>
+            <h2>Review Transfer</h2>
+          </div>
+          <button type="button" class="ghost-link" data-action="back-to-local">Back</button>
         </div>
 
-        <div id="reviewTransferView" class="transfer-panel transfer-panel-hidden">
-          <div class="section-heading-row">
-            <div>
-              <p class="eyebrow">Review</p>
-              <h2>Review Transfer</h2>
-            </div>
-            <button type="button" class="ghost-link" data-action="back-to-local">Back</button>
+        <div class="review-card">
+          <div class="review-detail-row">
+            <span>Recipient</span>
+            <strong id="reviewRecipient">—</strong>
           </div>
+          <div class="review-detail-row">
+            <span>Bank</span>
+            <strong id="reviewBank">—</strong>
+          </div>
+          <div class="review-detail-row">
+            <span>Account</span>
+            <strong id="reviewAccount">—</strong>
+          </div>
+          <div class="review-detail-row">
+            <span>Amount</span>
+            <strong id="reviewAmount">—</strong>
+          </div>
+          <button id="confirmTransferBtn" type="button" class="btn btn-primary review-action">Confirm Transfer</button>
+        </div>
+      </div>
 
-          <div class="review-card">
-            <div class="review-detail-row">
-              <span>Recipient</span>
-              <strong id="reviewRecipient">—</strong>
-            </div>
-            <div class="review-detail-row">
-              <span>Bank</span>
-              <strong id="reviewBank">—</strong>
-            </div>
-            <div class="review-detail-row">
-              <span>Account</span>
-              <strong id="reviewAccount">—</strong>
-            </div>
-            <div class="review-detail-row">
-              <span>Amount</span>
-              <strong id="reviewAmount">—</strong>
-            </div>
-            <button id="confirmTransferBtn" type="button" class="btn btn-primary review-action">Confirm Transfer</button>
+      <div id="pinTransferView" class="transfer-panel transfer-panel-hidden">
+        <div class="section-heading-row">
+          <div>
+            <p class="eyebrow">Security</p>
+            <h2>Enter Transaction PIN</h2>
           </div>
+          <button type="button" class="ghost-link" data-action="back-to-review">Back</button>
         </div>
 
-        <div id="pinTransferView" class="transfer-panel transfer-panel-hidden">
-          <div class="section-heading-row">
-            <div>
-              <p class="eyebrow">Security</p>
-              <h2>Enter Transaction PIN</h2>
-            </div>
-            <button type="button" class="ghost-link" data-action="back-to-review">Back</button>
+        <div class="pin-card">
+          <div class="pin-entry" id="pinEntry" aria-label="Transaction PIN">
+            <input type="password" inputmode="numeric" maxlength="1" class="pin-box" aria-label="Digit 1" />
+            <input type="password" inputmode="numeric" maxlength="1" class="pin-box" aria-label="Digit 2" />
+            <input type="password" inputmode="numeric" maxlength="1" class="pin-box" aria-label="Digit 3" />
+            <input type="password" inputmode="numeric" maxlength="1" class="pin-box" aria-label="Digit 4" />
           </div>
+          <p id="pinError" class="form-error hidden">Incorrect Transaction PIN. Please check your PIN and try again.</p>
+          <button id="submitPinBtn" type="button" class="btn btn-primary">Verify PIN</button>
+        </div>
+      </div>
 
-          <div class="pin-card">
-            <div class="pin-entry" id="pinEntry" aria-label="Transaction PIN">
-              <input type="password" inputmode="numeric" maxlength="1" class="pin-box" aria-label="Digit 1" />
-              <input type="password" inputmode="numeric" maxlength="1" class="pin-box" aria-label="Digit 2" />
-              <input type="password" inputmode="numeric" maxlength="1" class="pin-box" aria-label="Digit 3" />
-              <input type="password" inputmode="numeric" maxlength="1" class="pin-box" aria-label="Digit 4" />
-            </div>
-            <p id="pinError" class="form-error hidden">Incorrect Transaction PIN. Please check your PIN and try again.</p>
-            <button id="submitPinBtn" type="button" class="btn btn-primary">Verify PIN</button>
+      <div id="processingView" class="transfer-panel transfer-panel-hidden">
+        <div class="processing-card">
+          <div class="spinner large"></div>
+          <h2>Processing transfer...</h2>
+          <p>Please wait while we complete your transaction.</p>
+        </div>
+      </div>
+
+      <div id="successView" class="transfer-panel transfer-panel-hidden">
+        <div class="success-card">
+          <div class="success-mark">✓</div>
+          <p class="eyebrow success-eyebrow">Transaction successful</p>
+          <h2 id="successAmountLine">₦0 sent successfully</h2>
+          <div class="success-details">
+            <div><span>Recipient</span><strong id="successRecipient">—</strong></div>
+            <div><span>Bank</span><strong id="successBank">—</strong></div>
+            <div><span>Reference</span><strong id="successReference">TW-00000000</strong></div>
           </div>
+          <button id="doneTransferBtn" type="button" class="btn btn-primary">Done</button>
+        </div>
+      </div>
+
+      <div id="globalTransferView" class="transfer-panel transfer-panel-hidden">
+        <div class="section-heading-row">
+          <div>
+            <p class="eyebrow">Global transfer</p>
+            <h2>International transfer</h2>
+          </div>
+          <button type="button" class="ghost-link" data-action="back-to-home">Back</button>
         </div>
 
-        <div id="processingView" class="transfer-panel transfer-panel-hidden">
-          <div class="processing-card">
-            <div class="spinner large"></div>
-            <h2>Processing transfer...</h2>
-            <p>Please wait while we complete your transaction.</p>
-          </div>
+        <div class="global-stepper" aria-label="International transfer progress">
+          <span class="active"><b>1</b> Recipient</span><i></i><span><b>2</b> Amount</span><i></i><span><b>3</b>
+            Review</span>
         </div>
 
-        <div id="successView" class="transfer-panel transfer-panel-hidden">
-          <div class="success-card">
-            <div class="success-mark">✓</div>
-            <p class="eyebrow success-eyebrow">Transaction successful</p>
-            <h2 id="successAmountLine">₦0 sent successfully</h2>
-            <div class="success-details">
-              <div><span>Recipient</span><strong id="successRecipient">—</strong></div>
-              <div><span>Bank</span><strong id="successBank">—</strong></div>
-              <div><span>Reference</span><strong id="successReference">TW-00000000</strong></div>
+        <div class="global-transfer-card">
+          <div class="global-recipient-grid">
+            <div class="global-row">
+              <label for="globalCountry">Destination country</label>
+              <select id="globalCountry">
+                <option value="US">United States</option>
+                <option value="GB">United Kingdom</option>
+                <option value="CA">Canada</option>
+                <option value="GH">Ghana</option>
+                <option value="AE">United Arab Emirates</option>
+              </select>
             </div>
-            <button id="doneTransferBtn" type="button" class="btn btn-primary">Done</button>
-          </div>
-        </div>
-
-        <div id="globalTransferView" class="transfer-panel transfer-panel-hidden">
-          <div class="section-heading-row">
-            <div>
-              <p class="eyebrow">Global transfer</p>
-              <h2>International transfer</h2>
+            <div class="global-row">
+              <label for="globalBank">Recipient bank</label>
+              <select id="globalBank"></select>
+              <div id="globalBankPreview" class="global-bank-preview" aria-live="polite"></div>
             </div>
-            <button type="button" class="ghost-link" data-action="back-to-home">Back</button>
+            <div class="global-row">
+              <label for="globalRecipientName">Recipient name</label>
+              <input id="globalRecipientName" type="text" placeholder="Enter full name" />
+            </div>
+            <div class="global-row">
+              <label for="globalAccountNumber">Account or IBAN</label>
+              <input id="globalAccountNumber" type="text" placeholder="Enter account details" />
+            </div>
           </div>
 
-          <div class="global-transfer-card">
+          <div class="global-amount-grid">
             <div class="global-row">
               <label for="globalFromCurrency">Sending currency</label>
               <select id="globalFromCurrency">
-                <option value="USD">USD</option>
-                <option value="EUR">EUR</option>
-                <option value="GBP">GBP</option>
-                <option value="CAD">CAD</option>
-                <option value="GHS">GHS</option>
-                <option value="AED">AED</option>
+                <option value="USD">USD · US Dollar</option>
+                <option value="EUR">EUR · Euro</option>
+                <option value="GBP">GBP · British Pound</option>
+                <option value="CAD">CAD · Canadian Dollar</option>
+                <option value="GHS">GHS · Ghanaian Cedi</option>
+                <option value="AED">AED · UAE Dirham</option>
               </select>
             </div>
-
             <div class="global-row">
               <label for="globalAmount">Amount</label>
               <input id="globalAmount" type="number" min="1" step="0.01" value="100" />
             </div>
-
-            <div class="fx-summary">
-              <div class="fx-box">
-                <span>You send</span>
-                <strong id="fxFromAmount">USD 100.00</strong>
-              </div>
-              <div class="fx-box accent">
-                <span>Exchange rate</span>
-                <strong id="fxRateLine">1 USD = ₦1,600</strong>
-              </div>
-              <div class="fx-box">
-                <span>Recipient receives</span>
-                <strong id="fxRecipientAmount">₦160,000.00</strong>
-              </div>
-            </div>
-
-            <p class="global-note">Powered by the current TransWallet exchange-rate source.</p>
-            <button type="button" class="btn btn-primary" id="globalTransferContinueBtn">Continue</button>
           </div>
+
+          <div class="fx-summary">
+            <div class="fx-box">
+              <span>You send</span>
+              <strong id="fxFromAmount">USD 100.00</strong>
+            </div>
+            <div class="fx-box accent">
+              <span>Exchange rate</span>
+              <strong id="fxRateLine">1 USD = ₦1,600</strong>
+            </div>
+            <div class="fx-box">
+              <span>Recipient receives</span>
+              <strong id="fxRecipientAmount">₦160,000.00</strong>
+            </div>
+          </div>
+
+          <p id="globalAmountError" class="form-error hidden">Enter a valid amount within your available balance.</p>
+          <p class="global-note">Transparent demo quote from the current TransWallet exchange-rate source. No hidden
+            markup.</p>
+          <button type="button" class="btn btn-primary" id="globalTransferContinueBtn">Continue</button>
         </div>
-      </section>
-    </main>
-  </body>
+      </div>
+
+      <div id="globalReviewView" class="transfer-panel transfer-panel-hidden">
+        <div class="section-heading-row">
+          <div>
+            <p class="eyebrow">International review</p>
+            <h2>Check your transfer</h2>
+          </div><button type="button" class="ghost-link" data-action="back-to-global">Back</button>
+        </div>
+        <div class="review-card global-review-card">
+          <div class="global-recipient-summary"><span id="globalReviewFlag" class="country-flag"></span>
+            <div><strong id="globalReviewRecipient">—</strong><span id="globalReviewDestination">—</span></div>
+          </div>
+          <div class="review-detail-row"><span>Bank</span><strong id="globalReviewBank">—</strong></div>
+          <div class="review-detail-row"><span>Account</span><strong id="globalReviewAccount">—</strong></div>
+          <div class="review-detail-row"><span>You send</span><strong id="globalReviewAmount">—</strong></div>
+          <div class="review-detail-row"><span>Recipient receives</span><strong id="globalReviewReceive">—</strong>
+          </div>
+          <button id="globalConfirmTransferBtn" type="button" class="btn btn-primary review-action">Confirm
+            international transfer</button>
+        </div>
+      </div>
+
+      <div id="globalSuccessView" class="transfer-panel transfer-panel-hidden">
+        <div class="success-card">
+          <div class="success-mark">✓</div>
+          <p class="eyebrow success-eyebrow">International transfer complete</p>
+          <h2 id="globalSuccessLine">Transfer sent successfully</h2>
+          <div class="success-details">
+            <div><span>Recipient</span><strong id="globalSuccessRecipient">—</strong></div>
+            <div><span>Destination</span><strong id="globalSuccessDestination">—</strong></div>
+            <div><span>Reference</span><strong id="globalSuccessReference">—</strong></div>
+          </div><button id="globalDoneTransferBtn" type="button" class="btn btn-primary">Back to transfers</button>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+
 </html>

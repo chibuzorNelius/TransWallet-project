@@ -9,6 +9,8 @@
     EUR: { code: 'EUR', name: 'Euro', symbol: '\u20ac', flag: '../images/EURFLAG.png', baseRate: 0.92 },
     GBP: { code: 'GBP', name: 'British Pound', symbol: '\u00a3', flag: '../images/britishflag.png', baseRate: 0.78 },
     CAD: { code: 'CAD', name: 'Canadian Dollar', symbol: 'C$', flag: '../images/canadaflag.png', baseRate: 1.36 },
+    GHS: { code: 'GHS', name: 'Ghanaian Cedi', symbol: 'GH₵', flag: '../images/GMP FLAG.png', baseRate: 15.88 },
+    AED: { code: 'AED', name: 'UAE Dirham', symbol: 'AED', flag: '', baseRate: 3.67 },
     AUD: { code: 'AUD', name: 'Australian Dollar', symbol: 'A$', flag: '', baseRate: 1.52 },
     JPY: { code: 'JPY', name: 'Japanese Yen', symbol: '\u00a5', flag: '../images/JapanFlag.png', baseRate: 154 },
     CHF: { code: 'CHF', name: 'Swiss Franc', symbol: 'CHF', flag: '', baseRate: 0.89 }
@@ -20,15 +22,21 @@
     'GBP/NGN': 0.63,
     'USD/EUR': 0.21,
     'GBP/USD': -0.12,
-    'CAD/NGN': -0.15
+    'CAD/NGN': -0.15,
+    'GHS/NGN': 0.27,
+    'AED/NGN': -0.09
   };
 
   function getRate(from, to) {
-    return currencies[to].baseRate / currencies[from].baseRate;
+    const safeFrom = currencies[from];
+    const safeTo = currencies[to];
+    if (!safeFrom || !safeTo) return 0;
+    return safeTo.baseRate / safeFrom.baseRate;
   }
 
   function formatAmount(amount, currency) {
-    return `${currencies[currency].symbol}${Number(amount || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    const safeCurrency = currencies[currency] || { symbol: '' };
+    return `${safeCurrency.symbol}${Number(amount || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
   }
 
   global.TransWalletRates = { currencies, movements, getRate, formatAmount };

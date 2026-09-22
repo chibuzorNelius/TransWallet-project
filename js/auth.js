@@ -171,6 +171,7 @@ function setupProfilePanel() {
   const profilePanel = document.getElementById('profilePanel');
   const copyAccNumberBtn = document.getElementById('copyAccNumberBtn');
   const shareDetailsBtn = document.getElementById('shareDetailsBtn');
+  const profileCardClose = document.getElementById('profileCardClose');
   const copyToast = document.getElementById('copyToast');
   const toastMsg = document.getElementById('toastMsg');
   
@@ -224,6 +225,14 @@ function setupProfilePanel() {
       profileTrigger.focus();
     }
   });
+
+  // Close account card panel
+  if (profileCardClose) {
+    profileCardClose.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closePanel();
+    });
+  }
 
   // Copy Account Number
   if (copyAccNumberBtn) {
