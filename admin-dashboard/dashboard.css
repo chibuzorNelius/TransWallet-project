@@ -176,20 +176,31 @@ select {
 
 .admin-header {
 	display: flex;
+	overflow: hidden;
+	height: 10vh;
 	align-items: center;
 	justify-content: space-between;
 	gap: 20px;
-	padding: 34px clamp(20px, 4vw, 56px);
+	min-width: 0;
+	padding: 34px clamp(20px, 4vw, 46px);
 	border-bottom: 1px solid rgba(37, 50, 70, .75);
 }
-
+.welcome{
+	display: flex;
+	gap: 30px;
+}
 .admin-header h1,
 .section-heading h2 {
 	margin: 3px 0 0;
 }
 
 .admin-header h1 {
-	font-size: clamp(1.35rem, 2vw, 2rem);
+	font-size: clamp(0.7rem, 1vw, 1.5rem);
+	overflow-wrap: anywhere;
+}
+
+.admin-header > div:not(.admin-profile) {
+	min-width: 0;
 }
 
 .admin-kicker {
@@ -204,6 +215,7 @@ select {
 	display: flex;
 	align-items: center;
 	gap: 10px;
+	flex-shrink: 0;
 }
 
 .admin-profile small {
@@ -622,10 +634,11 @@ select {
 
 .admin-toast {
 	position: fixed;
-	right: 24px;
-	bottom: 24px;
+	right: 16px;
+	bottom: 16px;
 	z-index: 20;
-	max-width: 360px;
+	width: min(360px, calc(100vw - 32px));
+	max-width: calc(100vw - 32px);
 	padding: 13px 16px;
 	border: 1px solid var(--color-border);
 	border-radius: 10px;
@@ -775,5 +788,20 @@ select {
 	.settings-list div {
 		align-items: flex-start;
 		flex-direction: column;
+	}
+}
+
+@media (max-width: 480px) {
+	.metric-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.metric-wide,
+	.metric-revenue {
+		grid-column: auto;
+	}
+
+	.admin-profile span:last-child {
+		display: none;
 	}
 }

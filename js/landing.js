@@ -3,8 +3,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const year = document.getElementById('currentYear');
   const menuToggle = document.querySelector('.menu-toggle');
   const siteMenu = document.getElementById('site-menu');
+  const header = document.querySelector('.site-header');
+
+  const updateHeaderState = () => {
+    if (header) header.classList.toggle('is-scrolled', window.scrollY > 5);
+  };
 
   if (year) year.textContent = new Date().getFullYear();
+  updateHeaderState();
+  window.addEventListener('scroll', updateHeaderState, { passive: true });
 
   if (menuToggle && siteMenu) {
     menuToggle.addEventListener('click', () => {
