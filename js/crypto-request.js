@@ -1,21 +1,4 @@
-/*
-Project: Trans Wallet Project
-File Purpose: Crypto purchase request flow
-Author Placeholder: Crypto Developer
-Created Date Placeholder: 2026-08-03
-Last Updated Placeholder: 2026-08-11
-Description: Interactive crypto-detail page behavior for request creation and activity rendering.
-*/
 
-// ===== MODULE OWNER =====
-// This file is intended for:
-// Crypto Developer
-// Responsibilities:
-// Build crypto request form
-// Simulate purchase request state
-// Present pending request review
-// Maintain page-specific network selection and quote rendering
-// ================================================
 
 const cryptoAssets = {
   usdt: {

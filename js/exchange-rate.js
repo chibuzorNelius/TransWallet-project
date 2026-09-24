@@ -57,7 +57,7 @@ function getExchangeRate(fromCurrency = 'USD', toCurrency = 'NGN') {
 
   if (fromCurrency === toCurrency) return 1;
   if (!fromRate || !toRate) return 0;
-  return toRate / fromRate;
+  return fromRate / toRate;
 }
 
 function convertCurrency(amount, fromCurrency = 'USD', toCurrency = 'NGN') {

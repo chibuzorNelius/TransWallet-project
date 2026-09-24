@@ -35,7 +35,7 @@ function initOtpFlow() {
   const timer = document.getElementById('otpTimer');
   let seconds = 30;
   inputs[0].focus();
-  const showDemoCode = () => window.setTimeout(() => window.alert(`Your Trans Wallet verification code is ${pending.otp}.`), 3500);
+  const showDemoCode = () => window.setTimeout(() => window.alert(`Your Trans Wallet verification code is ${pending.otp}.`), 5000);
   showDemoCode();
   const countdown = window.setInterval(() => { seconds -= 1; timer.textContent = seconds; if (seconds <= 0) { window.clearInterval(countdown); resend.disabled = false; resend.textContent = 'Resend code'; } }, 1000);
   inputs.forEach((input, index) => input.addEventListener('input', () => { input.value = input.value.replace(/\D/g, '').slice(-1); if (input.value && inputs[index + 1]) inputs[index + 1].focus(); }));

@@ -314,28 +314,32 @@
             </div>
             <div class="global-row">
               <label for="globalAmount">Amount</label>
-              <input id="globalAmount" type="number" min="1" step="0.01" value="100" />
+              <input id="globalAmount" type="number" min="1" step="0.01" value="1" />
             </div>
           </div>
 
           <div class="fx-summary">
             <div class="fx-box">
-              <span>You send</span>
-              <strong id="fxFromAmount">USD 100.00</strong>
+              <span>Recipient receives</span>
+              <strong id="fxFromAmount">USD 1.00</strong>
             </div>
             <div class="fx-box accent">
               <span>Exchange rate</span>
               <strong id="fxRateLine">1 USD = ₦1,600</strong>
             </div>
             <div class="fx-box">
-              <span>Recipient receives</span>
-              <strong id="fxRecipientAmount">₦160,000.00</strong>
+              <span>You will be charged</span>
+              <strong id="fxChargeAmount">₦1,600.00</strong>
             </div>
           </div>
 
+          <div class="fx-breakdown">
+            <div class="fx-row"><span>Converted amount</span><strong id="fxRecipientAmount">₦1,600.00</strong></div>
+            <div class="fx-row"><span>Available balance</span><strong id="fxAvailableBalance">₦0.00</strong></div>
+          </div>
+
           <p id="globalAmountError" class="form-error hidden">Enter a valid amount within your available balance.</p>
-          <p class="global-note">Transparent demo quote from the current TransWallet exchange-rate source. No hidden
-            markup.</p>
+          <p class="global-note">Transparent quote from the current TransWallet exchange-rate source. No hidden markup.</p>
           <button type="button" class="btn btn-primary" id="globalTransferContinueBtn">Continue</button>
         </div>
       </div>
@@ -353,9 +357,11 @@
           </div>
           <div class="review-detail-row"><span>Bank</span><strong id="globalReviewBank">—</strong></div>
           <div class="review-detail-row"><span>Account</span><strong id="globalReviewAccount">—</strong></div>
-          <div class="review-detail-row"><span>You send</span><strong id="globalReviewAmount">—</strong></div>
-          <div class="review-detail-row"><span>Recipient receives</span><strong id="globalReviewReceive">—</strong>
-          </div>
+          <div class="review-detail-row"><span>Amount</span><strong id="globalReviewAmount">—</strong></div>
+          <div class="review-detail-row"><span>Recipient receives</span><strong id="globalReviewReceive">—</strong></div>
+          <div class="review-detail-row"><span>Exchange rate</span><strong id="globalReviewRate">—</strong></div>
+          <div class="review-detail-row"><span>Wallet deduction</span><strong id="globalReviewCharge">—</strong></div>
+          <div class="review-detail-row"><span>Available balance</span><strong id="globalReviewBalance">—</strong></div>
           <button id="globalConfirmTransferBtn" type="button" class="btn btn-primary review-action">Confirm
             international transfer</button>
         </div>

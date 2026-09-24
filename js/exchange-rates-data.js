@@ -4,16 +4,16 @@
  */
 (function exposeExchangeRates(global) {
   const currencies = {
-    USD: { code: 'USD', name: 'US Dollar', symbol: '$', flag: '../images/usaFlag.png', baseRate: 1 },
-    NGN: { code: 'NGN', name: 'Nigerian Naira', symbol: '\u20a6', flag: '../images/nigeriaFlag.png', baseRate: 1600 },
-    EUR: { code: 'EUR', name: 'Euro', symbol: '\u20ac', flag: '../images/EURFLAG.png', baseRate: 0.92 },
-    GBP: { code: 'GBP', name: 'British Pound', symbol: '\u00a3', flag: '../images/britishflag.png', baseRate: 0.78 },
-    CAD: { code: 'CAD', name: 'Canadian Dollar', symbol: 'C$', flag: '../images/canadaflag.png', baseRate: 1.36 },
-    GHS: { code: 'GHS', name: 'Ghanaian Cedi', symbol: 'GH₵', flag: '../images/GMP FLAG.png', baseRate: 15.88 },
-    AED: { code: 'AED', name: 'UAE Dirham', symbol: 'AED', flag: '', baseRate: 3.67 },
-    AUD: { code: 'AUD', name: 'Australian Dollar', symbol: 'A$', flag: '', baseRate: 1.52 },
-    JPY: { code: 'JPY', name: 'Japanese Yen', symbol: '\u00a5', flag: '../images/JapanFlag.png', baseRate: 154 },
-    CHF: { code: 'CHF', name: 'Swiss Franc', symbol: 'CHF', flag: '', baseRate: 0.89 }
+    USD: { code: 'USD', name: 'US Dollar', symbol: '$', flag: '../images/usaFlag.png', baseRate: 1600 },
+    NGN: { code: 'NGN', name: 'Nigerian Naira', symbol: '\u20a6', flag: '../images/nigeriaFlag.png', baseRate: 1 },
+    EUR: { code: 'EUR', name: 'Euro', symbol: '\u20ac', flag: '../images/EURFLAG.png', baseRate: 1740 },
+    GBP: { code: 'GBP', name: 'British Pound', symbol: '\u00a3', flag: '../images/britishflag.png', baseRate: 2010 },
+    CAD: { code: 'CAD', name: 'Canadian Dollar', symbol: 'C$', flag: '../images/canadaflag.png', baseRate: 1150 },
+    GHS: { code: 'GHS', name: 'Ghanaian Cedi', symbol: 'GH₵', flag: '../images/GMP FLAG.png', baseRate: 106 },
+    AED: { code: 'AED', name: 'UAE Dirham', symbol: 'AED', flag: '', baseRate: 435 },
+    AUD: { code: 'AUD', name: 'Australian Dollar', symbol: 'A$', flag: '', baseRate: 1710 },
+    JPY: { code: 'JPY', name: 'Japanese Yen', symbol: '\u00a5', flag: '../images/JapanFlag.png', baseRate: 10.39 },
+    CHF: { code: 'CHF', name: 'Swiss Franc', symbol: 'CHF', flag: '', baseRate: 1790 }
   };
 
   const movements = {
@@ -31,7 +31,7 @@
     const safeFrom = currencies[from];
     const safeTo = currencies[to];
     if (!safeFrom || !safeTo) return 0;
-    return safeTo.baseRate / safeFrom.baseRate;
+    return safeFrom.baseRate / safeTo.baseRate;
   }
 
   function formatAmount(amount, currency) {

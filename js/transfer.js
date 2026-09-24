@@ -71,6 +71,7 @@ let recipientState = null;
 let activeTransferAmount = 0;
 let activeReview = null;
 let activeGlobalReview = null;
+let isProcessingTransfer = false;
 
 function formatNaira(value) {
   return `₦${Number(value || 0).toLocaleString('en-NG', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
@@ -323,34 +324,88 @@ function validateTransferAmount() {
   return true;
 }
 
-function renderGlobalFX() {
+function getGlobalTransferState() {
   const currencySelect = document.getElementById('globalFromCurrency');
   const countrySelect = document.getElementById('globalCountry');
-  const fromCurrency = currencySelect?.value || getCurrencyForCountry(countrySelect?.value || 'US');
-  const safeFromCurrency = fromCurrency || 'USD';
+  const countryCode = countrySelect?.value || 'US';
+  const currency = currencySelect?.value || getCurrencyForCountry(countryCode);
+  const safeCurrency = currency || 'USD';
   const amountInput = document.getElementById('globalAmount');
-  const amount = Number(amountInput?.value || 0);
-  const safeAmount = Number.isFinite(amount) ? Math.max(0, amount) : 0;
-  const fxRate = window.TransWalletExchange?.getRateSummary?.(safeAmount, safeFromCurrency, 'NGN') || { rate: 0, converted: 0 };
+  const rawAmount = Number(amountInput?.value || 0);
+  const amount = Number.isFinite(rawAmount) ? Math.max(0, rawAmount) : 0;
+  const exchangeRate = Number(window.TransWalletExchange?.getExchangeRate?.(safeCurrency, 'NGN') || 0);
+  const localDeduction = amount * exchangeRate;
+  const fee = 0;
+  const totalDeduction = localDeduction + fee;
+  const availableBalance = getCurrentUserBalance();
+
+  return {
+    countryCode,
+    currency: safeCurrency,
+    countryName: GLOBAL_COUNTRIES[countryCode]?.name || 'United States',
+    amount,
+    exchangeRate,
+    localDeduction,
+    fee,
+    totalDeduction,
+    availableBalance
+  };
+}
+
+function renderGlobalFX() {
+  const state = getGlobalTransferState();
+  const currencySelect = document.getElementById('globalFromCurrency');
+  const countrySelect = document.getElementById('globalCountry');
+
+  if (currencySelect && currencySelect.value !== state.currency) {
+    currencySelect.value = state.currency;
+  }
+
+  if (countrySelect && countrySelect.value !== state.countryCode) {
+    countrySelect.value = state.countryCode;
+  }
 
   const fromAmount = document.getElementById('fxFromAmount');
   const rateLine = document.getElementById('fxRateLine');
+  const chargeAmount = document.getElementById('fxChargeAmount');
   const recipientAmount = document.getElementById('fxRecipientAmount');
+  const availableBalance = document.getElementById('fxAvailableBalance');
+  const errorNode = document.getElementById('globalAmountError');
 
-  if (currencySelect && currencySelect.value !== safeFromCurrency) {
-    currencySelect.value = safeFromCurrency;
+  if (fromAmount) {
+    fromAmount.textContent = `${state.currency} ${state.amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
   }
 
-  if (countrySelect && countrySelect.value !== getCountryForCurrency(safeFromCurrency)) {
-    countrySelect.value = getCountryForCurrency(safeFromCurrency);
+  if (rateLine) {
+    rateLine.textContent = `1 ${state.currency} = ${formatNaira(state.exchangeRate || 0)}`;
   }
 
-  if (fromAmount) fromAmount.textContent = `${safeFromCurrency} ${safeAmount.toFixed(2)}`;
-  if (rateLine) rateLine.textContent = `1 ${safeFromCurrency} = ${formatNaira(fxRate.rate || 0)}`;
-  if (recipientAmount) recipientAmount.textContent = formatNaira(fxRate.converted || 0);
+  if (chargeAmount) {
+    chargeAmount.textContent = formatNaira(state.localDeduction);
+  }
 
-  const isValidAmount = safeAmount > 0 && Number.isFinite(fxRate.converted) && fxRate.converted <= getCurrentUserBalance();
-  document.getElementById('globalAmountError')?.classList.toggle('hidden', isValidAmount || !safeAmount);
+  if (recipientAmount) {
+    recipientAmount.textContent = formatNaira(state.localDeduction);
+  }
+
+  if (availableBalance) {
+    availableBalance.textContent = formatNaira(state.availableBalance);
+  }
+
+  const validAmount = state.amount > 0 && Number.isFinite(state.localDeduction) && state.totalDeduction <= state.availableBalance;
+  if (errorNode) {
+    if (!state.amount || state.amount <= 0) {
+      errorNode.textContent = 'Enter an amount greater than zero.';
+      errorNode.classList.remove('hidden');
+    } else if (state.totalDeduction > state.availableBalance) {
+      errorNode.textContent = `Insufficient balance. You need ${formatNaira(state.totalDeduction)} but your available balance is ${formatNaira(state.availableBalance)}.`;
+      errorNode.classList.remove('hidden');
+    } else {
+      errorNode.classList.add('hidden');
+    }
+  }
+
+  return { ...state, validAmount };
 }
 
 function openUserPin() {
@@ -371,19 +426,47 @@ function buildGlobalReview() {
   const countryCode = document.getElementById('globalCountry')?.value || 'US';
   const country = GLOBAL_COUNTRIES[countryCode];
   const currency = document.getElementById('globalFromCurrency')?.value || 'USD';
-  const amount = Number(document.getElementById('globalAmount')?.value || 0);
-  const fx = window.TransWalletExchange?.getRateSummary?.(amount, currency, 'NGN');
   const recipient = document.getElementById('globalRecipientName')?.value.trim();
   const accountNumber = document.getElementById('globalAccountNumber')?.value.trim();
   const bank = document.getElementById('globalBank')?.value;
-  if (!recipient || !accountNumber || !bank || !amount || !fx || fx.converted > getCurrentUserBalance()) return false;
-  activeGlobalReview = { countryCode, country: country.name, currency, amount, converted: fx.converted, recipient, accountNumber, bank };
+  const state = getGlobalTransferState();
+
+  if (!recipient || !accountNumber || !bank || !state.amount || state.amount <= 0) {
+    document.getElementById('globalAmountError')?.classList.remove('hidden');
+    return false;
+  }
+
+  if (state.totalDeduction > state.availableBalance) {
+    document.getElementById('globalAmountError')?.classList.remove('hidden');
+    document.getElementById('globalAmountError').textContent = `Insufficient balance. You need ${formatNaira(state.totalDeduction)} but your available balance is ${formatNaira(state.availableBalance)}.`;
+    return false;
+  }
+
+  activeGlobalReview = {
+    countryCode,
+    country: country?.name || state.countryName,
+    currency,
+    amount: state.amount,
+    exchangeRate: state.exchangeRate,
+    convertedLocalAmount: state.localDeduction,
+    fee: state.fee,
+    totalDeduction: state.totalDeduction,
+    recipient,
+    accountNumber,
+    bank,
+    availableBalance: state.availableBalance
+  };
+
   document.getElementById('globalReviewRecipient').textContent = recipient;
-  document.getElementById('globalReviewDestination').textContent = country.name;
+  document.getElementById('globalReviewDestination').textContent = country?.name || state.countryName;
   document.getElementById('globalReviewBank').textContent = bank;
   document.getElementById('globalReviewAccount').textContent = maskAccountNumber(accountNumber);
-  document.getElementById('globalReviewAmount').textContent = `${currency} ${amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
-  document.getElementById('globalReviewReceive').textContent = formatNaira(fx.converted);
+  document.getElementById('globalReviewAmount').textContent = `${currency} ${state.amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  document.getElementById('globalReviewReceive').textContent = `${currency} ${state.amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  document.getElementById('globalReviewRate').textContent = `1 ${currency} = ${formatNaira(state.exchangeRate || 0)}`;
+  document.getElementById('globalReviewCharge').textContent = formatNaira(state.totalDeduction);
+  document.getElementById('globalReviewBalance').textContent = formatNaira(state.availableBalance);
+  document.getElementById('globalAmountError')?.classList.add('hidden');
   return true;
 }
 
@@ -409,11 +492,12 @@ function verifyPin() {
 function completeTransfer() {
   const currentUser = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
   const isGlobal = Boolean(activeGlobalReview);
-  const amount = isGlobal ? Number(activeGlobalReview.converted || 0) : Number(activeReview?.amount || 0);
   const review = isGlobal ? activeGlobalReview : activeReview;
-  if (!currentUser || !review || !amount) return;
+  const deduction = isGlobal ? Number(review?.totalDeduction || review?.convertedLocalAmount || 0) : Number(review?.amount || 0);
 
-  const nextBalance = Number(currentUser.balance || 0) - amount;
+  if (!currentUser || !review || !deduction) return;
+
+  const nextBalance = Number(currentUser.balance || 0) - deduction;
   currentUser.balance = Math.max(0, nextBalance);
   if (typeof updateUser === 'function') {
     updateUser(currentUser);
@@ -422,13 +506,25 @@ function completeTransfer() {
   const transactionRecord = {
     id: `TX-${Date.now()}`,
     userId: currentUser.id,
-    type: 'transfer',
+    type: isGlobal ? 'international_transfer' : 'transfer',
     description: isGlobal ? `International transfer to ${review.recipient}` : `Send Money to ${review.recipient}`,
-    fiatAmount: -amount,
+    fiatAmount: -deduction,
     fiatCurrency: 'NGN',
     status: 'completed',
     createdAt: new Date().toISOString(),
-    reference: `TW-${String(Date.now()).slice(-8)}`
+    reference: `TW-${String(Date.now()).slice(-8)}`,
+    country: review.country || review.countryCode || null,
+    recipient: review.recipient || null,
+    destinationCountry: review.country || review.countryCode || null,
+    recipientCurrency: review.currency || null,
+    foreignAmount: Number(review.amount || 0),
+    foreignCurrency: review.currency || 'USD',
+    exchangeRate: Number(review.exchangeRate || 0),
+    localAmount: Number(review.convertedLocalAmount || deduction || 0),
+    fee: Number(review.fee || 0),
+    totalDeduction: Number(review.totalDeduction || deduction || 0),
+    bank: review.bank || null,
+    accountNumber: review.accountNumber || null
   };
 
   if (typeof addTransaction === 'function') {
@@ -448,12 +544,18 @@ function completeTransfer() {
   const successReference = document.getElementById('successReference');
 
   if (isGlobal) {
-    document.getElementById('globalSuccessLine').textContent = `${review.currency} ${review.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })} sent successfully`;
-    document.getElementById('globalSuccessRecipient').textContent = review.recipient;
-    document.getElementById('globalSuccessDestination').textContent = review.country;
-    document.getElementById('globalSuccessReference').textContent = transactionRecord.reference;
+    const globalSuccessLine = document.getElementById('globalSuccessLine');
+    if (globalSuccessLine) {
+      globalSuccessLine.textContent = `${review.currency} ${Number(review.amount || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} sent successfully`;
+    }
+    const globalSuccessRecipient = document.getElementById('globalSuccessRecipient');
+    const globalSuccessDestination = document.getElementById('globalSuccessDestination');
+    const globalSuccessReference = document.getElementById('globalSuccessReference');
+    if (globalSuccessRecipient) globalSuccessRecipient.textContent = review.recipient;
+    if (globalSuccessDestination) globalSuccessDestination.textContent = review.country;
+    if (globalSuccessReference) globalSuccessReference.textContent = transactionRecord.reference;
   } else {
-    if (successAmountLine) successAmountLine.textContent = `${formatNaira(amount)} sent successfully`;
+    if (successAmountLine) successAmountLine.textContent = `${formatNaira(deduction)} sent successfully`;
     if (successRecipient) successRecipient.textContent = review.recipient;
     if (successBank) successBank.textContent = review.bank;
   }
@@ -468,6 +570,11 @@ function completeTransfer() {
 function initTransferFlow() {
   updateLandingBalance();
   renderBankOptions();
+
+  const globalAmountInput = document.getElementById('globalAmount');
+  if (globalAmountInput && !globalAmountInput.value) {
+    globalAmountInput.value = '1';
+  }
 
   const hashMode = window.location.hash.replace('#', '');
   if (hashMode === 'globalTransfer') {
@@ -568,10 +675,12 @@ function initTransferFlow() {
   });
 
   document.getElementById('submitPinBtn')?.addEventListener('click', () => {
-    if (!verifyPin()) return;
+    if (isProcessingTransfer || !verifyPin()) return;
+    isProcessingTransfer = true;
     toggleTransferView('processingView');
     window.setTimeout(() => {
       completeTransfer();
+      isProcessingTransfer = false;
     }, 1200);
   });
 
@@ -604,12 +713,17 @@ function initTransferFlow() {
   });
 
   document.getElementById('globalTransferContinueBtn')?.addEventListener('click', () => {
-    renderGlobalFX();
+    const state = renderGlobalFX();
+    if (!state.amount || state.amount <= 0 || state.totalDeduction > state.availableBalance) {
+      document.getElementById('globalAmountError')?.classList.remove('hidden');
+      return;
+    }
     if (buildGlobalReview()) toggleTransferView('globalReviewView');
   });
 
   document.getElementById('globalConfirmTransferBtn')?.addEventListener('click', () => {
-    if (activeGlobalReview) openUserPin();
+    if (isProcessingTransfer || !activeGlobalReview) return;
+    openUserPin();
   });
 
   document.getElementById('copyTransferAccountBtn')?.addEventListener('click', async (event) => {
